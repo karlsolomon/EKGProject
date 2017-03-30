@@ -72,8 +72,13 @@ class Symptoms {
     var symptomsList = [String]()
     var symptomsToAbbreviations = [String: String]()
     var symptomsLegend = [String]()
+    private static let instance = Symptoms()
     
-    init (){
+    class var getInstance: Symptoms
+    {
+        return instance
+    }
+    private init (){
         emergencySymptomsList = heartAttack + heartFailure
         symptomsList = heartAttack + coronaryArteryDisease + arrhythmia + atrialFibrillation
         symptomsList += coronaryArteryDisease + arrhythmia + atrialFibrillation
@@ -117,12 +122,12 @@ class Symptoms {
          return "Failed Key Generation"
     }
     
-    internal func getAllSymptoms() -> [String]{
+    func getAllSymptoms() -> [String]{
         let sorted = symptomsList.sort()
         return sorted
     }
     
-    internal func getSymptomsAbbreviations(selected: [String]) -> [String]{
+    func getSymptomsAbbreviations(selected: [String]) -> [String]{
         var abbreviations = [String]() 
         
         for i in selected {
@@ -130,7 +135,7 @@ class Symptoms {
         }
         return abbreviations
     }
-    internal func dangerousSymptoms(selected: [String]) -> Bool{
+    func dangerousSymptoms(selected: [String]) -> Bool{
         var dangerousCounter = 0
         
         for x in selected{
@@ -152,3 +157,5 @@ class Symptoms {
     
 }
 
+var test = Symptoms.getInstance
+test.getAllSymptoms()
