@@ -81,14 +81,18 @@ class Symptoms {
         symptomsList += heartValveDisease + heartFailure + cardiomyopathy + pericarditis
         
         let symptoms = symptomsList.sort()
+        //print("\(symptoms)")
         for i in symptoms{
             symptomsToAbbreviations.updateValue("", forKey: i)
+            
         }
-        
+       // print("intial \(symptomsToAbbreviations)")
         
         for (word,abbrev) in symptomsToAbbreviations {
-            symptomsToAbbreviations.updateValue(generateKey(abbrev), forKey: word)
+            //print(" generated key is \(generateKey(word))")
+            symptomsToAbbreviations.updateValue(generateKey(word), forKey: word)
         }
+        //print("keys made \(symptomsToAbbreviations)")
         for x in symptomsToAbbreviations.keys{
             symptomsLegend.append(symptomsToAbbreviations[x]! + " - " + x)
         }
@@ -98,9 +102,13 @@ class Symptoms {
     
     
     internal func generateKey(word: String) -> String {
-        for index in 0 ... word.characters.count {
-    
-            if symptomsToAbbreviations.values.contains(word){
+        for index in 1 ... word.characters.count {
+           // print(symptomsToAbbreviations[word])
+           // print(" word is \(word)")
+            let substring = word[word.startIndex..<word.startIndex.advancedBy(index)]
+            
+            if symptomsToAbbreviations.values.contains(substring) == false {
+         //       print(" substring is \(substring)")
                 let abbreviation = word[word.startIndex..<word.startIndex.advancedBy(index)]
                 return abbreviation
             }
@@ -130,7 +138,8 @@ class Symptoms {
                 dangerousCounter += 1
             }
         }
-        if dangerousCounter > 3 {
+        print(dangerousCounter)
+        if dangerousCounter >= 3 {
             return true
         }
         else{
@@ -139,11 +148,7 @@ class Symptoms {
         
         
     }
-    
-    
-    
+
     
 }
-let test = Symptoms()
-var key = test.generateKey("Shortness of Breath")
-print(key)
+
