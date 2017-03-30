@@ -7,19 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		960040E31E8D946700EC63E9 /* ArchivesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960040E21E8D946700EC63E9 /* ArchivesViewController.swift */; };
 		96012F021E8C1EA300973986 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96012F011E8C1EA300973986 /* AppDelegate.swift */; };
-		96012F041E8C1EA300973986 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96012F031E8C1EA300973986 /* FirstViewController.swift */; };
-		96012F061E8C1EA300973986 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96012F051E8C1EA300973986 /* SecondViewController.swift */; };
+		96012F041E8C1EA300973986 /* SymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96012F031E8C1EA300973986 /* SymptomsViewController.swift */; };
+		96012F061E8C1EA300973986 /* LiveFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96012F051E8C1EA300973986 /* LiveFeedViewController.swift */; };
 		96012F091E8C1EA300973986 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96012F071E8C1EA300973986 /* Main.storyboard */; };
 		96012F0B1E8C1EA300973986 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96012F0A1E8C1EA300973986 /* Assets.xcassets */; };
 		96012F0E1E8C1EA300973986 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96012F0C1E8C1EA300973986 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		960040E21E8D946700EC63E9 /* ArchivesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchivesViewController.swift; sourceTree = "<group>"; };
 		96012EFE1E8C1EA300973986 /* EKGShirt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EKGShirt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96012F011E8C1EA300973986 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		96012F031E8C1EA300973986 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		96012F051E8C1EA300973986 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		96012F031E8C1EA300973986 /* SymptomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomsViewController.swift; sourceTree = "<group>"; };
+		96012F051E8C1EA300973986 /* LiveFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveFeedViewController.swift; sourceTree = "<group>"; };
 		96012F081E8C1EA300973986 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		96012F0A1E8C1EA300973986 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		96012F0D1E8C1EA300973986 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -57,8 +59,9 @@
 			isa = PBXGroup;
 			children = (
 				96012F011E8C1EA300973986 /* AppDelegate.swift */,
-				96012F031E8C1EA300973986 /* FirstViewController.swift */,
-				96012F051E8C1EA300973986 /* SecondViewController.swift */,
+				96012F031E8C1EA300973986 /* SymptomsViewController.swift */,
+				96012F051E8C1EA300973986 /* LiveFeedViewController.swift */,
+				960040E21E8D946700EC63E9 /* ArchivesViewController.swift */,
 				96012F071E8C1EA300973986 /* Main.storyboard */,
 				96012F0A1E8C1EA300973986 /* Assets.xcassets */,
 				96012F0C1E8C1EA300973986 /* LaunchScreen.storyboard */,
@@ -93,6 +96,10 @@
 		96012EF61E8C1EA300973986 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					2,
+					tableView,
+				);
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Solomon, Karl";
@@ -138,9 +145,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96012F061E8C1EA300973986 /* SecondViewController.swift in Sources */,
+				96012F061E8C1EA300973986 /* LiveFeedViewController.swift in Sources */,
 				96012F021E8C1EA300973986 /* AppDelegate.swift in Sources */,
-				96012F041E8C1EA300973986 /* FirstViewController.swift in Sources */,
+				96012F041E8C1EA300973986 /* SymptomsViewController.swift in Sources */,
+				960040E31E8D946700EC63E9 /* ArchivesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +298,7 @@
 				96012F141E8C1EA300973986 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

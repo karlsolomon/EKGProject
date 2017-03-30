@@ -4,27 +4,32 @@
 //
 //  Created by Solomon, Karl on 3/29/17.
 //  Copyright © 2017 Solomon, Karl. All rights reserved.
-//
+// Tags: Definitions Button = 0, TableView = 1, RecordButton = 2
 
 import UIKit
 
 class SymptomsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-	let contents = ["Symptom 1", "Symptom 2"]
+	var contents = ["Symptom 1", "Symptom 2", "Symptom 3"]
 	var selectedSymptoms = [String]()
 	let textCellIdentifier = "TextCell"
-	let symptomsSelected = false
+	var symptomsSelected = false
+    var recordButton = UIButton()
+    var tableView = UITableView()
     override func viewDidLoad() {
         super.viewDidLoad()
-        recordButton.titleLabel = "Record"
+        recordButton = (self.view.viewWithTag(2) as? UIButton)!
+        tableView = (self.view.viewWithTag(1) as? UITableView)!
+        recordButton.setTitle("Record EKG", forState: UIControlState.Normal)
         tableView.delegate = self	// must name tableView "symptomsView" in storyboard
         tableView.dataSource = self
-
         tableView.userInteractionEnabled = false
         tableView.allowsMultipleSelection = true
+        self.view.addSubview(tableView)
+        self.view.addSubview(recordButton)
     }
 
-
+//UI TABLE VIEW DATA SOURCE
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 	    let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath)	 
 	    cell.textLabel?.text = contents[indexPath.row]	 
@@ -32,14 +37,27 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
 	}
 
 
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-	    return contents.count
-	}
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return contents.count
+    }
+    
+    
+//UI TABLE VIEW DELEGATE
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        selectedSymptoms.append(contents[indexPath.row])
+        print("added \(contents[indexPath.row])")
+    }
+    
+    func tableView(tableView: UITableView, deselectRowAtIndexPath indexPath: NSIndexPath) {
+        selectedSymptoms.removeAtIndex(selectedSymptoms.indexOf(contents[indexPath.row])!)
+        print("removed \(contents[indexPath.row])")
+    }
 
 	@IBAction func recordButton(sender: UIButton) {
+    
 		if(symptomsSelected) {
-			if(symptoms.dangerousSymptoms(symptoms: currentSymptoms)) {
-				var alert = UIAlertController(title: "Title", message: "Message", preferredStyle: UIAlertControllerStyle.Alert)
+			//if(symptoms.dangerousSymptoms(symptoms: currentSymptoms)) {
+				let alert = UIAlertController(title: "Title", message: "Message", preferredStyle: UIAlertControllerStyle.Alert)
 				alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { action in
 					if let url = NSURL(string: "tel://\(2817452091)") where UIApplication.sharedApplication().canOpenURL(url) {
 						UIApplication.sharedApplication().openURL(url)
@@ -49,25 +67,21 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
 				}))
 				presentViewController(alert, animated: true, completion: nil)
 				//present(alert, animated: true, completion: nil)
-			}
-			NSTimer.scheduledTimerWithTimeInterval 150, target: recordButton, selector: #selector(ViewController.enableButton), userInfo: nil, repeats: true)
-			performSegueWithIdentifier("SendSymptoms", sender: sender)
+			//}
+            //NSTimer.scheduledTimerWithTimeInterval(150, target: recordButton, selector: #selector(SymptomsViewController.enableButton), userInfo: nil, repeats: false)
+			//performSegueWithIdentifier("SendSymptoms", sender: sender)
 
 		} else {
-			recordButton.titleLabel = "Submit Symptoms"
+			recordButton.setTitle("Submit Symptoms", forState: UIControlState.Normal)//titleLabel = "Submit Symptoms"
 			symptomsSelected = true
 			tableView.userInteractionEnabled = true
 		}
 	}
+    
+    func enableButton() {
+        recordButton.enabled = true
+    }
 
-
-	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {	 
-	    selectedSymptoms.append(contents[indexPath.row])
-	}
-
-	func tableView(tableView: UITableView, deselectRowAtIndexPath indexPath: NSIndexPath) {	 
-	    selectedSymptoms.remove(contents[indexPath.row])
-	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

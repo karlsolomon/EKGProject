@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		960040E11E8D934600EC63E9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 960040E01E8D934600EC63E9 /* Default-568h@2x.png */; };
 		96012EE21E8C1CCB00973986 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96012EE11E8C1CCB00973986 /* AppDelegate.swift */; };
 		96012EE41E8C1CCB00973986 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96012EE31E8C1CCB00973986 /* FirstViewController.swift */; };
 		96012EE61E8C1CCB00973986 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96012EE51E8C1CCB00973986 /* SecondViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		960040E01E8D934600EC63E9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		96012EDE1E8C1CCB00973986 /* EKGShirt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EKGShirt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96012EE11E8C1CCB00973986 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96012EE31E8C1CCB00973986 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -40,6 +42,7 @@
 		96012ED51E8C1CCB00973986 = {
 			isa = PBXGroup;
 			children = (
+				960040E01E8D934600EC63E9 /* Default-568h@2x.png */,
 				96012EE01E8C1CCB00973986 /* EKGShirt */,
 				96012EDF1E8C1CCB00973986 /* Products */,
 			);
@@ -126,6 +129,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96012EEE1E8C1CCB00973986 /* LaunchScreen.storyboard in Resources */,
+				960040E11E8D934600EC63E9 /* Default-568h@2x.png in Resources */,
 				96012EEB1E8C1CCB00973986 /* Assets.xcassets in Resources */,
 				96012EE91E8C1CCB00973986 /* Main.storyboard in Resources */,
 			);
@@ -290,6 +294,7 @@
 				96012EF41E8C1CCB00973986 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
