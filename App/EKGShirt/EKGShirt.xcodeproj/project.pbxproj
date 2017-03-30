@@ -14,6 +14,10 @@
 		96012F091E8C1EA300973986 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96012F071E8C1EA300973986 /* Main.storyboard */; };
 		96012F0B1E8C1EA300973986 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96012F0A1E8C1EA300973986 /* Assets.xcassets */; };
 		96012F0E1E8C1EA300973986 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96012F0C1E8C1EA300973986 /* LaunchScreen.storyboard */; };
+		964EA7131E8DC4BB004E2A9F /* archives.png in Resources */ = {isa = PBXBuildFile; fileRef = 964EA70F1E8DC4BB004E2A9F /* archives.png */; };
+		964EA7141E8DC4BB004E2A9F /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = 964EA7101E8DC4BB004E2A9F /* email.png */; };
+		964EA7151E8DC4BB004E2A9F /* livefeed.png in Resources */ = {isa = PBXBuildFile; fileRef = 964EA7111E8DC4BB004E2A9F /* livefeed.png */; };
+		964EA7161E8DC4BB004E2A9F /* symptoms.png in Resources */ = {isa = PBXBuildFile; fileRef = 964EA7121E8DC4BB004E2A9F /* symptoms.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,10 @@
 		96012F0A1E8C1EA300973986 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		96012F0D1E8C1EA300973986 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		96012F0F1E8C1EA300973986 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		964EA70F1E8DC4BB004E2A9F /* archives.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = archives.png; path = ../../icons/archives.png; sourceTree = "<group>"; };
+		964EA7101E8DC4BB004E2A9F /* email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = email.png; path = ../../icons/email.png; sourceTree = "<group>"; };
+		964EA7111E8DC4BB004E2A9F /* livefeed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = livefeed.png; path = ../../icons/livefeed.png; sourceTree = "<group>"; };
+		964EA7121E8DC4BB004E2A9F /* symptoms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = symptoms.png; path = ../../icons/symptoms.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +67,10 @@
 			isa = PBXGroup;
 			children = (
 				96012F011E8C1EA300973986 /* AppDelegate.swift */,
+				964EA70F1E8DC4BB004E2A9F /* archives.png */,
+				964EA7101E8DC4BB004E2A9F /* email.png */,
+				964EA7111E8DC4BB004E2A9F /* livefeed.png */,
+				964EA7121E8DC4BB004E2A9F /* symptoms.png */,
 				96012F031E8C1EA300973986 /* SymptomsViewController.swift */,
 				96012F051E8C1EA300973986 /* LiveFeedViewController.swift */,
 				960040E21E8D946700EC63E9 /* ArchivesViewController.swift */,
@@ -106,6 +118,7 @@
 				TargetAttributes = {
 					96012EFD1E8C1EA300973986 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 5BU4Q6J5R9;
 					};
 				};
 			};
@@ -133,8 +146,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				96012F0E1E8C1EA300973986 /* LaunchScreen.storyboard in Resources */,
+				964EA7141E8DC4BB004E2A9F /* email.png in Resources */,
+				964EA7161E8DC4BB004E2A9F /* symptoms.png in Resources */,
+				964EA7131E8DC4BB004E2A9F /* archives.png in Resources */,
 				96012F0B1E8C1EA300973986 /* Assets.xcassets in Resources */,
 				96012F091E8C1EA300973986 /* Main.storyboard in Resources */,
+				964EA7151E8DC4BB004E2A9F /* livefeed.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,10 +278,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = EKGShirt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.companyname.EKGShirt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -272,10 +292,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = EKGShirt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.companyname.EKGShirt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

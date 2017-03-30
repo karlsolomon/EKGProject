@@ -10,6 +10,10 @@ import UIKit
 
 class ArchivesViewController: UITableViewController {
 
+    // MARK: Properties
+    @IBOutlet var archivesTableView: UITableView!
+    @IBOutlet weak var emailButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

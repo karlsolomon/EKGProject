@@ -29,7 +29,7 @@
         <scene sceneID="lg7-SM-oiu">
             <objects>
                 <navigationController id="6zQ-Nf-9cZ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Symptoms" id="1MM-kp-RnR"/>
+                    <tabBarItem key="tabBarItem" title="Symptoms" image="symptoms.png" id="1MM-kp-RnR"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qph-zu-T5M">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -45,7 +45,7 @@
         <!--SymptomsViewController-->
         <scene sceneID="JCX-Iz-QqM">
             <objects>
-                <viewController title="SymptomsViewController" id="bhp-NT-gtO" sceneMemberID="viewController">
+                <viewController title="SymptomsViewController" id="bhp-NT-gtO" customClass="SymptomsViewController" customModule="EKGShirt" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nzR-yT-9EG"/>
                         <viewControllerLayoutGuide type="bottom" id="P7z-vX-Y6X"/>
@@ -54,122 +54,118 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jdh-jv-iPY" userLabel="recordButton">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <accessibility key="accessibilityConfiguration" identifier="recordButton" label="recordButton">
-                                    <accessibilityTraits key="traits" button="YES"/>
-                                </accessibility>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <state key="normal" title="notAccessed"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="136" y="488" width="129" height="39"/>
-                                </variation>
-                            </button>
                             <tableView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" restorationIdentifier="tableView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Jx3-1G-kJB" userLabel="tableView">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="symptomsCell" id="kDd-5C-nz1">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kDd-5C-nz1" id="2Bq-5g-XX5">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="0.0" y="64" width="400" height="410"/>
                                 </variation>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ztk-m1-Kuk">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Button"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="85" y="487" width="231" height="30"/>
+                                </variation>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="jdh-jv-iPY"/>
                                 <exclude reference="Jx3-1G-kJB"/>
+                                <exclude reference="ztk-m1-Kuk"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="jdh-jv-iPY"/>
                                 <include reference="Jx3-1G-kJB"/>
+                                <include reference="ztk-m1-Kuk"/>
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Symptoms" id="FMu-Et-Lse"/>
+                    <tabBarItem key="tabBarItem" title="Symptoms" image="symptoms.png" id="FMu-Et-Lse"/>
                     <navigationItem key="navigationItem" title="Symptoms" id="1ss-EC-Nz5">
                         <barButtonItem key="rightBarButtonItem" title="Definitions" style="plain" id="a5n-ZB-Lpi"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="definitions" destination="a5n-ZB-Lpi" id="2E6-fk-ArL"/>
+                        <outlet property="recordButton" destination="ztk-m1-Kuk" id="TAL-UW-FlM"/>
+                        <outlet property="tableView" destination="Jx3-1G-kJB" id="ZuP-Qt-oTz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gjy-Cq-5Ad" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1597.5" y="-8"/>
         </scene>
-        <!--ArchivesViewController-->
-        <scene sceneID="eUd-6H-wHV">
-            <objects>
-                <tableViewController title="ArchivesViewController" id="xKY-dJ-oYO" customClass="ArchivesViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="g11-7c-gIS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="30g-zO-sR8" detailTextLabel="lb4-wW-Iax" style="IBUITableViewCellStyleValue1" id="Hwc-Gm-bwu">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hwc-Gm-bwu" id="Can-kP-jed">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="MM-DD-YYYY hh:mm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="30g-zO-sR8">
-                                            <rect key="frame" x="15" y="12" width="167.5" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                            <variation key="widthClass=compact">
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            </variation>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="S, Sw, Ir" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lb4-wW-Iax">
-                                            <rect key="frame" x="524" y="12" width="61" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                            <variation key="widthClass=compact">
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            </variation>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="xKY-dJ-oYO" id="1jy-IA-uW0"/>
-                            <outlet property="delegate" destination="xKY-dJ-oYO" id="PRd-iW-R0s"/>
-                        </connections>
-                    </tableView>
-                    <tabBarItem key="tabBarItem" title="Archives" id="jau-w0-PcQ"/>
-                    <navigationItem key="navigationItem" title="Archives" id="Gsu-W6-ey7"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Tvx-WM-2ZC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1593" y="1323"/>
-        </scene>
         <!--Archives-->
         <scene sceneID="jTL-NE-qaR">
             <objects>
                 <navigationController id="JHe-Jt-yet" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Archives" id="vLw-h5-Hup"/>
+                    <tabBarItem key="tabBarItem" title="Archives" image="archives.png" id="vLw-h5-Hup"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jRP-JK-4UV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="xKY-dJ-oYO" kind="relationship" relationship="rootViewController" id="dot-b5-Q8f"/>
+                        <segue destination="nmY-Xb-2Jq" kind="relationship" relationship="rootViewController" id="4zL-fI-Jf3"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fwh-k3-I8C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="663" y="1323"/>
         </scene>
+        <!--Archives-->
+        <scene sceneID="ISQ-aK-jVr">
+            <objects>
+                <tableViewController id="nmY-Xb-2Jq" customClass="ArchivesViewController" customModule="EKGShirt" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="dxD-r6-LeC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="GQ0-qd-CMt">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GQ0-qd-CMt" id="zMq-jT-RA6">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="nmY-Xb-2Jq" id="b2t-GD-GzT"/>
+                            <outlet property="delegate" destination="nmY-Xb-2Jq" id="qmv-90-fAE"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Archives" image="archives.png" id="wyS-ya-aDi"/>
+                    <navigationItem key="navigationItem" title="Archives" id="zsS-TR-6N1">
+                        <barButtonItem key="rightBarButtonItem" image="email.png" id="YDO-QZ-Xyr"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="archivesTableView" destination="dxD-r6-LeC" id="cQh-UB-mbK"/>
+                        <outlet property="emailButton" destination="YDO-QZ-Xyr" id="Py7-hq-avb"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gy7-6E-Kpe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1596" y="1314"/>
+        </scene>
         <!--Live Feed-->
         <scene sceneID="4da-6o-ogw">
             <objects>
                 <navigationController id="q0O-ZJ-IO5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Live Feed" id="Ice-h7-Izd"/>
+                    <tabBarItem key="tabBarItem" title="Live Feed" image="livefeed.png" id="Ice-h7-Izd"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="GBH-bQ-HEv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -195,7 +191,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Live Feed" id="FB7-66-gCk"/>
+                    <tabBarItem key="tabBarItem" title="Live Feed" image="livefeed.png" id="FB7-66-gCk"/>
                     <navigationItem key="navigationItem" title="Live Feed" id="now-pB-uSr"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ahT-wX-gQl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -203,4 +199,10 @@
             <point key="canvasLocation" x="1602" y="651"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="archives.png" width="30" height="30"/>
+        <image name="email.png" width="30" height="30"/>
+        <image name="livefeed.png" width="29" height="30"/>
+        <image name="symptoms.png" width="32" height="32"/>
+    </resources>
 </document>

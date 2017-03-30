@@ -9,17 +9,21 @@
 import UIKit
 
 class SymptomsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
+    // MARK: Properties
+    
+    @IBOutlet weak var definitions: UIBarButtonItem!
+    @IBOutlet weak var recordButton: UIButton!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var sampleCell: UIView!
+    
 	var contents = ["Symptom 1", "Symptom 2", "Symptom 3"]
 	var selectedSymptoms = [String]()
-	let textCellIdentifier = "TextCell"
+    let cellIdentifier = "symptomsCell"
 	var symptomsSelected = false
-    var recordButton = UIButton()
-    var tableView = UITableView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        recordButton = (self.view.viewWithTag(2) as? UIButton)!
-        tableView = (self.view.viewWithTag(1) as? UITableView)!
         recordButton.setTitle("Record EKG", forState: UIControlState.Normal)
         tableView.delegate = self	// must name tableView "symptomsView" in storyboard
         tableView.dataSource = self
@@ -31,7 +35,7 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
 
 //UI TABLE VIEW DATA SOURCE
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-	    let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath)	 
+	    let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
 	    cell.textLabel?.text = contents[indexPath.row]	 
 	    return cell
 	}
@@ -40,6 +44,7 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return contents.count
     }
+    
     
     
 //UI TABLE VIEW DELEGATE
@@ -89,4 +94,3 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
 
 
 }
-
