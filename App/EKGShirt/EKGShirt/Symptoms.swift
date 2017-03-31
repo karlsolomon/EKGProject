@@ -9,7 +9,7 @@
 import Foundation
 
 class Symptoms {
-    private let chestPain = "Chest Pain/Discomfort/Pressure/Heaviness/Burning/Fullness/Squeezing"
+    private let chestPain = "Chest Pain/Pressure/Burning/Squeezing"
     private let heartburn = "Heartburn or Indigestion"
     private let discomfort = "Discomfort in Back/Jaw/Throat/Arm"
     private let sweating = "Sweating"
@@ -142,12 +142,9 @@ class Symptoms {
     
     private func generateKey(word: String) -> String {
         for index in 1 ... word.characters.count {
-            // print(symptomsToAbbreviations[word])
-            // print(" word is \(word)")
             let substring = word[word.startIndex..<word.startIndex.advancedBy(index)]
             
             if symptomsToAbbreviations.values.contains(substring) == false {
-                //       print(" substring is \(substring)")
                 let abbreviation = word[word.startIndex..<word.startIndex.advancedBy(index)]
                 return abbreviation
             }
