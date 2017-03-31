@@ -25,7 +25,7 @@ class TextFileReader {
     private var fileList = [String]()
     
     init(){
-        let location = NSString(string: "pmy89/EKGProject/EKGShirt").stringByExpandingTildeInPath
+        let location = NSString(string: "Users/pmy89/EKGProject/EKGShirt").stringByExpandingTildeInPath
         self.setDirectory(location)
         
         /*let folderPath = NSBundle.mainBundle().pathForResource("Files", ofType: nil)
@@ -42,14 +42,28 @@ class TextFileReader {
         
     }
     func findTextfiles() -> [String]{
-        let fileManager = NSFileManager.defaultManager()
-        let enumerator:NSDirectoryEnumerator = fileManager.enumeratorAtPath(directory)!
         var list = [String]()
+        let fileManager = NSFileManager.defaultManager()
+        let path = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        let docsDir = path[0].path
+        
+        let filelist = try? fileManager.contentsOfDirectoryAtPath(docsDir!)
+        for file: String in filelist!{
+            if file.containsString(".txt"){
+                let targetPath = docsDir! + "/" + file
+                list.append(targetPath)
+                
+            }
+        }
+        
+ 
+      /*  let enumerator:NSDirectoryEnumerator = fileManager.enumeratorAtPath(docsDir!)!
+       
         for element in enumerator{
             if element.hasSuffix(".txt"){
                 list.append(element as! String)
             }
-        }
+        }*/
         return list
         
     }
@@ -70,11 +84,15 @@ class TextFileReader {
     func getFileList() -> [String]{
         return fileList
     }
-    
+    private func setFileList(list: [String]){
+        fileList = list
+    }
     func readFile() -> [String: String]{
         var fileContent = [String:String]()
-        for i in 0...fileList.count {
+        for i in 0..<fileList.count {
+            
             let data = try? NSString(contentsOfFile: fileList[i], encoding: NSUTF8StringEncoding)
+            
             fileContent.updateValue(data as! String, forKey: fileList[i])
         }
         return fileContent
@@ -88,9 +106,9 @@ class TextFileReader {
         for (key,value) in dataArray{
             var dataString = dataArray[key]
             var leadArray = dataString?.componentsSeparatedByString("\n")
-            for i in 0...leadArray!.count{
+            for i in 0..<leadArray!.count{ // index starts at 2 to avoid the date and time
                 var valueArray = leadArray![i].componentsSeparatedByString(" ")
-                for j in 0...valueArray.count{
+                for j in 1..<valueArray.count{
                     intvalueArray.append(Int16(valueArray[j])!)
                 }
                 intArray.append(intvalueArray)
