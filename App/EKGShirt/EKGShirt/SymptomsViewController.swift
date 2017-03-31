@@ -52,8 +52,12 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
             NSTimer.scheduledTimerWithTimeInterval(150, target: self, selector: #selector(self.enableButton), userInfo: nil, repeats: false)
             recordButton.setTitle("Record EKG", forState: UIControlState.Normal)
             recordButton.enabled = false
+            tableView.userInteractionEnabled = false
             print("Selected the following: \(selectedSymptoms)")
-            //TODO: Send Symptoms
+            
+            //TODO: 
+            //Send Symptoms
+            resetTable()
             
         } else {
             recordButton.setTitle("Submit Symptoms", forState: UIControlState.Normal)//titleLabel = "Submit Symptoms"
@@ -65,6 +69,19 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
     func enableButton() {
         print("timer Ended")
         self.recordButton.enabled = true
+        self.tableView.userInteractionEnabled = true
+    }
+    
+    func resetTable() {
+        var symptom = ""
+        var symptomIndex = 0
+        for i in (0..<selectedSymptoms.count).reverse() {
+            symptom = selectedSymptoms[i]
+            print("deselecting:  \(symptom)")
+            symptomIndex = selectedSymptoms.indexOf(symptom)!
+            selectedSymptoms.removeAtIndex(symptomIndex)
+        }
+        tableView.reloadData()
     }
     
 
