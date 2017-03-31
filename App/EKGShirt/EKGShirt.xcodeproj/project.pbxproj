@@ -19,6 +19,7 @@
 		964EA7141E8DC4BB004E2A9F /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = 964EA7101E8DC4BB004E2A9F /* email.png */; };
 		964EA7151E8DC4BB004E2A9F /* livefeed.png in Resources */ = {isa = PBXBuildFile; fileRef = 964EA7111E8DC4BB004E2A9F /* livefeed.png */; };
 		964EA7161E8DC4BB004E2A9F /* symptoms.png in Resources */ = {isa = PBXBuildFile; fileRef = 964EA7121E8DC4BB004E2A9F /* symptoms.png */; };
+		96CB31AE1E8EB6040038762F /* Symptoms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CB31AD1E8EB6040038762F /* Symptoms.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		964EA7101E8DC4BB004E2A9F /* email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = email.png; path = ../../icons/email.png; sourceTree = "<group>"; };
 		964EA7111E8DC4BB004E2A9F /* livefeed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = livefeed.png; path = ../../icons/livefeed.png; sourceTree = "<group>"; };
 		964EA7121E8DC4BB004E2A9F /* symptoms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = symptoms.png; path = ../../icons/symptoms.png; sourceTree = "<group>"; };
+		96CB31AD1E8EB6040038762F /* Symptoms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symptoms.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 				96012F031E8C1EA300973986 /* SymptomsViewController.swift */,
 				96012F051E8C1EA300973986 /* LiveFeedViewController.swift */,
 				960040E21E8D946700EC63E9 /* ArchivesViewController.swift */,
+				96CB31AD1E8EB6040038762F /* Symptoms.swift */,
 				96012F071E8C1EA300973986 /* Main.storyboard */,
 				817197481E8DFF12004189E5 /* TextFileReader.swift */,
 				96012F0A1E8C1EA300973986 /* Assets.xcassets */,
@@ -169,6 +172,7 @@
 				817197491E8DFF12004189E5 /* TextFileReader.swift in Sources */,
 				96012F021E8C1EA300973986 /* AppDelegate.swift in Sources */,
 				96012F041E8C1EA300973986 /* SymptomsViewController.swift in Sources */,
+				96CB31AE1E8EB6040038762F /* Symptoms.swift in Sources */,
 				960040E31E8D946700EC63E9 /* ArchivesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -96,7 +96,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Symptoms" image="symptoms.png" id="FMu-Et-Lse"/>
                     <navigationItem key="navigationItem" title="Symptoms" id="1ss-EC-Nz5">
-                        <barButtonItem key="rightBarButtonItem" title="Definitions" style="plain" id="a5n-ZB-Lpi"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="organize" id="a5n-ZB-Lpi"/>
                     </navigationItem>
                     <connections>
                         <outlet property="definitions" destination="a5n-ZB-Lpi" id="2E6-fk-ArL"/>
@@ -166,6 +166,7 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Archives" image="archives.png" id="wyS-ya-aDi"/>
                     <navigationItem key="navigationItem" title="Archives" id="zsS-TR-6N1">
+                        <barButtonItem key="leftBarButtonItem" systemItem="organize" id="Grr-R7-QUO"/>
                         <barButtonItem key="rightBarButtonItem" image="email.png" id="YDO-QZ-Xyr"/>
                     </navigationItem>
                     <connections>
