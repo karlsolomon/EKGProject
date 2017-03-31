@@ -27,9 +27,7 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
         recordButton.setTitle("Record EKG", forState: UIControlState.Normal)
         tableView.delegate = self	// must name tableView "symptomsView" in storyboard
         tableView.dataSource = self
-        tableView.userInteractionEnabled = false
-        tableView.allowsMultipleSelection = true
-        
+        allowSelection(false)
         let tapRecord = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
         tapRecord.numberOfTapsRequired = 1
         recordButton.addGestureRecognizer(tapRecord)
@@ -53,7 +51,7 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
             NSTimer.scheduledTimerWithTimeInterval(150, target: self, selector: #selector(self.enableButton), userInfo: nil, repeats: false)
             recordButton.setTitle("Record EKG", forState: UIControlState.Normal)
             recordButton.enabled = false
-            tableView.userInteractionEnabled = false
+            allowSelection(false)
             print("Selected the following: \(selectedSymptoms)")
             
             //TODO: 
@@ -63,14 +61,25 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
         } else {
             recordButton.setTitle("Submit Symptoms", forState: UIControlState.Normal)//titleLabel = "Submit Symptoms"
             symptomsSelected = true
-            tableView.userInteractionEnabled = true
+            allowSelection(true)
+        }
+    }
+    
+    func allowSelection(selection: Bool) {
+        if(selection) {
+            tableView.allowsSelection = true
+            tableView.allowsMultipleSelection = true
+        }
+        else {
+            tableView.allowsMultipleSelection = false
+            tableView.allowsSelection = false
         }
     }
     
     func enableButton() {
         print("timer Ended")
         self.recordButton.enabled = true
-        self.tableView.userInteractionEnabled = true
+        self.tableView.allowsSelection = true
     }
     
     func resetTable() {

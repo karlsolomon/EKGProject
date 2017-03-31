@@ -73,6 +73,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                        </accessibility>
                                     </tableViewCell>
                                 </prototypes>
                                 <variation key="widthClass=compact" fixedFrame="YES">
@@ -95,11 +98,8 @@
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Symptoms" image="symptoms.png" id="FMu-Et-Lse"/>
-                    <navigationItem key="navigationItem" title="Symptoms" id="1ss-EC-Nz5">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="organize" id="a5n-ZB-Lpi"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Symptoms" id="1ss-EC-Nz5"/>
                     <connections>
-                        <outlet property="definitions" destination="a5n-ZB-Lpi" id="2E6-fk-ArL"/>
                         <outlet property="recordButton" destination="ztk-m1-Kuk" id="TAL-UW-FlM"/>
                         <outlet property="tableView" destination="Jx3-1G-kJB" id="ZuP-Qt-oTz"/>
                     </connections>
@@ -107,6 +107,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gjy-Cq-5Ad" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1597.5" y="-8"/>
+        </scene>
+        <!--Symptoms Abbreviations-->
+        <scene sceneID="sr4-GF-8bQ">
+            <objects>
+                <tableViewController title="Symptoms Abbreviations" id="dgi-Lk-zKU" customClass="SymptomsLegendController" customModule="EKGShirt" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="mhZ-tK-Idc">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="legendCell" id="guM-Nl-em6">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="guM-Nl-em6" id="Vc3-fE-mWa">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="dgi-Lk-zKU" id="mB4-yU-jGA"/>
+                            <outlet property="delegate" destination="dgi-Lk-zKU" id="AsK-Zs-6Ce"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sA9-PC-6zy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2326.5" y="1314"/>
         </scene>
         <!--Archives-->
         <scene sceneID="jTL-NE-qaR">
@@ -134,26 +162,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ArchiveCell" textLabel="GNv-V6-81E" detailTextLabel="xdE-0P-HB4" style="IBUITableViewCellStyleSubtitle" id="GQ0-qd-CMt">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ArchiveCell" textLabel="GNv-V6-81E" detailTextLabel="xdE-0P-HB4" style="IBUITableViewCellStyleValue1" id="GQ0-qd-CMt">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GQ0-qd-CMt" id="zMq-jT-RA6">
                                     <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GNv-V6-81E">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="03/31/2017 14:25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GNv-V6-81E">
                                             <rect key="frame" x="15" y="6" width="31.5" height="19.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xdE-0P-HB4">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="A, B, Sw, T" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xdE-0P-HB4">
                                             <rect key="frame" x="15" y="25.5" width="40.5" height="13.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="widthClass=compact">
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            </variation>
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
@@ -166,7 +197,11 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Archives" image="archives.png" id="wyS-ya-aDi"/>
                     <navigationItem key="navigationItem" title="Archives" id="zsS-TR-6N1">
-                        <barButtonItem key="leftBarButtonItem" systemItem="organize" id="Grr-R7-QUO"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="organize" id="Grr-R7-QUO">
+                            <connections>
+                                <segue destination="dgi-Lk-zKU" kind="show" id="QSn-C1-FqV"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="email.png" id="YDO-QZ-Xyr"/>
                     </navigationItem>
                     <connections>
@@ -213,7 +248,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ahT-wX-gQl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1602" y="651"/>
+            <point key="canvasLocation" x="2091" y="663"/>
         </scene>
     </scenes>
     <resources>
