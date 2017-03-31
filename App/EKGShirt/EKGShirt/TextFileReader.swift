@@ -10,9 +10,9 @@ import Foundation
 struct Archive {
     var date: String?
     var time: String?
-    var data: [Int16]
+    var data: [[Int16]]
     
-    init(date: String?, time: String?, data: [Int16]){
+    init(date: String?, time: String?, data: [[Int16]]){
         self.date = date
         self.time = time
         self.data = data
@@ -71,18 +71,40 @@ class TextFileReader {
         return fileList
     }
     
-    func readFile() -> [String]{
-        var fileContent = [String]()
-     //   for i in 0...fileList.count {
-            let data = try? NSString(contentsOfFile: directory, encoding: NSUTF8StringEncoding)
-            fileContent.append(data as! String)
-     //   }
+    func readFile() -> [String: String]{
+        var fileContent = [String:String]()
+        for i in 0...fileList.count {
+            let data = try? NSString(contentsOfFile: fileList[i], encoding: NSUTF8StringEncoding)
+            fileContent.updateValue(data as! String, forKey: fileList[i])
+        }
         return fileContent
     }
-    func getArchive() -> Archive{
-        var archive = Archive
+    func getArchive() -> [Archive]{
+        var archiveList = [Archive]()
+        let dataArray = readFile()
+        var intvalueArray = [Int16]()
+        var intArray = [[Int16]]()
+        //separates lead data string into Int16 matrix
+        for (key,value) in dataArray{
+            var dataString = dataArray[key]
+            var leadArray = dataString?.componentsSeparatedByString("\n")
+            for i in 0...leadArray!.count{
+                var valueArray = leadArray![i].componentsSeparatedByString(" ")
+                for j in 0...valueArray.count{
+                    intvalueArray.append(Int16(valueArray[j])!)
+                }
+                intArray.append(intvalueArray)
+            }
+            
+            
+            var datetime = key.componentsSeparatedByString("_")
+            var date = datetime[0]
+            var time = datetime[1]
+            var newArchive = Archive(date: date, time: time, data: intArray)
+            archiveList.append(newArchive)
+        }
+     return archiveList
         
-        return
     }
     
     

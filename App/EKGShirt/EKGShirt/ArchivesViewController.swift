@@ -45,8 +45,9 @@ class ArchivesViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ArchiveCell", forIndexPath: indexPath)
-        let fileList = fileReader.getFileList()
-        let archive = fileList[indexPath.row]
+        let archive = fileReader.getArchive()[indexPath.row]
+        cell.textLabel?.text = archive.date
+        cell.detailTextLabel?.text = archive.time
         
         return cell
     }
