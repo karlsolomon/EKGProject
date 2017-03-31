@@ -23,6 +23,7 @@ class TextFileReader {
     
     private var directory = String()
     private var fileList = [String]()
+    private var fileNames = [String]()
     
     init(){
         let location = NSString(string: "Users/pmy89/EKGProject/EKGShirt").stringByExpandingTildeInPath
@@ -51,6 +52,7 @@ class TextFileReader {
         for file: String in filelist!{
             if file.containsString(".txt"){
                 let targetPath = docsDir! + "/" + file
+                fileNames.append(file)
                 list.append(targetPath)
                 
             }
@@ -103,6 +105,7 @@ class TextFileReader {
         var intvalueArray = [Int16]()
         var intArray = [[Int16]]()
         //separates lead data string into Int16 matrix
+        var fn = 0
         for (key,value) in dataArray{
             var dataString = dataArray[key]
             var leadArray = dataString?.componentsSeparatedByString("\n")
@@ -115,11 +118,12 @@ class TextFileReader {
             }
             
             
-            var datetime = key.componentsSeparatedByString("_")
+            var datetime = fileNames[fn].componentsSeparatedByString("_")
             var date = datetime[0]
             var time = datetime[1]
             var newArchive = Archive(date: date, time: time, data: intArray)
             archiveList.append(newArchive)
+            fn += 1
         }
      return archiveList
         
