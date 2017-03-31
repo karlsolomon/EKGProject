@@ -32,14 +32,14 @@ class Symptoms {
     private let lowFever = "Low-grade Fever"
     private let sharpChestPain = "Sharp Central Chest Pain"
     
-    private var coronaryArteryDisease = [String]()
-    private var heartAttack = [String]()
-    private var arrhythmia = [String]()
-    private var atrialFibrillation = [String]()
-    private var heartValveDisease = [String]()
-    private var heartFailure = [String]()
-    private var cardiomyopathy = [String]()
-    private var pericarditis = [String]()
+    private var coronaryArteryDisease = Set<String>()
+    private var heartAttack = Set<String>()
+    private var arrhythmia = Set<String>()
+    private var atrialFibrillation = Set<String>()
+    private var heartValveDisease = Set<String>()
+    private var heartFailure = Set<String>()
+    private var cardiomyopathy = Set<String>()
+    private var pericarditis = Set<String>()
     private var emergencySymptomsList = [String]()
     private var symptomsList = [String]()
     private var symptomsToAbbreviations = [String: String]()
@@ -49,11 +49,8 @@ class Symptoms {
     
     private init (){
         populateLists()
-        emergencySymptomsList = heartAttack + heartFailure
-        symptomsList = heartAttack + coronaryArteryDisease + arrhythmia + atrialFibrillation
-        symptomsList += coronaryArteryDisease + arrhythmia + atrialFibrillation
-        symptomsList += arrhythmia
-        symptomsList += heartValveDisease + heartFailure + cardiomyopathy + pericarditis
+        emergencySymptomsList = Array(heartAttack.union(heartFailure).union(pericarditis))
+        symptomsList = Array(coronaryArteryDisease.union(heartAttack).union(arrhythmia).union(atrialFibrillation).union(heartValveDisease).union(heartFailure).union(cardiomyopathy).union(pericarditis))
         
         let symptoms = symptomsList.sort()
         //print("\(symptoms)")
