@@ -26,8 +26,8 @@ class TextFileReader {
     private var fileNames = [String]()
     
     init(){
-        let location = NSString(string: "Users/pmy89/EKGProject/EKGShirt").stringByExpandingTildeInPath
-        self.setDirectory(location)
+       // let location = NSString(string: "Users/pmy89/EKGProject/EKGShirt").stringByExpandingTildeInPath
+     //   self.setDirectory(location)
         
         /*let folderPath = NSBundle.mainBundle().pathForResource("Files", ofType: nil)
          setDirectory(folderPath!)
@@ -47,8 +47,9 @@ class TextFileReader {
         let fileManager = NSFileManager.defaultManager()
         let path = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         let docsDir = path[0].path
-        
+        setDirectory(docsDir!)
         let filelist = try? fileManager.contentsOfDirectoryAtPath(docsDir!)
+        
         for file: String in filelist!{
             if file.containsString(".txt"){
                 let targetPath = docsDir! + "/" + file
@@ -120,7 +121,11 @@ class TextFileReader {
             
             var datetime = fileNames[fn].componentsSeparatedByString("_")
             var date = datetime[0]
-            var time = datetime[1]
+      //      var dateMod = date[0] + date[1] + "/" + date[2] + date[3] + "/" + date[4...7]
+            
+            var time = (datetime[1] as NSString).stringByReplacingOccurrencesOfString(".txt", withString: "")
+            var timeMod = String()
+            for i in 0..<time.characters.count
             var newArchive = Archive(date: date, time: time, data: intArray)
             archiveList.append(newArchive)
             fn += 1

@@ -14,6 +14,8 @@ class ArchivesViewController: UITableViewController {
     @IBOutlet var archivesTableView: UITableView!
     @IBOutlet weak var emailButton: UIBarButtonItem!
     
+    
+    
     var fileReader = TextFileReader()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +36,7 @@ class ArchivesViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 3
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
