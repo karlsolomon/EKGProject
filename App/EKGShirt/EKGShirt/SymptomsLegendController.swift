@@ -10,11 +10,12 @@ import UIKit
 
 class SymptomsLegendController: UITableViewController {
     
-    var symptomsLegend = Symptoms.instance.getSymptomsLegend()
+    let symptomsLegend = Symptoms.instance.getSymptomsLegend()
     let cellIdentifier = "legendCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("loaded legend")
         tableView.allowsSelection = false
     }
     

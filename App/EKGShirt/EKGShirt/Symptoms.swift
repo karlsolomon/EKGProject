@@ -68,6 +68,7 @@ class Symptoms {
         for x in symptomsToAbbreviations.keys{
             symptomsLegend.append(symptomsToAbbreviations[x]! + " - " + x)
         }
+        symptomsLegend.sortInPlace()
         
     }
     
