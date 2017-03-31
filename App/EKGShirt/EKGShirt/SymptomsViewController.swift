@@ -29,9 +29,44 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.dataSource = self
         tableView.userInteractionEnabled = false
         tableView.allowsMultipleSelection = true
-        self.view.addSubview(tableView)
-        self.view.addSubview(recordButton)
+        
+        let tapRecord = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
+        tapRecord.numberOfTapsRequired = 1
+        recordButton.addGestureRecognizer(tapRecord)
     }
+    
+//Custom Button Handling
+    func tap(sender: UITapGestureRecognizer) {
+        print("Record Pressed")
+        if(symptomsSelected) {
+            //if(symptoms.dangerousSymptoms(symptoms: currentSymptoms)) {
+            let alert = UIAlertController(title: "Cardiac Emergency", message: "You have 3 or more symptoms that are symptoms of cardiac emergencies. Would you like to call Emergency Medical Services?", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Call 911", style: .Default, handler: { action in
+                if let url = NSURL(string: "tel://\(2817452091)") where UIApplication.sharedApplication().canOpenURL(url) {
+                    UIApplication.sharedApplication().openURL(url)
+                }
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
+            }))
+            presentViewController(alert, animated: true, completion: nil)
+            NSTimer.scheduledTimerWithTimeInterval(150, target: self, selector: #selector(self.enableButton), userInfo: nil, repeats: false)
+            recordButton.setTitle("Record EKG", forState: UIControlState.Normal)
+            recordButton.enabled = false
+            print("Selected the following: \(selectedSymptoms)")
+            //TODO: Send Symptoms
+            
+        } else {
+            recordButton.setTitle("Submit Symptoms", forState: UIControlState.Normal)//titleLabel = "Submit Symptoms"
+            symptomsSelected = true
+            tableView.userInteractionEnabled = true
+        }
+    }
+    
+    func enableButton() {
+        print("timer Ended")
+        self.recordButton.enabled = true
+    }
+    
 
 //UI TABLE VIEW DATA SOURCE
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -53,39 +88,12 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
         print("added \(contents[indexPath.row])")
     }
     
-    func tableView(tableView: UITableView, deselectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         selectedSymptoms.removeAtIndex(selectedSymptoms.indexOf(contents[indexPath.row])!)
         print("removed \(contents[indexPath.row])")
     }
-
-	@IBAction func recordButton(sender: UIButton) {
     
-		if(symptomsSelected) {
-			//if(symptoms.dangerousSymptoms(symptoms: currentSymptoms)) {
-				let alert = UIAlertController(title: "Title", message: "Message", preferredStyle: UIAlertControllerStyle.Alert)
-				alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { action in
-					if let url = NSURL(string: "tel://\(2817452091)") where UIApplication.sharedApplication().canOpenURL(url) {
-						UIApplication.sharedApplication().openURL(url)
-					}
-				}))
-				alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
-				}))
-				presentViewController(alert, animated: true, completion: nil)
-				//present(alert, animated: true, completion: nil)
-			//}
-            //NSTimer.scheduledTimerWithTimeInterval(150, target: recordButton, selector: #selector(SymptomsViewController.enableButton), userInfo: nil, repeats: false)
-			//performSegueWithIdentifier("SendSymptoms", sender: sender)
 
-		} else {
-			recordButton.setTitle("Submit Symptoms", forState: UIControlState.Normal)//titleLabel = "Submit Symptoms"
-			symptomsSelected = true
-			tableView.userInteractionEnabled = true
-		}
-	}
-    
-    func enableButton() {
-        recordButton.enabled = true
-    }
 
 
     override func didReceiveMemoryWarning() {
