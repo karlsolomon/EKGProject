@@ -7,19 +7,20 @@
 //
 
 import UIKit
+import Foundation
+import MessageUI
 
-class ArchivesViewController: UITableViewController {
+class ArchivesViewController: UITableViewController, MFMailComposeViewControllerDelegate {
 
     // MARK: Properties
     @IBOutlet var archivesTableView: UITableView!
+    
     @IBOutlet weak var emailButton: UIBarButtonItem!
-    
-    
+
     
     var fileReader = TextFileReader()
     override func viewDidLoad() {
-        super.viewDidLoad()
-
+        //emailButton.addTarget(self, action: Selector(emailButtonPressed(self)), forControlEvents: .TouchUpInside)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -53,10 +54,24 @@ class ArchivesViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let email = UITableViewRowAction(style: .Normal, title: "Email", handler: {_,_ in 
+            print("Email Tapped")
+        })
+        let delete = UITableViewRowAction(style: .Default, title: "Delete", handler: {_,_ in 
+            print("Delete")
+        })
+        return [email, delete]
+    }
+    
+    
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             //source.removeAtIndex(indexPath.row)
-            //tableView.deleteRowsAtINdexPaths([indexPath]), withAnimation: UITableViewRowAnimation.Automatic)
+            //
+            //tableView.deleteRowsAtIndexPaths([indexPath]), withAnimation: UITableViewRowAnimation.Automatic)
+            //or
+            //self.tableView.reloadData()
         }
     }
     
@@ -106,5 +121,46 @@ class ArchivesViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // MARK: EMAIL VIEW DELEGATE
+    
+    @IBAction func emailButton(sender: UIBarButtonItem) {
+        print("Email Button Pressed")
+        let mailComposeViewController = configuredMailComposeViewController()
+        if MFMailComposeViewController.canSendMail() {
+            presentViewController(mailComposeViewController, animated: true, completion: nil)
+        } else {
+            self.showSendMailErrorAlert()
+        }
+    }
+
+    
+    func configuredMailComposeViewController() -> MFMailComposeViewController {
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
+        
+        mailComposerVC.setToRecipients(["someone@somewhere.com"])
+        mailComposerVC.setSubject("Sending you an in-app e-mail...")
+        mailComposerVC.setMessageBody("Sending e-mail in-app is not so bad!", isHTML: false)
+        
+        if let filePath = NSBundle.mainBundle().pathForResource("samples", ofType: "csv") {
+            if let fileData = NSData(contentsOfFile: filePath) {
+                mailComposerVC.addAttachmentData(fileData, mimeType: "text/csv", fileName: "Sample CSV")
+            }
+        }
+        
+        return mailComposerVC
+    }
+    
+    func showSendMailErrorAlert() {
+        let sendMailErrorAlert = UIAlertView(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", delegate: self, cancelButtonTitle: "OK")
+        sendMailErrorAlert.show()
+    }
+    
+    // MARK: MFMailComposeViewControllerDelegate Method
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
 
 }

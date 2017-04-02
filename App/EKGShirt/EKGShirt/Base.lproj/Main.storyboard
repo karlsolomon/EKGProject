@@ -207,37 +207,18 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="email.png" id="YDO-QZ-Xyr">
                             <connections>
-                                <segue destination="75l-vz-e7C" kind="popoverPresentation" popoverAnchorBarButtonItem="YDO-QZ-Xyr" id="U3Y-5j-xxf">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
+                                <action selector="emailButton:" destination="nmY-Xb-2Jq" id="2wf-Vd-VIr"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="archivesTableView" destination="dxD-r6-LeC" id="cQh-UB-mbK"/>
-                        <outlet property="emailButton" destination="YDO-QZ-Xyr" id="Py7-hq-avb"/>
+                        <outlet property="emailButton" destination="YDO-QZ-Xyr" id="crx-YG-EfO"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gy7-6E-Kpe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1596" y="1314"/>
-        </scene>
-        <!--Email View Controller-->
-        <scene sceneID="m43-fd-tdY">
-            <objects>
-                <viewController id="75l-vz-e7C" customClass="EmailViewController" customModule="EKGShirt" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="0AS-bW-MPz"/>
-                        <viewControllerLayoutGuide type="bottom" id="bEq-xI-1rp"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="sfs-dm-ThR">
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GjX-S0-3rA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1597.5" y="2125"/>
         </scene>
         <!--Live Feed-->
         <scene sceneID="4da-6o-ogw">
