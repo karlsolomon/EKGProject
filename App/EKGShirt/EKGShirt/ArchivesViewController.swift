@@ -29,7 +29,6 @@ class ArchivesViewController: UITableViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
@@ -54,7 +53,15 @@ class ArchivesViewController: UITableViewController {
         return cell
     }
     
-
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            //source.removeAtIndex(indexPath.row)
+            //tableView.deleteRowsAtINdexPaths([indexPath]), withAnimation: UITableViewRowAnimation.Automatic)
+        }
+    }
+    
+    
+  
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

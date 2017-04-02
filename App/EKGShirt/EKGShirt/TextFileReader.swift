@@ -102,36 +102,36 @@ class TextFileReader {
     }
     func getArchive() -> [Archive]{
         var archiveList = [Archive]()
-        let dataArray = readFile()
-        var intvalueArray = [Int16]()
-        var intArray = [[Int16]]()
-        //separates lead data string into Int16 matrix
-        var fn = 0
-        for (key,value) in dataArray{
-            var dataString = dataArray[key]
-            var leadArray = dataString?.componentsSeparatedByString("\n")
-            for i in 0..<leadArray!.count{ // index starts at 2 to avoid the date and time
-                var valueArray = leadArray![i].componentsSeparatedByString(" ")
-                for j in 1..<valueArray.count{
-                    intvalueArray.append(Int16(valueArray[j])!)
-                }
-                intArray.append(intvalueArray)
-            }
-            
-            
-            var datetime = fileNames[fn].componentsSeparatedByString("_")
-            var date = datetime[0]
-      //      var dateMod = date[0] + date[1] + "/" + date[2] + date[3] + "/" + date[4...7]
-            
-            var time = (datetime[1] as NSString).stringByReplacingOccurrencesOfString(".txt", withString: "")
-            var timeMod = String()
-            for i in 0..<time.characters.count
-            var newArchive = Archive(date: date, time: time, data: intArray)
-            archiveList.append(newArchive)
-            fn += 1
-        }
-     return archiveList
-        
+//        let dataArray = readFile()
+//        var intvalueArray = [Int16]()
+//        var intArray = [[Int16]]()
+//        //separates lead data string into Int16 matrix
+//        var fn = 0
+//        for (key,value) in dataArray{
+//            var dataString = dataArray[key]
+//            var leadArray = dataString?.componentsSeparatedByString("\n")
+//            for i in 0..<leadArray!.count{ // index starts at 2 to avoid the date and time
+//                var valueArray = leadArray![i].componentsSeparatedByString(" ")
+//                for j in 1..<valueArray.count{
+//                    intvalueArray.append(Int16(valueArray[j])!)
+//                }
+//                intArray.append(intvalueArray)
+//            }
+//            
+//            
+//            var datetime = fileNames[fn].componentsSeparatedByString("_")
+//            var date = datetime[0]
+//      //      var dateMod = date[0] + date[1] + "/" + date[2] + date[3] + "/" + date[4...7]
+//            
+//            var time = (datetime[1] as NSString).stringByReplacingOccurrencesOfString(".txt", withString: "")
+//            var timeMod = String()
+//            for i in 0..<time.characters.count
+//            var newArchive = Archive(date: date, time: time, data: intArray)
+//            archiveList.append(newArchive)
+//            fn += 1
+//        }
+    return archiveList
+
     }
     
     
@@ -140,4 +140,4 @@ class TextFileReader {
     }
 }
 
-var test = TextFileReader()
+//var test = TextFileReader()
