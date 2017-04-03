@@ -139,10 +139,9 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
         
-        mailComposerVC.setToRecipients(["someone@somewhere.com"])
-        mailComposerVC.setSubject("Sending you an in-app e-mail...")
-        mailComposerVC.setMessageBody("Sending e-mail in-app is not so bad!", isHTML: false)
-        
+        mailComposerVC.setToRecipients(["ksolomon@utexas.edu"])
+        mailComposerVC.setSubject("Patient Data")
+        mailComposerVC.setMessageBody("Am I dying?", isHTML: false)
         if let filePath = NSBundle.mainBundle().pathForResource("samples", ofType: "csv") {
             if let fileData = NSData(contentsOfFile: filePath) {
                 mailComposerVC.addAttachmentData(fileData, mimeType: "text/csv", fileName: "Sample CSV")

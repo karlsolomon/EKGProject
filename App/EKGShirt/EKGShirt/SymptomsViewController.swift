@@ -40,7 +40,7 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
             if(Symptoms.instance.dangerousSymptoms(selectedSymptoms)) {
                 let alert = UIAlertController(title: "Cardiac Emergency", message: "You have 3 or more symptoms that are symptoms of cardiac emergencies. Would you like to call Emergency Medical Services?", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Call 911", style: .Default, handler: { action in
-                    if let url = NSURL(string: "tel://\(2817452091)") where UIApplication.sharedApplication().canOpenURL(url) {
+                    if let url = NSURL(string: "tel://2817452091") where UIApplication.sharedApplication().canOpenURL(url) {
                     UIApplication.sharedApplication().openURL(url)
                 }
             }))
