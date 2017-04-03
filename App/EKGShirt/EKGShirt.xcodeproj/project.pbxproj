@@ -22,6 +22,7 @@
 		96CB31AE1E8EB6040038762F /* Symptoms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CB31AD1E8EB6040038762F /* Symptoms.swift */; };
 		96F01CBE1E91D3AC002E5A32 /* SymptomsLegendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F01CBD1E91D3AC002E5A32 /* SymptomsLegendController.swift */; };
 		96F01CC01E91D4A2002E5A32 /* samples.csv in Resources */ = {isa = PBXBuildFile; fileRef = 96F01CBF1E91D4A2002E5A32 /* samples.csv */; };
+		96F01CC41E91E991002E5A32 /* Archive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F01CC31E91E991002E5A32 /* Archive.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		96CB31AD1E8EB6040038762F /* Symptoms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symptoms.swift; sourceTree = "<group>"; };
 		96F01CBD1E91D3AC002E5A32 /* SymptomsLegendController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SymptomsLegendController.swift; path = ../SymptomsLegendController.swift; sourceTree = "<group>"; };
 		96F01CBF1E91D4A2002E5A32 /* samples.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = samples.csv; sourceTree = SOURCE_ROOT; };
+		96F01CC31E91E991002E5A32 /* Archive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Archive.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				96012F031E8C1EA300973986 /* SymptomsViewController.swift */,
 				96F01CBD1E91D3AC002E5A32 /* SymptomsLegendController.swift */,
 				96012F051E8C1EA300973986 /* LiveFeedViewController.swift */,
+				96F01CC31E91E991002E5A32 /* Archive.swift */,
 				960040E21E8D946700EC63E9 /* ArchivesViewController.swift */,
 				96F01CBF1E91D4A2002E5A32 /* samples.csv */,
 				96CB31AD1E8EB6040038762F /* Symptoms.swift */,
@@ -177,6 +180,7 @@
 			files = (
 				96012F061E8C1EA300973986 /* LiveFeedViewController.swift in Sources */,
 				817197491E8DFF12004189E5 /* TextFileReader.swift in Sources */,
+				96F01CC41E91E991002E5A32 /* Archive.swift in Sources */,
 				96012F021E8C1EA300973986 /* AppDelegate.swift in Sources */,
 				96012F041E8C1EA300973986 /* SymptomsViewController.swift in Sources */,
 				96CB31AE1E8EB6040038762F /* Symptoms.swift in Sources */,
