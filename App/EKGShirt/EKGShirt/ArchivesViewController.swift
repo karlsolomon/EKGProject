@@ -40,7 +40,7 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
         let cell = tableView.dequeueReusableCellWithIdentifier("ArchiveCell", forIndexPath: indexPath)
         let archive = Archive.getArchiveList()[indexPath.row]
         cell.textLabel?.text = archive.getDate() + " " + archive.getTime()
-        cell.detailTextLabel?.text = archive.getSymptoms()
+        cell.detailTextLabel?.text = archive.getSymptomsAbbreviations()
         
         return cell
     }
@@ -78,7 +78,7 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
         mailComposerVC.mailComposeDelegate = self
         mailComposerVC.setToRecipients(["ksolomon@utexas.edu"])
         mailComposerVC.setSubject("Patient EKG Record: " + archive.getDate() + " " + archive.getTime() )
-        mailComposerVC.setMessageBody("Symptoms: " + archive.getSymptoms(), isHTML: false)
+        mailComposerVC.setMessageBody("Symptoms: \n" + archive.getSymptoms(), isHTML: false)
         if let fileData = NSData(contentsOfFile: archive.getFile()) {
             mailComposerVC.addAttachmentData(fileData, mimeType: "text/csv", fileName: "Sample CSV")
         } else {

@@ -24,7 +24,7 @@ class Archive{
         setDateTime(date)
         self.path = path
      //   self.data = readFile(path)
-        self.symptoms = symptoms.joinWithSeparator(",")
+        self.symptoms = symptoms.joinWithSeparator(", ")
         self.symptomsAbbreviations = Symptoms.instance.getSymptomsAbbreviations(symptoms).joinWithSeparator(",")
         Archive.ArchiveList.append(self)
     }
