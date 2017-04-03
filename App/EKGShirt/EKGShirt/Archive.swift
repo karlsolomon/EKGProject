@@ -14,28 +14,27 @@ class Archive{
     }
     static var ArchiveList = [Archive]()
     private var date = String()
-    private var time = String
+    private var time = String()
     private var path = String()
     private var data = [[Int]]()
     
     private var symptoms = [String]()
     
     init(date: NSDate, path: String, symptoms: [String]){
-        
-        self.date = setDateTime(date)
+        setDateTime(date)
         self.path = path
-        self.data = readFile(path)
+     //   self.data = readFile(path)
         self.symptoms = symptoms
         
     }
     
     func setDateTime(date: NSDate){
         let formatter = NSDateFormatter()
-        var dateStringSplit = [String]
+        var dateStringSplit = [String]()
         // initially set the format based on your datepicker date
         formatter.dateFormat = "mm-dd-yyyy HH:mm:ss"
         let dateString = formatter.stringFromDate(date)
-        dateStringSplit =  dateString?.componentsSeparatedByString(" ")
+        dateStringSplit =  dateString.componentsSeparatedByString(" ")
         self.date = dateStringSplit[0]
         self.time = dateStringSplit[1]
     }
@@ -66,30 +65,32 @@ class Archive{
             return data[6]
         }
     }
-    func getArchive(path:String)->Archive{
+    func getArchive(path:String)->Archive?{
         for archive in Archive.ArchiveList{
             if archive.getPath() == path{
                 return archive
             }
         }
+        return nil
     }
     func readFile(path: String) -> [[Int]]{
-        var fileContent = [String]()
+        var fileContent = [[Int]]()
         
         let data = try? NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
         var dataInt = [Int]()
-        for i in fileContent{
-            var leadArray = data?.componentsSeparatedByString("\n")
-            for i in 0..<leadArray!.count{
-                var valueArray = leadArray![i].componentsSeparatedByString(" ")
-                for j in 1..<valueArray.count{
-                    dataInt.append(Int16(valueArray[j])!)
-                }
-                intArray.append(intvalueArray)
+        var leadArray = data?.componentsSeparatedByString("\n")
+        for lead in leadArray!{
+            var valueArray = lead.componentsSeparatedByString(" ")
+            for value in valueArray{
+                var valueInt = Int(value)
+                dataInt.append(valueInt!)
             }
+            fileContent.append(dataInt)
         }
         return fileContent
+        
+     
     }
-    
+ 
     
 }

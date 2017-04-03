@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		817197491E8DFF12004189E5 /* TextFileReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817197481E8DFF12004189E5 /* TextFileReader.swift */; };
+		81E7B9A61E91E5CF0027A92C /* Archive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7B9A51E91E5CF0027A92C /* Archive.swift */; };
 		960040E31E8D946700EC63E9 /* ArchivesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960040E21E8D946700EC63E9 /* ArchivesViewController.swift */; };
 		96012F021E8C1EA300973986 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96012F011E8C1EA300973986 /* AppDelegate.swift */; };
 		96012F041E8C1EA300973986 /* SymptomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96012F031E8C1EA300973986 /* SymptomsViewController.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		817197481E8DFF12004189E5 /* TextFileReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFileReader.swift; sourceTree = "<group>"; };
+		81E7B9A51E91E5CF0027A92C /* Archive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Archive.swift; sourceTree = "<group>"; };
 		960040E21E8D946700EC63E9 /* ArchivesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchivesViewController.swift; sourceTree = "<group>"; };
 		96012EFE1E8C1EA300973986 /* EKGShirt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EKGShirt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96012F011E8C1EA300973986 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				96012F011E8C1EA300973986 /* AppDelegate.swift */,
+				81E7B9A51E91E5CF0027A92C /* Archive.swift */,
 				964EA70F1E8DC4BB004E2A9F /* archives.png */,
 				964EA7101E8DC4BB004E2A9F /* email.png */,
 				964EA7111E8DC4BB004E2A9F /* livefeed.png */,
@@ -177,6 +180,7 @@
 			files = (
 				96012F061E8C1EA300973986 /* LiveFeedViewController.swift in Sources */,
 				817197491E8DFF12004189E5 /* TextFileReader.swift in Sources */,
+				81E7B9A61E91E5CF0027A92C /* Archive.swift in Sources */,
 				96012F021E8C1EA300973986 /* AppDelegate.swift in Sources */,
 				96012F041E8C1EA300973986 /* SymptomsViewController.swift in Sources */,
 				96CB31AE1E8EB6040038762F /* Symptoms.swift in Sources */,

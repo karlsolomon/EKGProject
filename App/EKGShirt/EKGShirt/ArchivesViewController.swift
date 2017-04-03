@@ -18,7 +18,7 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
     @IBOutlet weak var emailButton: UIBarButtonItem!
 
     
-    var fileReader = TextFileReader()
+
     override func viewDidLoad() {
         //emailButton.addTarget(self, action: Selector(emailButtonPressed(self)), forControlEvents: .TouchUpInside)
         // Uncomment the following line to preserve selection between presentations
@@ -41,15 +41,15 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return fileReader.numberofFiles()
+        return Archive.ArchiveList.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ArchiveCell", forIndexPath: indexPath)
-        let archive = fileReader.getArchive()[indexPath.row]
-        cell.textLabel?.text = archive.date
-        cell.detailTextLabel?.text = archive.time
+        let archive = Archive.ArchiveList[indexPath.row]
+        cell.textLabel?.text = archive.getDate()
+        cell.detailTextLabel?.text = archive.getTime()
         
         return cell
     }
