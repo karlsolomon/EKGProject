@@ -47,8 +47,8 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ArchiveCell", forIndexPath: indexPath)
-        let archive = fileReader.getArchive()[indexPath.row]
-        cell.textLabel?.text = archive.date
+        let archive = Archive.ArchiveList[indexPath.row]
+        cell.textLabel?.text = archive.getDate()
         cell.detailTextLabel?.text = archive.time
         
         return cell

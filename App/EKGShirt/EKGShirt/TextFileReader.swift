@@ -7,7 +7,7 @@
 //
 
 import Foundation
-struct Archive {
+/*struct Archives {
     var date: String?
     var time: String?
     var data: [[Int16]]
@@ -18,7 +18,7 @@ struct Archive {
         self.data = data
         
     }
-}
+}*/
 class TextFileReader {
     
     private var directory = String()
@@ -58,15 +58,6 @@ class TextFileReader {
                 
             }
         }
-        
- 
-      /*  let enumerator:NSDirectoryEnumerator = fileManager.enumeratorAtPath(docsDir!)!
-       
-        for element in enumerator{
-            if element.hasSuffix(".txt"){
-                list.append(element as! String)
-            }
-        }*/
         return list
         
     }
@@ -100,36 +91,36 @@ class TextFileReader {
         }
         return fileContent
     }
-    func getArchive() -> [Archive]{
+    func parseArchive(archive: Archive) -> [Archive]{
         var archiveList = [Archive]()
-//        let dataArray = readFile()
-//        var intvalueArray = [Int16]()
-//        var intArray = [[Int16]]()
-//        //separates lead data string into Int16 matrix
-//        var fn = 0
-//        for (key,value) in dataArray{
-//            var dataString = dataArray[key]
-//            var leadArray = dataString?.componentsSeparatedByString("\n")
-//            for i in 0..<leadArray!.count{ // index starts at 2 to avoid the date and time
-//                var valueArray = leadArray![i].componentsSeparatedByString(" ")
-//                for j in 1..<valueArray.count{
-//                    intvalueArray.append(Int16(valueArray[j])!)
-//                }
-//                intArray.append(intvalueArray)
-//            }
-//            
-//            
-//            var datetime = fileNames[fn].componentsSeparatedByString("_")
-//            var date = datetime[0]
-//      //      var dateMod = date[0] + date[1] + "/" + date[2] + date[3] + "/" + date[4...7]
-//            
-//            var time = (datetime[1] as NSString).stringByReplacingOccurrencesOfString(".txt", withString: "")
-//            var timeMod = String()
-//            for i in 0..<time.characters.count
-//            var newArchive = Archive(date: date, time: time, data: intArray)
-//            archiveList.append(newArchive)
-//            fn += 1
-//        }
+        let dataArray = readFile()
+        var intvalueArray = [Int16]()
+        var intArray = [[Int16]]()
+        //separates lead data string into Int16 matrix
+        var fn = 0
+        for (key,value) in dataArray{
+            var dataString = dataArray[key]
+            var leadArray = dataString?.componentsSeparatedByString("\n")
+            for i in 0..<leadArray!.count{ // index starts at 2 to avoid the date and time
+                var valueArray = leadArray![i].componentsSeparatedByString(" ")
+                for j in 1..<valueArray.count{
+                    intvalueArray.append(Int16(valueArray[j])!)
+                }
+                intArray.append(intvalueArray)
+            }
+            
+            
+            var datetime = fileNames[fn].componentsSeparatedByString("_")
+            var date = datetime[0]
+      //      var dateMod = date[0] + date[1] + "/" + date[2] + date[3] + "/" + date[4...7]
+            
+            var time = (datetime[1] as NSString).stringByReplacingOccurrencesOfString(".txt", withString: "")
+            var timeMod = String()
+            for i in 0..<time.characters.count
+       //     var newArchive = Archive(date: date, time: time, data: intArray)
+            archiveList.append(newArchive)
+            fn += 1
+        }
     return archiveList
 
     }
