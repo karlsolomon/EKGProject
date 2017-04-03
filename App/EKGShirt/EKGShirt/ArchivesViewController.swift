@@ -12,15 +12,52 @@ import MessageUI
 
 class ArchivesViewController: UITableViewController, MFMailComposeViewControllerDelegate {
 
+    var ArchiveList = [Archive]()
+    
     // MARK: Properties
     @IBOutlet var archivesTableView: UITableView!
     
 
     override func viewDidLoad() {
+        super.viewDidLoad()
+        if let savedArchives = loadArchives() {
+            ArchiveList += savedArchives
+        }
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        saveArchives()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        print("Archives View Appeared")
+        ArchiveList += Archive.getNewArchiveList()
+        self.archivesTableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    //MARK: NSCODING
+    
+    private func saveArchives() {
+        print("PATH: \(Archive.ArchiveURL.path)")
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(ArchiveList, toFile: Archive.ArchiveURL.path!)
+        if isSuccessfulSave {
+            print("Save Successful")
+        } else {
+            print("Save Failed")
+        }
+    }
+    
+    func addArchive(archive: Archive) {
+        ArchiveList.append(archive)
+        saveArchives()
+    }
+    
+    private func loadArchives() -> [Archive]? {
+        return NSKeyedUnarchiver.unarchiveObjectWithFile(Archive.ArchiveURL.path!) as? [Archive]
     }
 
     // MARK: - Table view data source
@@ -32,13 +69,19 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return Archive.getArchiveList().count
+        return ArchiveList.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ArchiveCell", forIndexPath: indexPath)
-        let archive = Archive.getArchiveList()[indexPath.row]
+        let archive = ArchiveList[indexPath.row]
+        print(archive.getDate())
+        print(archive.getTime())
+        print(archive.getSymptoms())
+        
+        
+        print("# of Archives: \(ArchiveList.count)")
         cell.textLabel?.text = archive.getDate() + " " + archive.getTime()
         cell.detailTextLabel?.text = archive.getSymptomsAbbreviations()
         
@@ -46,7 +89,7 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let archive = Archive.ArchiveList[indexPath.row]
+        let archive = ArchiveList[indexPath.row]
         let email = UITableViewRowAction(style: .Normal, title: "Email", handler: {_,_ in
             print("Email \(archive.getPath())")
             let mailComposeViewController = self.configuredMailComposeViewController(archive)
@@ -59,7 +102,7 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
         })
         let delete = UITableViewRowAction(style: .Default, title: "Delete", handler: {_,_ in 
             print("Delete")
-            Archive.ArchiveList.removeAtIndex(indexPath.row)
+            self.ArchiveList.removeAtIndex(indexPath.row)
             self.archivesTableView.reloadData()
         })
         return [email, delete]
