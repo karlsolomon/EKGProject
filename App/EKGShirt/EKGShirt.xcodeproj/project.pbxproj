@@ -20,6 +20,8 @@
 		964EA7151E8DC4BB004E2A9F /* livefeed.png in Resources */ = {isa = PBXBuildFile; fileRef = 964EA7111E8DC4BB004E2A9F /* livefeed.png */; };
 		964EA7161E8DC4BB004E2A9F /* symptoms.png in Resources */ = {isa = PBXBuildFile; fileRef = 964EA7121E8DC4BB004E2A9F /* symptoms.png */; };
 		96CB31AE1E8EB6040038762F /* Symptoms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CB31AD1E8EB6040038762F /* Symptoms.swift */; };
+		96F01CBE1E91D3AC002E5A32 /* SymptomsLegendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F01CBD1E91D3AC002E5A32 /* SymptomsLegendController.swift */; };
+		96F01CC01E91D4A2002E5A32 /* samples.csv in Resources */ = {isa = PBXBuildFile; fileRef = 96F01CBF1E91D4A2002E5A32 /* samples.csv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		964EA7111E8DC4BB004E2A9F /* livefeed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = livefeed.png; path = ../../icons/livefeed.png; sourceTree = "<group>"; };
 		964EA7121E8DC4BB004E2A9F /* symptoms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = symptoms.png; path = ../../icons/symptoms.png; sourceTree = "<group>"; };
 		96CB31AD1E8EB6040038762F /* Symptoms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symptoms.swift; sourceTree = "<group>"; };
+		96F01CBD1E91D3AC002E5A32 /* SymptomsLegendController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SymptomsLegendController.swift; path = ../SymptomsLegendController.swift; sourceTree = "<group>"; };
+		96F01CBF1E91D4A2002E5A32 /* samples.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = samples.csv; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,8 +80,10 @@
 				964EA7111E8DC4BB004E2A9F /* livefeed.png */,
 				964EA7121E8DC4BB004E2A9F /* symptoms.png */,
 				96012F031E8C1EA300973986 /* SymptomsViewController.swift */,
+				96F01CBD1E91D3AC002E5A32 /* SymptomsLegendController.swift */,
 				96012F051E8C1EA300973986 /* LiveFeedViewController.swift */,
 				960040E21E8D946700EC63E9 /* ArchivesViewController.swift */,
+				96F01CBF1E91D4A2002E5A32 /* samples.csv */,
 				96CB31AD1E8EB6040038762F /* Symptoms.swift */,
 				96012F071E8C1EA300973986 /* Main.storyboard */,
 				817197481E8DFF12004189E5 /* TextFileReader.swift */,
@@ -153,6 +159,7 @@
 			files = (
 				96012F0E1E8C1EA300973986 /* LaunchScreen.storyboard in Resources */,
 				964EA7141E8DC4BB004E2A9F /* email.png in Resources */,
+				96F01CC01E91D4A2002E5A32 /* samples.csv in Resources */,
 				964EA7161E8DC4BB004E2A9F /* symptoms.png in Resources */,
 				964EA7131E8DC4BB004E2A9F /* archives.png in Resources */,
 				96012F0B1E8C1EA300973986 /* Assets.xcassets in Resources */,
@@ -174,6 +181,7 @@
 				96012F041E8C1EA300973986 /* SymptomsViewController.swift in Sources */,
 				96CB31AE1E8EB6040038762F /* Symptoms.swift in Sources */,
 				960040E31E8D946700EC63E9 /* ArchivesViewController.swift in Sources */,
+				96F01CBE1E91D3AC002E5A32 /* SymptomsLegendController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,7 +244,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -275,7 +283,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
