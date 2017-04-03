@@ -13,30 +13,38 @@ class Archive{
         case LEAD1,LEAD2,LEAD3,AVF,AVL,AVR,V
     }
     static var ArchiveList = [Archive]()
-    private var date = NSDate()
-
+    private var date = String()
+    private var time = String
     private var path = String()
     private var data = [[Int]]()
     
     private var symptoms = [String]()
     
-    init(date: NSDate, path: String, data: [[Int]], symptoms: [String]){
+    init(date: NSDate, path: String, symptoms: [String]){
         
-        self.date = date
+        self.date = setDateTime(date)
         self.path = path
-        self.data = data
+        self.data = readFile(path)
         self.symptoms = symptoms
         
     }
     
-    func getDate()->String{
+    func setDateTime(date: NSDate){
         let formatter = NSDateFormatter()
+        var dateStringSplit = [String]
         // initially set the format based on your datepicker date
         formatter.dateFormat = "mm-dd-yyyy HH:mm:ss"
-        let dateString = formatter.stringFromDate(self.date)
-        return dateString
+        let dateString = formatter.stringFromDate(date)
+        dateStringSplit =  dateString?.componentsSeparatedByString(" ")
+        self.date = dateStringSplit[0]
+        self.time = dateStringSplit[1]
     }
-
+    func getDate()->String{
+        return self.date
+    }
+    func getTime()->String{
+        return self.time
+    }
     func getPath()->String{
         return path
     }
@@ -72,7 +80,7 @@ class Archive{
         var dataInt = [Int]()
         for i in fileContent{
             var leadArray = data?.componentsSeparatedByString("\n")
-            for i in 0..<leadArray!.count{ // index starts at 2 to avoid the date and time
+            for i in 0..<leadArray!.count{
                 var valueArray = leadArray![i].componentsSeparatedByString(" ")
                 for j in 1..<valueArray.count{
                     dataInt.append(Int16(valueArray[j])!)

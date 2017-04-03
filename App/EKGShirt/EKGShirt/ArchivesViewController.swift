@@ -49,7 +49,7 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
         let cell = tableView.dequeueReusableCellWithIdentifier("ArchiveCell", forIndexPath: indexPath)
         let archive = Archive.ArchiveList[indexPath.row]
         cell.textLabel?.text = archive.getDate()
-        cell.detailTextLabel?.text = archive.time
+        cell.detailTextLabel?.text = archive.getTime()
         
         return cell
     }
