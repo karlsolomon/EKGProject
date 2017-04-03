@@ -9,9 +9,9 @@
 import Foundation
 
 class Symptoms {
-    private let chestPain = "Chest Pain/Pressure/Burning/Squeezing"
+    private let chestPain = "Chest Pain/Pressure/Burning"
     private let heartburn = "Heartburn or Indigestion"
-    private let discomfort = "Discomfort in Back/Jaw/Throat/Arm"
+    private let discomfort = "Discomfort in Back/Throat/Arm"
     private let sweating = "Sweating"
     private let nausea = "Nausea"
     private let vomiting = "Vomiting"
@@ -27,7 +27,7 @@ class Symptoms {
     private let swelling = "Swelling of Ankles/Feet"
     private let sputum = "Cough with white sputum"
     private let bloated = "Bloated"
-    private let weightGain = "Rapid Weight Gain ( 2+ lbs in one day)"
+    private let weightGain = "Rapid Weight Gain (2 lbs/day)"
     private let fainting = "Fainting"
     private let lowFever = "Low-grade Fever"
     private let sharpChestPain = "Sharp Central Chest Pain"

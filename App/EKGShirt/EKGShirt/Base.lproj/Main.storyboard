@@ -54,17 +54,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ztk-m1-Kuk">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Record EKG"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="506" width="400" height="37"/>
-                                </variation>
-                            </button>
                             <tableView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" restorationIdentifier="tableView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Jx3-1G-kJB" userLabel="tableView">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="431" id="IZ4-w1-Bs3"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="symptomsCell" id="kDd-5C-nz1">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -78,22 +73,85 @@
                                         </accessibility>
                                     </tableViewCell>
                                 </prototypes>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="64" width="400" height="434"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="IZ4-w1-Bs3"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="64" width="400" height="398"/>
+                                    <mask key="constraints">
+                                        <include reference="IZ4-w1-Bs3"/>
+                                    </mask>
                                 </variation>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ztk-m1-Kuk">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="wvh-2a-WWa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Record EKG"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="wvh-2a-WWa"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="141" y="503" width="118" height="31"/>
+                                    <mask key="constraints">
+                                        <include reference="wvh-2a-WWa"/>
+                                    </mask>
+                                </variation>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Jx3-1G-kJB" firstAttribute="leading" secondItem="o0r-Rv-BdX" secondAttribute="leading" id="2fh-N5-Lbw"/>
+                            <constraint firstItem="ztk-m1-Kuk" firstAttribute="top" secondItem="Jx3-1G-kJB" secondAttribute="bottom" constant="10" id="7kM-ka-1Oq"/>
+                            <constraint firstItem="P7z-vX-Y6X" firstAttribute="top" secondItem="ztk-m1-Kuk" secondAttribute="bottom" constant="20" id="Hwv-ib-CcZ"/>
+                            <constraint firstItem="Jx3-1G-kJB" firstAttribute="top" secondItem="nzR-yT-9EG" secondAttribute="bottom" constant="10" id="NKh-MA-ub2"/>
+                            <constraint firstItem="ztk-m1-Kuk" firstAttribute="top" secondItem="Jx3-1G-kJB" secondAttribute="bottom" constant="20" id="QQS-L0-gNd"/>
+                            <constraint firstItem="ztk-m1-Kuk" firstAttribute="top" secondItem="Jx3-1G-kJB" secondAttribute="bottom" constant="8" symbolic="YES" id="TXs-7Y-FlT"/>
+                            <constraint firstItem="Jx3-1G-kJB" firstAttribute="top" secondItem="nzR-yT-9EG" secondAttribute="bottom" id="hts-pc-t74"/>
+                            <constraint firstItem="ztk-m1-Kuk" firstAttribute="centerX" secondItem="o0r-Rv-BdX" secondAttribute="centerX" id="okD-6C-CAS"/>
+                            <constraint firstItem="Jx3-1G-kJB" firstAttribute="centerX" secondItem="ztk-m1-Kuk" secondAttribute="centerX" id="qLK-qt-2no"/>
+                            <constraint firstItem="P7z-vX-Y6X" firstAttribute="top" secondItem="ztk-m1-Kuk" secondAttribute="bottom" constant="10" id="t7d-YC-lO9"/>
+                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="ztk-m1-Kuk"/>
                                 <exclude reference="Jx3-1G-kJB"/>
+                                <exclude reference="ztk-m1-Kuk"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="2fh-N5-Lbw"/>
+                                <exclude reference="NKh-MA-ub2"/>
+                                <exclude reference="hts-pc-t74"/>
+                                <exclude reference="qLK-qt-2no"/>
+                                <exclude reference="7kM-ka-1Oq"/>
+                                <exclude reference="QQS-L0-gNd"/>
+                                <exclude reference="TXs-7Y-FlT"/>
+                                <exclude reference="okD-6C-CAS"/>
+                                <exclude reference="Hwv-ib-CcZ"/>
+                                <exclude reference="t7d-YC-lO9"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="ztk-m1-Kuk"/>
                                 <include reference="Jx3-1G-kJB"/>
+                                <include reference="ztk-m1-Kuk"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="2fh-N5-Lbw"/>
+                                <include reference="NKh-MA-ub2"/>
+                                <include reference="hts-pc-t74"/>
+                                <include reference="qLK-qt-2no"/>
+                                <include reference="7kM-ka-1Oq"/>
+                                <include reference="QQS-L0-gNd"/>
+                                <include reference="TXs-7Y-FlT"/>
+                                <include reference="okD-6C-CAS"/>
+                                <include reference="Hwv-ib-CcZ"/>
+                                <include reference="t7d-YC-lO9"/>
                             </mask>
                         </variation>
                     </view>
