@@ -76,7 +76,6 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
     func enableButton() {
         print("timer Ended")
         self.recordButton.enabled = true
-        self.tableView.allowsSelection = true
     }
     
     func resetTable() {
