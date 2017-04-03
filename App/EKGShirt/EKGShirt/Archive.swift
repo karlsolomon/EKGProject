@@ -15,24 +15,33 @@ class Archive{
     static var ArchiveList = [Archive]()
     private var date = String()
     private var time = String()
-    private var path = String()
+    private var path = NSString()
     private var data = [[Int]]()
+    private var symptoms = String()
+    private var symptomsAbbreviations = String()
     
-    private var symptoms = [String]()
-    
-    init(date: NSDate, path: String, symptoms: [String]){
+    init(date: NSDate, path: NSString, symptoms: [String]){
         setDateTime(date)
         self.path = path
      //   self.data = readFile(path)
-        self.symptoms = symptoms
-        
+        self.symptoms = symptoms.joinWithSeparator(",")
+        self.symptomsAbbreviations = Symptoms.instance.getSymptomsAbbreviations(symptoms).joinWithSeparator(",")
+        Archive.ArchiveList.append(self)
+    }
+    
+    func getSymptoms() -> String {
+        return symptoms
+    }
+    
+    func getSymptomsAbbreviations() -> String {
+        return symptomsAbbreviations
     }
     
     func setDateTime(date: NSDate){
         let formatter = NSDateFormatter()
         var dateStringSplit = [String]()
         // initially set the format based on your datepicker date
-        formatter.dateFormat = "mm-dd-yyyy HH:mm:ss"
+        formatter.dateFormat = "mm/dd/yy HH:mm"
         let dateString = formatter.stringFromDate(date)
         dateStringSplit =  dateString.componentsSeparatedByString(" ")
         self.date = dateStringSplit[0]
@@ -44,7 +53,7 @@ class Archive{
     func getTime()->String{
         return self.time
     }
-    func getPath()->String{
+    func getPath()->NSString{
         return path
     }
     func getData(lead: LeadNum) ->[Int]{
@@ -73,16 +82,21 @@ class Archive{
         }
         return nil
     }
+    
+    func getFile() -> String {
+        return path as String
+    }
+    
     func readFile(path: String) -> [[Int]]{
         var fileContent = [[Int]]()
         
         let data = try? NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
         var dataInt = [Int]()
-        var leadArray = data?.componentsSeparatedByString("\n")
+        let leadArray = data?.componentsSeparatedByString("\n")
         for lead in leadArray!{
-            var valueArray = lead.componentsSeparatedByString(" ")
+            let valueArray = lead.componentsSeparatedByString(" ")
             for value in valueArray{
-                var valueInt = Int(value)
+                let valueInt = Int(value)
                 dataInt.append(valueInt!)
             }
             fileContent.append(dataInt)
@@ -90,6 +104,10 @@ class Archive{
         return fileContent
         
      
+    }
+    
+    static func getArchiveList() -> [Archive] {
+        return ArchiveList
     }
  
     

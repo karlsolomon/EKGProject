@@ -15,17 +15,8 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
     // MARK: Properties
     @IBOutlet var archivesTableView: UITableView!
     
-    @IBOutlet weak var emailButton: UIBarButtonItem!
-
-    
 
     override func viewDidLoad() {
-        //emailButton.addTarget(self, action: Selector(emailButtonPressed(self)), forControlEvents: .TouchUpInside)
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,25 +32,35 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return Archive.ArchiveList.count
+        return Archive.getArchiveList().count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ArchiveCell", forIndexPath: indexPath)
-        let archive = Archive.ArchiveList[indexPath.row]
-        cell.textLabel?.text = archive.getDate()
-        cell.detailTextLabel?.text = archive.getTime()
+        let archive = Archive.getArchiveList()[indexPath.row]
+        cell.textLabel?.text = archive.getDate() + " " + archive.getTime()
+        cell.detailTextLabel?.text = archive.getSymptoms()
         
         return cell
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let email = UITableViewRowAction(style: .Normal, title: "Email", handler: {_,_ in 
-            print("Email Tapped")
+        let archive = Archive.ArchiveList[indexPath.row]
+        let email = UITableViewRowAction(style: .Normal, title: "Email", handler: {_,_ in
+            print("Email \(archive.getPath())")
+            let mailComposeViewController = self.configuredMailComposeViewController(archive)
+            if MFMailComposeViewController.canSendMail() {
+                self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+            } else {
+                self.showSendMailErrorAlert()
+            }
+            
         })
         let delete = UITableViewRowAction(style: .Default, title: "Delete", handler: {_,_ in 
             print("Delete")
+            Archive.ArchiveList.removeAtIndex(indexPath.row)
+            self.archivesTableView.reloadData()
         })
         return [email, delete]
     }
@@ -67,87 +68,23 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            //source.removeAtIndex(indexPath.row)
-            //
-            //tableView.deleteRowsAtIndexPaths([indexPath]), withAnimation: UITableViewRowAnimation.Automatic)
-            //or
-            //self.tableView.reloadData()
+            archivesTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
     }
     
-    
-  
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-    // MARK: EMAIL VIEW DELEGATE
-    
-    @IBAction func emailButton(sender: UIBarButtonItem) {
-        print("Email Button Pressed")
-        let mailComposeViewController = configuredMailComposeViewController()
-        if MFMailComposeViewController.canSendMail() {
-            presentViewController(mailComposeViewController, animated: true, completion: nil)
-        } else {
-            self.showSendMailErrorAlert()
-        }
-    }
-
-    
-    func configuredMailComposeViewController() -> MFMailComposeViewController {
+    // MARK: EMAIL VIEW DELEGATE   
+    func configuredMailComposeViewController(archive: Archive) -> MFMailComposeViewController {
         let mailComposerVC = MFMailComposeViewController()
-        mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
-        
+        mailComposerVC.mailComposeDelegate = self
         mailComposerVC.setToRecipients(["ksolomon@utexas.edu"])
-        mailComposerVC.setSubject("Patient Data")
-        mailComposerVC.setMessageBody("Am I dying?", isHTML: false)
-        if let filePath = NSBundle.mainBundle().pathForResource("samples", ofType: "csv") {
-            if let fileData = NSData(contentsOfFile: filePath) {
-                mailComposerVC.addAttachmentData(fileData, mimeType: "text/csv", fileName: "Sample CSV")
-            }
+        mailComposerVC.setSubject("Patient EKG Record: " + archive.getDate() + " " + archive.getTime() )
+        mailComposerVC.setMessageBody("Symptoms: " + archive.getSymptoms(), isHTML: false)
+        if let fileData = NSData(contentsOfFile: archive.getFile()) {
+            mailComposerVC.addAttachmentData(fileData, mimeType: "text/csv", fileName: "Sample CSV")
+        } else {
+            let alert = UIAlertController(title: "File Not Found", message: "The file for this archive could not be found", preferredStyle: .Alert)
+            presentViewController(alert, animated: true, completion: nil)
         }
-        
         return mailComposerVC
     }
     

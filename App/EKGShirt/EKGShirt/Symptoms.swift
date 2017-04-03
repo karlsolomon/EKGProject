@@ -60,7 +60,7 @@ class Symptoms {
         }
         // print("intial \(symptomsToAbbreviations)")
         
-        for (word,abbrev) in symptomsToAbbreviations {
+        for (word,_) in symptomsToAbbreviations {
             //print(" generated key is \(generateKey(word))")
             symptomsToAbbreviations.updateValue(generateKey(word), forKey: word)
         }

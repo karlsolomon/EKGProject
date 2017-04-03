@@ -48,16 +48,13 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
             }))
             presentViewController(alert, animated: true, completion: nil)
             }
-            NSTimer.scheduledTimerWithTimeInterval(150, target: self, selector: #selector(self.enableButton), userInfo: nil, repeats: false)
+            NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: #selector(self.enableButton), userInfo: nil, repeats: false)
             recordButton.setTitle("Record EKG", forState: UIControlState.Normal)
             recordButton.enabled = false
             allowSelection(false)
-            print("Selected the following: \(selectedSymptoms)")
-            
-            //TODO: 
-            //Send Symptoms
+            print("Selected the following: \(selectedSymptoms)") 
+            sendSymptoms()
             resetTable()
-            
         } else {
             recordButton.setTitle("Submit Symptoms", forState: UIControlState.Normal)//titleLabel = "Submit Symptoms"
             symptomsSelected = true
@@ -92,6 +89,7 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
             selectedSymptoms.removeAtIndex(symptomIndex)
         }
         tableView.reloadData()
+        symptomsSelected = false
     }
     
 
@@ -122,6 +120,18 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    
+//MARK: SEND SYMPTOMS
+    func sendSymptoms() {
+        let date = NSDate()
+        if let filePath = NSBundle.mainBundle().pathForResource("samples", ofType: "csv") {
+            Archive(date: date, path: filePath, symptoms: selectedSymptoms)
+        } else {
+            let noFileFound = UIAlertController(title: "FILE NOT FOUND", message: "File at specified location not found", preferredStyle: .Alert)
+            presentViewController(noFileFound, animated: true, completion: nil)
+        }
     }
 
 
