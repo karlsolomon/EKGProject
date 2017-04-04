@@ -23,6 +23,7 @@ class Archive: NSObject, NSCoding{
     
     
     
+    
     private var date = String()
     private var time = String()
     private var path = NSString()

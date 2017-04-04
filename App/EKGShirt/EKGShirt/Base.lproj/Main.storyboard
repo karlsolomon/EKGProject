@@ -78,8 +78,7 @@
                                         <exclude reference="kvQ-aM-av2"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="64" width="400" height="424"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="kvQ-aM-av2"/>
                                     </mask>
@@ -99,8 +98,7 @@
                                         <exclude reference="z8d-g5-TGT"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="498" width="400" height="40"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="YOS-1G-sKL"/>
                                         <include reference="z8d-g5-TGT"/>
@@ -275,33 +273,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
-                    <connections>
-                        <segue destination="DwI-IS-2ep" kind="relationship" relationship="rootViewController" id="yXn-Jf-xFu"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CF2-CU-R3J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="663" y="656"/>
-        </scene>
-        <!--LiveFeedViewController-->
-        <scene sceneID="Blp-JL-zxj">
-            <objects>
-                <viewController title="LiveFeedViewController" id="DwI-IS-2ep" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="pzv-G1-ifG"/>
-                        <viewControllerLayoutGuide type="bottom" id="YfD-Qc-Py4"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="GDX-kp-FXf">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Live Feed" image="livefeed.png" id="FB7-66-gCk"/>
-                    <navigationItem key="navigationItem" title="Live Feed" id="now-pB-uSr"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ahT-wX-gQl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2091" y="663"/>
         </scene>
     </scenes>
     <resources>
