@@ -119,7 +119,7 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
 //MARK: SEND SYMPTOMS
     func sendSymptoms() {
         let date = NSDate()
-        if let filePath = NSBundle.mainBundle().pathForResource("samples", ofType: "csv") {
+        if let filePath = NSBundle.mainBundle().URLForResource("samples", withExtension: "csv"){
             Archive(date: date, path: filePath, symptoms: selectedSymptoms)
         } else {
             let noFileFound = UIAlertController(title: "FILE NOT FOUND", message: "File at specified location not found", preferredStyle: .Alert)

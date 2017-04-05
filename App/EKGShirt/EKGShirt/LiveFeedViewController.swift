@@ -48,7 +48,6 @@ class LiveFeedViewController: UIViewController {
         dataSet = LineChartDataSet(yVals: entries, label: "First unit test data")
         dataSet.drawCirclesEnabled = false
         dataSet.lineWidth = 2
-        //linePlotView = LineChartView(frame: CGRectMake(0, 0, 480, 350))
         linePlotView.leftAxis.axisMinValue = 0.0
         linePlotView.rightAxis.axisMinValue = 0.0
         linePlotView.data = LineChartData(xVals: xValues, dataSet: dataSet)
@@ -63,10 +62,6 @@ class LiveFeedViewController: UIViewController {
         plot.noDataText = "Waiting for EKG Data"
         plot.autoScaleMinMaxEnabled = true
         formatPlot(plot, data: data)
-        
-        
-        
-        
     }
     
     func formatArchivePlot(plot: LineChartView, data: LineChartDataSet) {
@@ -84,7 +79,23 @@ class LiveFeedViewController: UIViewController {
         plot.highlightPerTapEnabled = false
         plot.highlightPerDragEnabled = true
         plot.highlightFullBarEnabled = false
+        plot.legend.enabled = false
+        plot.descriptionText = ""
+        let xAxis = plot.xAxis
+        let gridColor = UIColor(red: 1, green: 0, blue: 0, alpha: 1)
+        let yAxisL = plot.leftAxis
+        let yAxisR = plot.rightAxis
+        
+        yAxisL.gridColor = gridColor
+        yAxisR.gridColor = gridColor
+        xAxis.gridColor = gridColor
+        
+        xAxis.axisLabelModulus = 5 // 25 = Big Grid Blocks, 5 = Small Grid Blocks. 1 Small Grid block = 40ms. FIXME: not working
+        
+        data.setColor(NSUIColor(red: 0, green: 0, blue: 0, alpha: 0.8))
     }
+    
+ 
 
 }
 

@@ -107,7 +107,7 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
         mailComposerVC.setToRecipients(["ksolomon@utexas.edu"])
         mailComposerVC.setSubject("Patient EKG Record: " + archive.getDate() + " " + archive.getTime() )
         mailComposerVC.setMessageBody("Symptoms: \n" + archive.getSymptoms(), isHTML: false)
-        if let fileData = NSData(contentsOfFile: archive.getFile()) {
+        if let fileData = NSData(contentsOfURL: archive.getPath()){
             mailComposerVC.addAttachmentData(fileData, mimeType: "text/csv", fileName: "Sample CSV")
         } else {
             let alert = UIAlertController(title: "File Not Found", message: "The file for this archive could not be found", preferredStyle: .Alert)
