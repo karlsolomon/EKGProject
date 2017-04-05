@@ -22,7 +22,7 @@ class LiveFeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        LiveFeedViewController.displayedLead = Archive.leads[0]
+        LiveFeedViewController.displayedLead = "Lead 1"
         updateChartWithData()
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -74,7 +74,7 @@ class LiveFeedViewController: UIViewController {
     
     func formatPlot(plot: LineChartView, data: LineChartDataSet) {
         plot.doubleTapToZoomEnabled = false
-        plot.setVisibleXRangeMaximum(10.0)  // make 300 to match 2.4s 125Hz readout
+        plot.setVisibleXRangeMaximum(300)  //300 to match 2.4s 125Hz readout
         plot.highlightPerTapEnabled = false
         plot.highlightPerDragEnabled = true
         plot.highlightFullBarEnabled = false

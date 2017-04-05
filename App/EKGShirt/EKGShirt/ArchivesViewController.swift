@@ -41,7 +41,7 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
     //MARK: NSCODING
     
     private func saveArchives() {
-        NSKeyedArchiver.archiveRootObject(ArchiveList, toFile: Archive.ArchiveURL.path!)
+       NSKeyedArchiver.archiveRootObject(ArchiveList, toFile: Archive.ArchiveURL.path!)
     }
     
     func addArchive(archive: Archive) {
@@ -50,7 +50,7 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
     }
     
     private func loadArchives() -> [Archive]? {
-        return NSKeyedUnarchiver.unarchiveObjectWithFile(Archive.ArchiveURL.path!) as? [Archive]
+        return NSKeyedUnarchiver.unarchiveObjectWithFile(Archive.ArchiveURL.absoluteString) as? [Archive]
     }
 
     // MARK: - Table view data source
