@@ -369,34 +369,6 @@
 			remoteGlobalIDString = 5BA8EC3F1A9D14DC00CE82E1;
 			remoteInfo = "Charts-iOS";
 		};
-		966E16171E946B3200BB400A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 966E16121E946B3200BB400A /* SwiftCSV.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3D1E59B41945FFAC001CF760;
-			remoteInfo = SwiftCSV;
-		};
-		966E16191E946B3200BB400A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 966E16121E946B3200BB400A /* SwiftCSV.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3D1E59BF1945FFAD001CF760;
-			remoteInfo = SwiftCSVTests;
-		};
-		966E16201E946B3D00BB400A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 966E161B1E946B3D00BB400A /* SwiftCSV.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3D1E59B41945FFAC001CF760;
-			remoteInfo = SwiftCSV;
-		};
-		966E16221E946B3D00BB400A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 966E161B1E946B3D00BB400A /* SwiftCSV.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3D1E59BF1945FFAD001CF760;
-			remoteInfo = SwiftCSVTests;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -540,8 +512,6 @@
 		65F06FA91BE818AA0074498D /* IBarChartDataSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBarChartDataSet.swift; sourceTree = "<group>"; };
 		65F06FAC1BE826010074498D /* IPieChartDataSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPieChartDataSet.swift; sourceTree = "<group>"; };
 		65F06FAF1BE826090074498D /* IRadarChartDataSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IRadarChartDataSet.swift; sourceTree = "<group>"; };
-		966E16121E946B3200BB400A /* SwiftCSV.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftCSV.xcodeproj; path = "../../../../../Downloads/SwiftCSV-0.2.2/SwiftCSV.xcodeproj"; sourceTree = "<group>"; };
-		966E161B1E946B3D00BB400A /* SwiftCSV.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftCSV.xcodeproj; path = "../../../../../Downloads/SwiftCSV-0.2.2/SwiftCSV.xcodeproj"; sourceTree = "<group>"; };
 		A52C5C371BAC5CA400594CDD /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDC77DC51C0A991A00C27BCF /* BarChartTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarChartTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -674,8 +644,6 @@
 		5BA8EC361A9D14DC00CE82E1 = {
 			isa = PBXGroup;
 			children = (
-				966E161B1E946B3D00BB400A /* SwiftCSV.xcodeproj */,
-				966E16121E946B3200BB400A /* SwiftCSV.xcodeproj */,
 				5BA8EC651A9D151C00CE82E1 /* Classes */,
 				06AEE7A31BDC3F8B009875AE /* ChartsTests */,
 				5BA8EC431A9D14DC00CE82E1 /* Supporting Files */,
@@ -874,24 +842,6 @@
 			path = Interfaces;
 			sourceTree = "<group>";
 		};
-		966E16131E946B3200BB400A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				966E16181E946B3200BB400A /* SwiftCSV.framework */,
-				966E161A1E946B3200BB400A /* SwiftCSVTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		966E161C1E946B3D00BB400A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				966E16211E946B3D00BB400A /* SwiftCSV.framework */,
-				966E16231E946B3D00BB400A /* SwiftCSVTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1031,16 +981,6 @@
 			mainGroup = 5BA8EC361A9D14DC00CE82E1;
 			productRefGroup = 5BA8EC411A9D14DC00CE82E1 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 966E161C1E946B3D00BB400A /* Products */;
-					ProjectRef = 966E161B1E946B3D00BB400A /* SwiftCSV.xcodeproj */;
-				},
-				{
-					ProductGroup = 966E16131E946B3200BB400A /* Products */;
-					ProjectRef = 966E16121E946B3200BB400A /* SwiftCSV.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				5BA8EC3F1A9D14DC00CE82E1 /* Charts-iOS */,
@@ -1050,37 +990,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		966E16181E946B3200BB400A /* SwiftCSV.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SwiftCSV.framework;
-			remoteRef = 966E16171E946B3200BB400A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		966E161A1E946B3200BB400A /* SwiftCSVTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SwiftCSVTests.xctest;
-			remoteRef = 966E16191E946B3200BB400A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		966E16211E946B3D00BB400A /* SwiftCSV.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SwiftCSV.framework;
-			remoteRef = 966E16201E946B3D00BB400A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		966E16231E946B3D00BB400A /* SwiftCSVTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SwiftCSVTests.xctest;
-			remoteRef = 966E16221E946B3D00BB400A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		06AEE7A01BDC3F8B009875AE /* Resources */ = {

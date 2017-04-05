@@ -290,6 +290,7 @@
                         <viewControllerLayoutGuide type="bottom" id="B1z-vk-k9p"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hdo-z9-gpQ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eY7-9M-qDZ" customClass="LineChartView" customModule="Charts">

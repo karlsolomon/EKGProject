@@ -7,15 +7,12 @@
 //
 
 import Foundation
-import SwiftCSV
 
 class Archive: NSObject, NSCoding{
     
     static var newArchiveList = [Archive]()
     
-    enum LeadNum{
-        case LEAD1,LEAD2,LEAD3,AVF,AVL,AVR,V
-    }
+    static var leads = [String]()
     
     
 //MARK: Archiving Paths
@@ -26,7 +23,7 @@ class Archive: NSObject, NSCoding{
     private var date = String()
     private var time = String()
     private var path = NSURL()
-    private var data = [String: [Double]]()
+    private var data = [String: [Int]]()
     private var symptoms = String()
     private var symptomsAbbreviations = String()
     
@@ -40,7 +37,7 @@ class Archive: NSObject, NSCoding{
         Archive.newArchiveList.append(self)
     }
     
-    init(date: String, time: String, path: NSURL, data: [String: [Double]], symptoms: String, symptomsAbbreviations: String) {
+    init(date: String, time: String, path: NSURL, data: [String: [Int]], symptoms: String, symptomsAbbreviations: String) {
         self.date = date
         self.time = time
         self.path = path
@@ -53,7 +50,7 @@ class Archive: NSObject, NSCoding{
         guard let date = aDecoder.decodeObjectForKey("date") as? String else {return nil}
         let time = aDecoder.decodeObjectForKey("time") as? String
         let path = aDecoder.decodeObjectForKey("path") as? NSURL
-        let data = aDecoder.decodeObjectForKey("data") as? [String: [Double]]
+        let data = aDecoder.decodeObjectForKey("data") as? [String: [Int]]
         let symptoms = aDecoder.decodeObjectForKey("symptoms") as? String
         let symptomsAbbreviations = aDecoder.decodeObjectForKey("symptomsAbbreviations") as? String
         self.init(date: date, time: time!, path: path!, data: data!, symptoms: symptoms!, symptomsAbbreviations: symptomsAbbreviations!)
@@ -104,41 +101,13 @@ class Archive: NSObject, NSCoding{
     func getPath()->NSURL{
         return path
     }
-    func getData(lead: LeadNum) ->[Double]{
-        switch lead{
-        case .LEAD1:
-            return data["Lead 1"]!
-        case .LEAD2:
-            return data["Lead 2"]!
-        case .LEAD3:
-            return data["Lead 3"]!
-        /*case .AVF:
-            return data["aVF"]!
-        case .AVR:
-            return data["aVR"]
-        case .AVL:
-            return data["aVL"]
-        case .V:
-            return data["V"]*/
-        default:
-            return [Double]()
-        }
+    func getData(lead: String) ->[Int]{
+        return data[lead]!
     }
     
     private func readFile(path: NSURL) {
-        do {
-            let csv = try CSV(url: path)
-            let csvData = csv.columns // [String: [String]]
-            var allData = [String: [Double]]()
-            
-            for (lead, value) in csvData {
-                let doubleArray = value.flatMap{Double($0)}
-                allData[lead] = doubleArray
-            }
-            self.data = allData
-            
-        } catch {
-            print("Couldn't Find file at: \(path.absoluteString)")
-        }
+        let csv = CSVParse(url: path)
+        Archive.leads = csv.getHeader()
+        self.data = csv.getColumnsAsInts()
     }
 }
