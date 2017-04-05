@@ -20,8 +20,9 @@
 		964EA7141E8DC4BB004E2A9F /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = 964EA7101E8DC4BB004E2A9F /* email.png */; };
 		964EA7151E8DC4BB004E2A9F /* livefeed.png in Resources */ = {isa = PBXBuildFile; fileRef = 964EA7111E8DC4BB004E2A9F /* livefeed.png */; };
 		964EA7161E8DC4BB004E2A9F /* symptoms.png in Resources */ = {isa = PBXBuildFile; fileRef = 964EA7121E8DC4BB004E2A9F /* symptoms.png */; };
-		96BBE2051E9546B90036027F /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96701F981E940CFC003CF8CF /* Charts.framework */; };
-		96BBE2061E9546B90036027F /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 96701F981E940CFC003CF8CF /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		96B674CC1E9596E700DF25D5 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B674CB1E9596E700DF25D5 /* PickerViewController.swift */; };
+		96B674D01E9599EF00DF25D5 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96701F981E940CFC003CF8CF /* Charts.framework */; };
+		96B674D11E9599EF00DF25D5 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 96701F981E940CFC003CF8CF /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		96BBE20A1E9547C90036027F /* CSVParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BBE2091E9547C90036027F /* CSVParse.swift */; };
 		96CB31AE1E8EB6040038762F /* Symptoms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CB31AD1E8EB6040038762F /* Symptoms.swift */; };
 		96F01CBE1E91D3AC002E5A32 /* SymptomsLegendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F01CBD1E91D3AC002E5A32 /* SymptomsLegendController.swift */; };
@@ -57,7 +58,7 @@
 			remoteGlobalIDString = 06AEE7A21BDC3F8B009875AE;
 			remoteInfo = ChartsTests;
 		};
-		96BBE2071E9546B90036027F /* PBXContainerItemProxy */ = {
+		96B674D21E9599EF00DF25D5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 96701E551E940CF3003CF8CF /* Charts.xcodeproj */;
 			proxyType = 1;
@@ -67,13 +68,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		966E160F1E94423400BB400A /* Embed Frameworks */ = {
+		96B674D41E9599EF00DF25D5 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				96BBE2061E9546B90036027F /* Charts.framework in Embed Frameworks */,
+				96B674D11E9599EF00DF25D5 /* Charts.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -97,6 +98,7 @@
 		964EA7111E8DC4BB004E2A9F /* livefeed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = livefeed.png; path = ../../icons/livefeed.png; sourceTree = "<group>"; };
 		964EA7121E8DC4BB004E2A9F /* symptoms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = symptoms.png; path = ../../icons/symptoms.png; sourceTree = "<group>"; };
 		96701E551E940CF3003CF8CF /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = Charts/Charts.xcodeproj; sourceTree = "<group>"; };
+		96B674CB1E9596E700DF25D5 /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		96BBE2091E9547C90036027F /* CSVParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSVParse.swift; sourceTree = "<group>"; };
 		96CB31AD1E8EB6040038762F /* Symptoms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symptoms.swift; sourceTree = "<group>"; };
 		96F01CBD1E91D3AC002E5A32 /* SymptomsLegendController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SymptomsLegendController.swift; path = ../SymptomsLegendController.swift; sourceTree = "<group>"; };
@@ -109,7 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96BBE2051E9546B90036027F /* Charts.framework in Frameworks */,
+				96B674D01E9599EF00DF25D5 /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +157,7 @@
 				96012F0A1E8C1EA300973986 /* Assets.xcassets */,
 				96012F0C1E8C1EA300973986 /* LaunchScreen.storyboard */,
 				96012F0F1E8C1EA300973986 /* Info.plist */,
+				96B674CB1E9596E700DF25D5 /* PickerViewController.swift */,
 			);
 			path = EKGShirt;
 			sourceTree = "<group>";
@@ -180,12 +183,12 @@
 				96012EFA1E8C1EA300973986 /* Sources */,
 				96012EFB1E8C1EA300973986 /* Frameworks */,
 				96012EFC1E8C1EA300973986 /* Resources */,
-				966E160F1E94423400BB400A /* Embed Frameworks */,
+				96B674D41E9599EF00DF25D5 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				96BBE2081E9546B90036027F /* PBXTargetDependency */,
+				96B674D31E9599EF00DF25D5 /* PBXTargetDependency */,
 			);
 			name = EKGShirt;
 			productName = EKGShirt;
@@ -290,6 +293,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96B674CC1E9596E700DF25D5 /* PickerViewController.swift in Sources */,
 				96BBE20A1E9547C90036027F /* CSVParse.swift in Sources */,
 				96012F061E8C1EA300973986 /* LiveFeedViewController.swift in Sources */,
 				817197491E8DFF12004189E5 /* TextFileReader.swift in Sources */,
@@ -305,10 +309,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		96BBE2081E9546B90036027F /* PBXTargetDependency */ = {
+		96B674D31E9599EF00DF25D5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Charts-iOS";
-			targetProxy = 96BBE2071E9546B90036027F /* PBXContainerItemProxy */;
+			targetProxy = 96B674D21E9599EF00DF25D5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

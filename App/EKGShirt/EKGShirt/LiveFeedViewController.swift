@@ -8,23 +8,28 @@
 
 import UIKit
 import Charts
- 
 
 class LiveFeedViewController: UIViewController {
     
     @IBOutlet weak var viewTitle: UINavigationItem!
     @IBOutlet weak var changeLeadButton: UIBarButtonItem! // Open PickerView Popup w/ Lead Options
     @IBOutlet weak var linePlotView: LineChartView!
+    @IBOutlet weak var pickerView: UIPickerView!
+    
     
     var dataSet: LineChartDataSet!
     static var displayedArchive: Archive?
-    static var displayedLead = String()
+    static var displayedLead = "Lead 1"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        LiveFeedViewController.displayedLead = "Lead 1"
-        updateChartWithData()
+        updateChartWithData()        
+        
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        updateChartWithData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,6 +38,7 @@ class LiveFeedViewController: UIViewController {
     }
     
     func updateChartWithData() {
+        viewTitle.title = LiveFeedViewController.displayedLead
         let values = LiveFeedViewController.displayedArchive?.getData(LiveFeedViewController.displayedLead)
         
         var entries: [ChartDataEntry] = Array()
@@ -93,8 +99,6 @@ class LiveFeedViewController: UIViewController {
         
         data.setColor(NSUIColor(red: 0, green: 0, blue: 0, alpha: 0.8))
     }
-    
- 
 
 }
 

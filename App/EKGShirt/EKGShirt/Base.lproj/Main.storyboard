@@ -330,7 +330,11 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Live Feed" id="vDA-lh-GGD">
-                        <barButtonItem key="rightBarButtonItem" title="Change Lead" id="PbW-qq-DjA"/>
+                        <barButtonItem key="rightBarButtonItem" title="Change Lead" id="PbW-qq-DjA">
+                            <connections>
+                                <segue destination="sTe-pu-NB9" kind="show" id="9Wg-nF-yC7"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="changeLeadButton" destination="PbW-qq-DjA" id="Nmm-kA-Hp7"/>
@@ -341,6 +345,56 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vwo-uB-e2h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1599" y="665"/>
+        </scene>
+        <!--Picker View Controller-->
+        <scene sceneID="IJ4-TY-yKN">
+            <objects>
+                <viewController id="sTe-pu-NB9" customClass="PickerViewController" customModule="EKGShirt" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HUh-ZV-mY3"/>
+                        <viewControllerLayoutGuide type="bottom" id="xvg-CC-fap"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="v17-3p-R9r">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L5b-Ln-XbO">
+                                <rect key="frame" x="0.0" y="-216" width="320" height="216"/>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="L5b-Ln-XbO" secondAttribute="trailing" id="2QS-Yx-eRi"/>
+                            <constraint firstItem="L5b-Ln-XbO" firstAttribute="leading" secondItem="v17-3p-R9r" secondAttribute="leading" id="BlB-ey-Qxm"/>
+                            <constraint firstItem="L5b-Ln-XbO" firstAttribute="centerY" secondItem="v17-3p-R9r" secondAttribute="centerY" id="hf0-G9-N74"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="L5b-Ln-XbO"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="2QS-Yx-eRi"/>
+                                <exclude reference="BlB-ey-Qxm"/>
+                                <exclude reference="hf0-G9-N74"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="L5b-Ln-XbO"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="2QS-Yx-eRi"/>
+                                <include reference="BlB-ey-Qxm"/>
+                                <include reference="hf0-G9-N74"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="picker" destination="L5b-Ln-XbO" id="AcT-L4-AR5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JJG-JX-hJ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2340" y="665"/>
         </scene>
     </scenes>
     <resources>

@@ -110,4 +110,9 @@ class Archive: NSObject, NSCoding{
     func getData(lead: String) ->[Int]{
         return data[lead]!
     }
+    func getLeads() -> [String] {
+        return self.leads
+    }
+    
+    
 }
