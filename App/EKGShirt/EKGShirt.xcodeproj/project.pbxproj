@@ -20,14 +20,44 @@
 		964EA7141E8DC4BB004E2A9F /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = 964EA7101E8DC4BB004E2A9F /* email.png */; };
 		964EA7151E8DC4BB004E2A9F /* livefeed.png in Resources */ = {isa = PBXBuildFile; fileRef = 964EA7111E8DC4BB004E2A9F /* livefeed.png */; };
 		964EA7161E8DC4BB004E2A9F /* symptoms.png in Resources */ = {isa = PBXBuildFile; fileRef = 964EA7121E8DC4BB004E2A9F /* symptoms.png */; };
-		96701F9F1E940D38003CF8CF /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96701F981E940CFC003CF8CF /* Charts.framework */; };
-		96701FA01E940D38003CF8CF /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 96701F981E940CFC003CF8CF /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		966E160B1E94423300BB400A /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96701F981E940CFC003CF8CF /* Charts.framework */; };
+		966E160C1E94423300BB400A /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 96701F981E940CFC003CF8CF /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		966E162D1E946B6200BB400A /* SwiftCSV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 966E162A1E946B5000BB400A /* SwiftCSV.framework */; };
+		966E162E1E946B6200BB400A /* SwiftCSV.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 966E162A1E946B5000BB400A /* SwiftCSV.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		96CB31AE1E8EB6040038762F /* Symptoms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CB31AD1E8EB6040038762F /* Symptoms.swift */; };
 		96F01CBE1E91D3AC002E5A32 /* SymptomsLegendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F01CBD1E91D3AC002E5A32 /* SymptomsLegendController.swift */; };
 		96F01CC01E91D4A2002E5A32 /* samples.csv in Resources */ = {isa = PBXBuildFile; fileRef = 96F01CBF1E91D4A2002E5A32 /* samples.csv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		966E160D1E94423400BB400A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 96701E551E940CF3003CF8CF /* Charts.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5BA8EC3F1A9D14DC00CE82E1;
+			remoteInfo = "Charts-iOS";
+		};
+		966E16291E946B5000BB400A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 966E16241E946B5000BB400A /* SwiftCSV.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D1E59B41945FFAC001CF760;
+			remoteInfo = SwiftCSV;
+		};
+		966E162B1E946B5000BB400A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 966E16241E946B5000BB400A /* SwiftCSV.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D1E59BF1945FFAD001CF760;
+			remoteInfo = SwiftCSVTests;
+		};
+		966E162F1E946B6200BB400A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 966E16241E946B5000BB400A /* SwiftCSV.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3D1E59B31945FFAC001CF760;
+			remoteInfo = SwiftCSV;
+		};
 		96701F971E940CFC003CF8CF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 96701E551E940CF3003CF8CF /* Charts.xcodeproj */;
@@ -56,23 +86,17 @@
 			remoteGlobalIDString = 06AEE7A21BDC3F8B009875AE;
 			remoteInfo = ChartsTests;
 		};
-		96701FA11E940D38003CF8CF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 96701E551E940CF3003CF8CF /* Charts.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 5BA8EC3F1A9D14DC00CE82E1;
-			remoteInfo = "Charts-iOS";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		96701FA31E940D38003CF8CF /* Embed Frameworks */ = {
+		966E160F1E94423400BB400A /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				96701FA01E940D38003CF8CF /* Charts.framework in Embed Frameworks */,
+				966E160C1E94423300BB400A /* Charts.framework in Embed Frameworks */,
+				966E162E1E946B6200BB400A /* SwiftCSV.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,6 +119,7 @@
 		964EA7101E8DC4BB004E2A9F /* email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = email.png; path = ../../icons/email.png; sourceTree = "<group>"; };
 		964EA7111E8DC4BB004E2A9F /* livefeed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = livefeed.png; path = ../../icons/livefeed.png; sourceTree = "<group>"; };
 		964EA7121E8DC4BB004E2A9F /* symptoms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = symptoms.png; path = ../../icons/symptoms.png; sourceTree = "<group>"; };
+		966E16241E946B5000BB400A /* SwiftCSV.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftCSV.xcodeproj; path = "../../../../Downloads/SwiftCSV-0.2.2/SwiftCSV.xcodeproj"; sourceTree = "<group>"; };
 		96701E551E940CF3003CF8CF /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = Charts/Charts.xcodeproj; sourceTree = "<group>"; };
 		96CB31AD1E8EB6040038762F /* Symptoms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symptoms.swift; sourceTree = "<group>"; };
 		96F01CBD1E91D3AC002E5A32 /* SymptomsLegendController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SymptomsLegendController.swift; path = ../SymptomsLegendController.swift; sourceTree = "<group>"; };
@@ -107,7 +132,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96701F9F1E940D38003CF8CF /* Charts.framework in Frameworks */,
+				966E160B1E94423300BB400A /* Charts.framework in Frameworks */,
+				966E162D1E946B6200BB400A /* SwiftCSV.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +143,7 @@
 		96012EF51E8C1EA300973986 = {
 			isa = PBXGroup;
 			children = (
+				966E16241E946B5000BB400A /* SwiftCSV.xcodeproj */,
 				96012F001E8C1EA300973986 /* EKGShirt */,
 				96012EFF1E8C1EA300973986 /* Products */,
 				96701E551E940CF3003CF8CF /* Charts.xcodeproj */,
@@ -156,6 +183,15 @@
 			path = EKGShirt;
 			sourceTree = "<group>";
 		};
+		966E16251E946B5000BB400A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				966E162A1E946B5000BB400A /* SwiftCSV.framework */,
+				966E162C1E946B5000BB400A /* SwiftCSVTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		96701F911E940CFC003CF8CF /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,12 +213,13 @@
 				96012EFA1E8C1EA300973986 /* Sources */,
 				96012EFB1E8C1EA300973986 /* Frameworks */,
 				96012EFC1E8C1EA300973986 /* Resources */,
-				96701FA31E940D38003CF8CF /* Embed Frameworks */,
+				966E160F1E94423400BB400A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				96701FA21E940D38003CF8CF /* PBXTargetDependency */,
+				966E160E1E94423400BB400A /* PBXTargetDependency */,
+				966E16301E946B6200BB400A /* PBXTargetDependency */,
 			);
 			name = EKGShirt;
 			productName = EKGShirt;
@@ -225,6 +262,10 @@
 					ProductGroup = 96701F911E940CFC003CF8CF /* Products */;
 					ProjectRef = 96701E551E940CF3003CF8CF /* Charts.xcodeproj */;
 				},
+				{
+					ProductGroup = 966E16251E946B5000BB400A /* Products */;
+					ProjectRef = 966E16241E946B5000BB400A /* SwiftCSV.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -234,6 +275,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		966E162A1E946B5000BB400A /* SwiftCSV.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftCSV.framework;
+			remoteRef = 966E16291E946B5000BB400A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		966E162C1E946B5000BB400A /* SwiftCSVTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwiftCSVTests.xctest;
+			remoteRef = 966E162B1E946B5000BB400A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		96701F981E940CFC003CF8CF /* Charts.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -301,10 +356,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		96701FA21E940D38003CF8CF /* PBXTargetDependency */ = {
+		966E160E1E94423400BB400A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Charts-iOS";
-			targetProxy = 96701FA11E940D38003CF8CF /* PBXContainerItemProxy */;
+			targetProxy = 966E160D1E94423400BB400A /* PBXContainerItemProxy */;
+		};
+		966E16301E946B6200BB400A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftCSV;
+			targetProxy = 966E162F1E946B6200BB400A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

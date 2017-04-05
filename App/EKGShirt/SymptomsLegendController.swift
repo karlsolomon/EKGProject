@@ -15,7 +15,6 @@ class SymptomsLegendController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("loaded legend")
         tableView.allowsSelection = false
     }
     

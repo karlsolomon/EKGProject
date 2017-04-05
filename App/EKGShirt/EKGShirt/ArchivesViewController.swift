@@ -30,7 +30,6 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
     }
     
     override func viewDidAppear(animated: Bool) {
-        print("Archives View Appeared")
         ArchiveList += Archive.getNewArchiveList()
         self.archivesTableView.reloadData()
     }
@@ -42,13 +41,7 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
     //MARK: NSCODING
     
     private func saveArchives() {
-        print("PATH: \(Archive.ArchiveURL.path)")
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(ArchiveList, toFile: Archive.ArchiveURL.path!)
-        if isSuccessfulSave {
-            print("Save Successful")
-        } else {
-            print("Save Failed")
-        }
+        NSKeyedArchiver.archiveRootObject(ArchiveList, toFile: Archive.ArchiveURL.path!)
     }
     
     func addArchive(archive: Archive) {
@@ -76,12 +69,6 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ArchiveCell", forIndexPath: indexPath)
         let archive = ArchiveList[indexPath.row]
-        print(archive.getDate())
-        print(archive.getTime())
-        print(archive.getSymptoms())
-        
-        
-        print("# of Archives: \(ArchiveList.count)")
         cell.textLabel?.text = archive.getDate() + " " + archive.getTime()
         cell.detailTextLabel?.text = archive.getSymptomsAbbreviations()
         
@@ -91,7 +78,6 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let archive = ArchiveList[indexPath.row]
         let email = UITableViewRowAction(style: .Normal, title: "Email", handler: {_,_ in
-            print("Email \(archive.getPath())")
             let mailComposeViewController = self.configuredMailComposeViewController(archive)
             if MFMailComposeViewController.canSendMail() {
                 self.presentViewController(mailComposeViewController, animated: true, completion: nil)
@@ -101,7 +87,6 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
             
         })
         let delete = UITableViewRowAction(style: .Default, title: "Delete", handler: {_,_ in 
-            print("Delete")
             self.ArchiveList.removeAtIndex(indexPath.row)
             self.archivesTableView.reloadData()
         })

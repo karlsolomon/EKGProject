@@ -187,7 +187,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sA9-PC-6zy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2326.5" y="1314"/>
+            <point key="canvasLocation" x="2368.5" y="1384"/>
         </scene>
         <!--Archives-->
         <scene sceneID="jTL-NE-qaR">
@@ -204,7 +204,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fwh-k3-I8C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="663" y="1323"/>
+            <point key="canvasLocation" x="663" y="1384"/>
         </scene>
         <!--Archives-->
         <scene sceneID="ISQ-aK-jVr">
@@ -262,7 +262,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gy7-6E-Kpe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1596" y="1314"/>
+            <point key="canvasLocation" x="1590" y="1384"/>
         </scene>
         <!--Live Feed-->
         <scene sceneID="4da-6o-ogw">
@@ -273,10 +273,72 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <connections>
+                        <segue destination="CGo-cR-YCj" kind="relationship" relationship="rootViewController" id="5PI-Eo-J3d"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CF2-CU-R3J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="663" y="656"/>
+            <point key="canvasLocation" x="690" y="668"/>
+        </scene>
+        <!--LiveFeedViewController-->
+        <scene sceneID="4oa-tu-KBX">
+            <objects>
+                <viewController title="LiveFeedViewController" id="CGo-cR-YCj" customClass="LiveFeedViewController" customModule="EKGShirt" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XIJ-e5-Itf"/>
+                        <viewControllerLayoutGuide type="bottom" id="B1z-vk-k9p"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hdo-z9-gpQ">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eY7-9M-qDZ" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" red="0.88206010199840101" green="0.89956975948817652" blue="0.93426865183246077" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="eY7-9M-qDZ" firstAttribute="leading" secondItem="hdo-z9-gpQ" secondAttribute="leading" id="8pB-vE-FAE"/>
+                            <constraint firstItem="eY7-9M-qDZ" firstAttribute="top" secondItem="XIJ-e5-Itf" secondAttribute="bottom" id="W17-0a-3fE"/>
+                            <constraint firstAttribute="trailing" secondItem="eY7-9M-qDZ" secondAttribute="trailing" id="X1k-SB-vi3"/>
+                            <constraint firstItem="eY7-9M-qDZ" firstAttribute="bottom" secondItem="B1z-vk-k9p" secondAttribute="top" id="x2D-ab-NAq"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="eY7-9M-qDZ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="8pB-vE-FAE"/>
+                                <exclude reference="W17-0a-3fE"/>
+                                <exclude reference="X1k-SB-vi3"/>
+                                <exclude reference="x2D-ab-NAq"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="eY7-9M-qDZ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="8pB-vE-FAE"/>
+                                <include reference="W17-0a-3fE"/>
+                                <include reference="X1k-SB-vi3"/>
+                                <include reference="x2D-ab-NAq"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="Live Feed" id="vDA-lh-GGD">
+                        <barButtonItem key="rightBarButtonItem" title="Change Lead" id="PbW-qq-DjA"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="changeLeadButton" destination="PbW-qq-DjA" id="Nmm-kA-Hp7"/>
+                        <outlet property="linePlotView" destination="eY7-9M-qDZ" id="HHi-Gs-Hoa"/>
+                        <outlet property="viewTitle" destination="vDA-lh-GGD" id="7qG-SY-FN0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vwo-uB-e2h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1599" y="665"/>
         </scene>
     </scenes>
     <resources>

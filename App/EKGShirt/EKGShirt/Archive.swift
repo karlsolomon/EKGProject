@@ -39,7 +39,6 @@ class Archive: NSObject, NSCoding{
         self.symptoms = symptoms.joinWithSeparator(", ")
         self.symptomsAbbreviations = Symptoms.instance.getSymptomsAbbreviations(symptoms).joinWithSeparator(",")
         Archive.newArchiveList.append(self)
-        print("Added new Archive")
     }
     
     init(date: String, time: String, path: NSString, data: [[Int]], symptoms: String, symptomsAbbreviations: String) {
@@ -49,7 +48,6 @@ class Archive: NSObject, NSCoding{
         self.data = data
         self.symptoms = symptoms
         self.symptomsAbbreviations = symptomsAbbreviations
-        print("loaded old archive")
     }
     
     required convenience init?(coder aDecoder: NSCoder) {

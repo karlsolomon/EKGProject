@@ -35,7 +35,6 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
     
 //Custom Button Handling
     func tap(sender: UITapGestureRecognizer) {
-        print("Record Pressed")
         if(symptomsSelected) {
             if(Symptoms.instance.dangerousSymptoms(selectedSymptoms)) {
                 let alert = UIAlertController(title: "Cardiac Emergency", message: "You have 3 or more symptoms that are symptoms of cardiac emergencies. Would you like to call Emergency Medical Services?", preferredStyle: UIAlertControllerStyle.Alert)
@@ -52,7 +51,6 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
             recordButton.setTitle("Record EKG", forState: UIControlState.Normal)
             recordButton.enabled = false
             allowSelection(false)
-            print("Selected the following: \(selectedSymptoms)") 
             sendSymptoms()
             resetTable()
         } else {
@@ -74,7 +72,6 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func enableButton() {
-        print("timer Ended")
         self.recordButton.enabled = true
     }
     
@@ -83,7 +80,6 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
         var symptomIndex = 0
         for i in (0..<selectedSymptoms.count).reverse() {
             symptom = selectedSymptoms[i]
-            print("deselecting:  \(symptom)")
             symptomIndex = selectedSymptoms.indexOf(symptom)!
             selectedSymptoms.removeAtIndex(symptomIndex)
         }
@@ -109,12 +105,10 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
 //UI TABLE VIEW DELEGATE
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         selectedSymptoms.append(contents[indexPath.row])
-        print("added \(contents[indexPath.row])")
     }
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         selectedSymptoms.removeAtIndex(selectedSymptoms.indexOf(contents[indexPath.row])!)
-        print("removed \(contents[indexPath.row])")
     }
     
     override func didReceiveMemoryWarning() {
