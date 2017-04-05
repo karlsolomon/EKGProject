@@ -93,6 +93,12 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
         return [email, delete]
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        LiveFeedViewController.displayedArchive = ArchiveList[indexPath.row]
+        let destinationVC = LiveFeedViewController()
+        destinationVC.performSegueWithIdentifier("ShowArchive", sender: self)        
+    }
+    
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
@@ -126,5 +132,4 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
-
 }

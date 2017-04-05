@@ -258,6 +258,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="archivesTableView" destination="dxD-r6-LeC" id="cQh-UB-mbK"/>
+                        <segue destination="CGo-cR-YCj" kind="show" identifier="ShowArchive" id="gi3-dG-fNM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gy7-6E-Kpe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -290,6 +291,7 @@
                         <viewControllerLayoutGuide type="bottom" id="B1z-vk-k9p"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hdo-z9-gpQ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eY7-9M-qDZ" customClass="LineChartView" customModule="Charts">
@@ -346,4 +348,7 @@
         <image name="livefeed.png" width="29" height="30"/>
         <image name="symptoms.png" width="32" height="32"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="gi3-dG-fNM"/>
+    </inferredMetricsTieBreakers>
 </document>
