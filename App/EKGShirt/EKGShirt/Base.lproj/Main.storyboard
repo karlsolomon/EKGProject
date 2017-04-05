@@ -258,6 +258,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="archivesTableView" destination="dxD-r6-LeC" id="cQh-UB-mbK"/>
+                        <segue destination="CGo-cR-YCj" kind="show" identifier="ShowArchive" id="gi3-dG-fNM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gy7-6E-Kpe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -347,4 +348,7 @@
         <image name="livefeed.png" width="29" height="30"/>
         <image name="symptoms.png" width="32" height="32"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="gi3-dG-fNM"/>
+    </inferredMetricsTieBreakers>
 </document>

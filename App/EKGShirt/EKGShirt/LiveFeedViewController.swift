@@ -17,10 +17,12 @@ class LiveFeedViewController: UIViewController {
     @IBOutlet weak var changeLeadButton: UIBarButtonItem! // Open PickerView Popup w/ Lead Options
     
     var dataSet: LineChartDataSet!
-    
+    static var displayedArchive: Archive?
+    static var displayedLead = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        LiveFeedViewController.displayedLead = Archive.leads[0]
         updateChartWithData()
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -31,16 +33,14 @@ class LiveFeedViewController: UIViewController {
     }
     
     func updateChartWithData() {
-        let values: [Double] = [8, 104, 81, 93, 52, 44, 97, 101, 75, 28,
-                                76, 25, 20, 13, 52, 44, 57, 23, 45, 91,
-                                99, 14, 84, 48, 40, 71, 106, 41, 45, 61]
+        let values = LiveFeedViewController.displayedArchive?.getData(LiveFeedViewController.displayedLead)
         
         var entries: [ChartDataEntry] = Array()
         var xValues: [String] = Array()
         
-        for (i, value) in values.enumerate()
+        for (i, value) in values!.enumerate()
         {
-            entries.append(ChartDataEntry.init(value: value, xIndex: i))
+            entries.append(ChartDataEntry.init(value: Double(value), xIndex: i))
             xValues.append("\(i)")
         }
         
