@@ -95,8 +95,8 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         LiveFeedViewController.displayedArchive = ArchiveList[indexPath.row]
-        let destinationVC = LiveFeedViewController()
-        destinationVC.performSegueWithIdentifier("ShowArchive", sender: self)        
+        let destinationVC = self.storyboard?.instantiateViewControllerWithIdentifier("LiveFeedViewController") as! LiveFeedViewController
+        self.showViewController(destinationVC, sender: self)       
     }
     
     

@@ -13,8 +13,8 @@ import Charts
 class LiveFeedViewController: UIViewController {
     
     @IBOutlet weak var viewTitle: UINavigationItem!
-    @IBOutlet weak var linePlotView: LineChartView!
     @IBOutlet weak var changeLeadButton: UIBarButtonItem! // Open PickerView Popup w/ Lead Options
+    @IBOutlet weak var linePlotView: LineChartView!
     
     var dataSet: LineChartDataSet!
     static var displayedArchive: Archive?

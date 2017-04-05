@@ -285,7 +285,7 @@
         <!--LiveFeedViewController-->
         <scene sceneID="4oa-tu-KBX">
             <objects>
-                <viewController title="LiveFeedViewController" id="CGo-cR-YCj" customClass="LiveFeedViewController" customModule="EKGShirt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LiveFeedViewController" title="LiveFeedViewController" id="CGo-cR-YCj" customClass="LiveFeedViewController" customModule="EKGShirt" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XIJ-e5-Itf"/>
                         <viewControllerLayoutGuide type="bottom" id="B1z-vk-k9p"/>
@@ -334,7 +334,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="changeLeadButton" destination="PbW-qq-DjA" id="Nmm-kA-Hp7"/>
-                        <outlet property="linePlotView" destination="eY7-9M-qDZ" id="HHi-Gs-Hoa"/>
+                        <outlet property="linePlotView" destination="eY7-9M-qDZ" id="p8e-07-a3P"/>
                         <outlet property="viewTitle" destination="vDA-lh-GGD" id="7qG-SY-FN0"/>
                     </connections>
                 </viewController>

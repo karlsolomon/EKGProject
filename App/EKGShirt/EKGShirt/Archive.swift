@@ -31,7 +31,9 @@ class Archive: NSObject, NSCoding{
         super.init()
         setDateTime(date)
         self.path = path
-        readFile(path)
+        let csv = CSVParse(url: path)
+        Archive.leads = csv.getHeader()
+        self.data = csv.getcolumns()
         self.symptoms = symptoms.joinWithSeparator(", ")
         self.symptomsAbbreviations = Symptoms.instance.getSymptomsAbbreviations(symptoms).joinWithSeparator(",")
         Archive.newArchiveList.append(self)
@@ -41,6 +43,9 @@ class Archive: NSObject, NSCoding{
         self.date = date
         self.time = time
         self.path = path
+        let csv = CSVParse(url: path)
+        Archive.leads = csv.getHeader()
+        self.data = csv.getcolumns()
         self.data = data
         self.symptoms = symptoms
         self.symptomsAbbreviations = symptomsAbbreviations
@@ -50,10 +55,14 @@ class Archive: NSObject, NSCoding{
         guard let date = aDecoder.decodeObjectForKey("date") as? String else {return nil}
         let time = aDecoder.decodeObjectForKey("time") as? String
         let path = aDecoder.decodeObjectForKey("path") as? NSURL
-        let data = aDecoder.decodeObjectForKey("data") as? [String: [Int]]
         let symptoms = aDecoder.decodeObjectForKey("symptoms") as? String
         let symptomsAbbreviations = aDecoder.decodeObjectForKey("symptomsAbbreviations") as? String
-        self.init(date: date, time: time!, path: path!, data: data!, symptoms: symptoms!, symptomsAbbreviations: symptomsAbbreviations!)
+        
+        let csv = CSVParse(url: path!)
+        Archive.leads = csv.getHeader()
+        let data = csv.getcolumns()
+        
+        self.init(date: date, time: time!, path: path!, data: data, symptoms: symptoms!, symptomsAbbreviations: symptomsAbbreviations!)
     }
     
     
@@ -103,11 +112,5 @@ class Archive: NSObject, NSCoding{
     }
     func getData(lead: String) ->[Int]{
         return data[lead]!
-    }
-    
-    private func readFile(path: NSURL) {
-        let csv = CSVParse(url: path)
-        Archive.leads = csv.getHeader()
-        self.data = csv.getColumnsAsInts()
     }
 }
