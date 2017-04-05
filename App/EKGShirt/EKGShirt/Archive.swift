@@ -33,19 +33,20 @@ class Archive: NSObject, NSCoding{
         setDateTime(date)
         self.path = path
         let csv = CSVParse(url: path)
-        self.leads = csv.getHeader()
         self.data = csv.getcolumns()
+        self.leads = csv.getHeader()
         self.symptoms = symptoms.joinWithSeparator(", ")
         self.symptomsAbbreviations = Symptoms.instance.getSymptomsAbbreviations(symptoms).joinWithSeparator(",")
         Archive.newArchiveList.append(self)
     }
     
-    init(date: String, time: String, path: NSURL, data: [String: [Int]], leads: [String] , symptoms: String, symptomsAbbreviations: String) {
+    init(date: String, time: String, path: NSURL, symptoms: String, symptomsAbbreviations: String) {
         self.date = date
         self.time = time
         self.path = path
-        self.data = data
-        self.leads = leads
+        let csv = CSVParse(url: path)
+        self.data = csv.getcolumns()
+        self.leads = csv.getHeader()
         self.symptoms = symptoms
         self.symptomsAbbreviations = symptomsAbbreviations
     }
@@ -54,11 +55,9 @@ class Archive: NSObject, NSCoding{
         guard let date = aDecoder.decodeObjectForKey("date") as? String else {return nil}
         let time = aDecoder.decodeObjectForKey("time") as? String
         let path = aDecoder.decodeObjectForKey("path") as? NSURL
-        let data = aDecoder.decodeObjectForKey("data") as? [String: [Int]]
-        let leads = aDecoder.decodeObjectForKey("leads") as? [String]
         let symptoms = aDecoder.decodeObjectForKey("symptoms") as? String
         let symptomsAbbreviations = aDecoder.decodeObjectForKey("symptomsAbbreviations") as? String
-        self.init(date: date, time: time!, path: path!, data: data!, leads: leads!, symptoms: symptoms!, symptomsAbbreviations: symptomsAbbreviations!)
+        self.init(date: date, time: time!, path: path!, symptoms: symptoms!, symptomsAbbreviations: symptomsAbbreviations!)
     }
     
     
@@ -74,8 +73,6 @@ class Archive: NSObject, NSCoding{
         aCoder.encodeObject(date, forKey: "date")
         aCoder.encodeObject(time, forKey: "time")
         aCoder.encodeObject(path, forKey: "path")
-        aCoder.encodeObject(data, forKey: "data")
-        aCoder.encodeObject(leads, forKey: "leads")
         aCoder.encodeObject(symptoms, forKey: "symptoms")
         aCoder.encodeObject(symptomsAbbreviations, forKey: "symptomsAbbreviations")
     }
@@ -113,6 +110,5 @@ class Archive: NSObject, NSCoding{
     func getLeads() -> [String] {
         return self.leads
     }
-    
     
 }
