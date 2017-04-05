@@ -14,13 +14,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         initNetworkCommunication()
-        let socket = SocketIOClient(socketURL: NSURL(string: "http://128.62.41.153:8080")!)
-        socket.on("connect"){data,ack in
-            print("socket connected")
-        }
+ /*       let socket = SocketIOClient(socketURL: NSURL(string: "http://10.146.26.31:8080")!)
+
+        socket.emit("fileRead", 1)
+
         print("waiting for connection")
         socket.connect()
-    
+        socket.emit("message", [1,2,3,4])
+        socket.on*/
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,7 +30,31 @@ class ViewController: UIViewController {
     }
     
     func initNetworkCommunication(){
+        let addr = "10.146.26.31"
+        let port = 8080
         
+      //  var host :NSHost = NSHost(address: addr)
+        var inp :NSInputStream?
+        var out :NSOutputStream?
+        NSStream.getStreamsToHostWithName(addr, port: port, inputStream: &inp, outputStream: &out)
+      //  NSStream.getStreamsToHost(host, port: port, inputStream: &inp, outputStream: &out)
+        
+        let inputStream = inp!
+        let outputStream = out!
+        inputStream.open()
+        outputStream.open()
+        
+
+        var buffer: [UInt8] = [1,2,3]
+        outputStream.write(&buffer, maxLength: buffer.count)
+        var readByte = [UInt8](count: 8, repeatedValue: 0)
+        while inputStream.hasBytesAvailable {
+            inputStream.read(&readByte, maxLength: 1)
+            
+        }
+        print(readByte)
+
+
     }
 
 }
