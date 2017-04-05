@@ -55,16 +55,18 @@ class ViewController: UIViewController {
 
 
     }
-    func receiveData(){
-        
+    func receiveData()->[String]{
+        var dataList = [String]()
         var buffer: [UInt8] = [1,2,3]
         var readByte = [UInt8](count: 4, repeatedValue: 0)
         while inputStream.hasBytesAvailable {
             inputStream.read(&readByte, maxLength: 5)
             outputStream.write(&buffer, maxLength: buffer.count)
-            print(asciiToInt(readByte))
+            print(dataList.append(asciiToInt(readByte)))
         }
         print(readByte)
+        
+        return dataList
     }
 
 }
