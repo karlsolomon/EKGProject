@@ -31,6 +31,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		813EEBBF1E96BA9200C9119E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 813EEBB81E96BA9100C9119E /* SocketClient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 813EEBA31E96BA9100C9119E;
+			remoteInfo = SocketClient;
+		};
 		96701F971E940CFC003CF8CF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 96701E551E940CF3003CF8CF /* Charts.xcodeproj */;
@@ -83,6 +90,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		813EEBB81E96BA9100C9119E /* SocketClient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SocketClient.xcodeproj; path = ../../Socket/SocketClient/SocketClient/SocketClient.xcodeproj; sourceTree = "<group>"; };
 		817197481E8DFF12004189E5 /* TextFileReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFileReader.swift; sourceTree = "<group>"; };
 		81E7B9A51E91E5CF0027A92C /* Archive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Archive.swift; sourceTree = "<group>"; };
 		960040E21E8D946700EC63E9 /* ArchivesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchivesViewController.swift; sourceTree = "<group>"; };
@@ -120,9 +128,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		813EEBB91E96BA9100C9119E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				813EEBC01E96BA9200C9119E /* SocketClient.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		96012EF51E8C1EA300973986 = {
 			isa = PBXGroup;
 			children = (
+				813EEBB81E96BA9100C9119E /* SocketClient.xcodeproj */,
 				96012F001E8C1EA300973986 /* EKGShirt */,
 				96012EFF1E8C1EA300973986 /* Products */,
 				96701E551E940CF3003CF8CF /* Charts.xcodeproj */,
@@ -234,6 +251,10 @@
 					ProductGroup = 96701F911E940CFC003CF8CF /* Products */;
 					ProjectRef = 96701E551E940CF3003CF8CF /* Charts.xcodeproj */;
 				},
+				{
+					ProductGroup = 813EEBB91E96BA9100C9119E /* Products */;
+					ProjectRef = 813EEBB81E96BA9100C9119E /* SocketClient.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -243,6 +264,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		813EEBC01E96BA9200C9119E /* SocketClient.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = SocketClient.app;
+			remoteRef = 813EEBBF1E96BA9200C9119E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		96701F981E940CFC003CF8CF /* Charts.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
