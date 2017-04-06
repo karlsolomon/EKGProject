@@ -16,6 +16,7 @@
 		96012F091E8C1EA300973986 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96012F071E8C1EA300973986 /* Main.storyboard */; };
 		96012F0B1E8C1EA300973986 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96012F0A1E8C1EA300973986 /* Assets.xcassets */; };
 		96012F0E1E8C1EA300973986 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96012F0C1E8C1EA300973986 /* LaunchScreen.storyboard */; };
+		962EF67A1E96A4D80099674A /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 962EF6781E96A4D80099674A /* Model.xcdatamodeld */; };
 		964EA7131E8DC4BB004E2A9F /* archives.png in Resources */ = {isa = PBXBuildFile; fileRef = 964EA70F1E8DC4BB004E2A9F /* archives.png */; };
 		964EA7141E8DC4BB004E2A9F /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = 964EA7101E8DC4BB004E2A9F /* email.png */; };
 		964EA7151E8DC4BB004E2A9F /* livefeed.png in Resources */ = {isa = PBXBuildFile; fileRef = 964EA7111E8DC4BB004E2A9F /* livefeed.png */; };
@@ -93,6 +94,7 @@
 		96012F0A1E8C1EA300973986 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		96012F0D1E8C1EA300973986 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		96012F0F1E8C1EA300973986 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		962EF6791E96A4D80099674A /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		964EA70F1E8DC4BB004E2A9F /* archives.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = archives.png; path = ../../icons/archives.png; sourceTree = "<group>"; };
 		964EA7101E8DC4BB004E2A9F /* email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = email.png; path = ../../icons/email.png; sourceTree = "<group>"; };
 		964EA7111E8DC4BB004E2A9F /* livefeed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = livefeed.png; path = ../../icons/livefeed.png; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				96012F011E8C1EA300973986 /* AppDelegate.swift */,
+				962EF6781E96A4D80099674A /* Model.xcdatamodeld */,
 				96BBE2091E9547C90036027F /* CSVParse.swift */,
 				81E7B9A51E91E5CF0027A92C /* Archive.swift */,
 				964EA70F1E8DC4BB004E2A9F /* archives.png */,
@@ -302,6 +305,7 @@
 				96012F041E8C1EA300973986 /* SymptomsViewController.swift in Sources */,
 				96CB31AE1E8EB6040038762F /* Symptoms.swift in Sources */,
 				960040E31E8D946700EC63E9 /* ArchivesViewController.swift in Sources */,
+				962EF67A1E96A4D80099674A /* Model.xcdatamodeld in Sources */,
 				96F01CBE1E91D3AC002E5A32 /* SymptomsLegendController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -471,6 +475,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		962EF6781E96A4D80099674A /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				962EF6791E96A4D80099674A /* Model.xcdatamodel */,
+			);
+			currentVersion = 962EF6791E96A4D80099674A /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 96012EF61E8C1EA300973986 /* Project object */;
 }
