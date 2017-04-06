@@ -19,6 +19,8 @@ class ViewController: UIViewController, NSStreamDelegate{
         var out :NSOutputStream?
     
         
+        
+        
         NSStream.getStreamsToHostWithName(addr, port: port, inputStream: &inp, outputStream: &out)
         
         let inputStream = inp!
@@ -30,19 +32,43 @@ class ViewController: UIViewController, NSStreamDelegate{
         inputStream.open()
         outputStream.open()
         var buffer : [UInt8] = [97]
-        var readBytes = [UInt8](count: 4, repeatedValue: 0)
-        while true{
+        var readBytes = [UInt8](count: 5, repeatedValue: 0)
+        var dataList = [String]()
+        var flag = true
+        while flag{
         while inputStream.hasBytesAvailable{
             inputStream.read(&readBytes, maxLength: 5)
             outputStream.write(buffer, maxLength: buffer.count)
-            print(readBytes)
-           
+            var ascii = convertFromAscii(readBytes)
+            print(ascii)
+            if ascii == "end"{
+                flag = false
+                break;
+            }
+            else{
+                
+            dataList.append(ascii)
+            readBytes = [UInt8](count: 5, repeatedValue: 0)
+            }
         }
             
         }
-    
+        print(dataList)
     }
-
+    func convertFromAscii(buffer: [UInt8]) -> String{
+        var s = String()
+        for value in buffer{
+            if value != 0{
+                if value == 33{
+                    return "end"
+                }
+                else{
+                    s += String(UnicodeScalar(value))
+                }
+            }
+        }
+        return s
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
