@@ -7,74 +7,54 @@
 //
 
 import Foundation
+import CoreData
 
-class Archive: NSObject, NSCoding{
+class Archive: NSManagedObject{
     
     static var newArchiveList = [Archive]()
-    
-    
-    
     
 //MARK: Archiving Paths
     static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
     static let ArchiveURL = DocumentsDirectory.URLByAppendingPathComponent("archives")
     
 //MARK: Properties
-    private var date = String()
-    private var time = String()
-    private var path = NSURL()
-    private var data = [String: [Int]]()
-    private var leads = [String]()
-    private var symptoms = String()
-    private var symptomsAbbreviations = String()
+    @NSManaged var date: String
+    @NSManaged var time: String
+    @NSManaged var path: String
+    @NSManaged var leads: String
+    @NSManaged var symptoms: String
+    @NSManaged var symptomsAbbreviations: String
+    var data = [String:[Int]]()
+    var dataPopulated = false
     
-    init(date: NSDate, path: NSURL, symptoms: [String]){
-        super.init()
-        setDateTime(date)
+    init(date: NSDate, path: String, symptoms: [String], entity: NSEntityDescription, context: NSManagedObjectContext) {
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+        let formatter = NSDateFormatter()
+        var dateStringSplit = [String]()
+        formatter.dateFormat = "MM/dd/yy hh:mm"
+        let dateString = formatter.stringFromDate(date)
+        dateStringSplit =  dateString.componentsSeparatedByString(" ")
+        self.date = dateStringSplit[0]
+        self.time = dateStringSplit[1]
+        
         self.path = path
-        let csv = CSVParse(url: path)
-        self.data = csv.getcolumns()
+        let csv = CSVParse(path: path)
         self.leads = csv.getHeader()
         self.symptoms = symptoms.joinWithSeparator(", ")
         self.symptomsAbbreviations = Symptoms.instance.getSymptomsAbbreviations(symptoms).joinWithSeparator(",")
-        Archive.newArchiveList.append(self)
     }
-    
-    init(date: String, time: String, path: NSURL, symptoms: String, symptomsAbbreviations: String) {
-        self.date = date
-        self.time = time
-        self.path = path
-        let csv = CSVParse(url: path)
-        self.data = csv.getcolumns()
-        self.leads = csv.getHeader()
-        self.symptoms = symptoms
-        self.symptomsAbbreviations = symptomsAbbreviations
-    }
-    
-    required convenience init?(coder aDecoder: NSCoder) {
-        guard let date = aDecoder.decodeObjectForKey("date") as? String else {return nil}
-        let time = aDecoder.decodeObjectForKey("time") as? String
-        let path = aDecoder.decodeObjectForKey("path") as? NSURL
-        let symptoms = aDecoder.decodeObjectForKey("symptoms") as? String
-        let symptomsAbbreviations = aDecoder.decodeObjectForKey("symptomsAbbreviations") as? String
-        self.init(date: date, time: time!, path: path!, symptoms: symptoms!, symptomsAbbreviations: symptomsAbbreviations!)
-    }
-    
-    
+
     static func getNewArchiveList() -> [Archive] {
         let list = Archive.newArchiveList
         Archive.newArchiveList = [Archive]()
         return list
     }
-
     
-//MARK: NSCoding
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(date, forKey: "date")
-        aCoder.encodeObject(time, forKey: "time")
-        aCoder.encodeObject(path, forKey: "path")
-        aCoder.encodeObject(symptoms, forKey: "symptoms")
-        aCoder.encodeObject(symptomsAbbreviations, forKey: "symptomsAbbreviations")
+    func getData() -> [String: [Int]]{
+        let csv = CSVParse(path: path)
+        let data = csv.getcolumns()
+        dataPopulated = true
+        return data
     }
     
     func getSymptoms() -> String {
@@ -85,15 +65,8 @@ class Archive: NSObject, NSCoding{
         return symptomsAbbreviations
     }
     
-    func setDateTime(date: NSDate){
-        let formatter = NSDateFormatter()
-        var dateStringSplit = [String]()
-        // initially set the format based on your datepicker date
-        formatter.dateFormat = "MM/dd/yy hh:mm"
-        let dateString = formatter.stringFromDate(date)
-        dateStringSplit =  dateString.componentsSeparatedByString(" ")
-        self.date = dateStringSplit[0]
-        self.time = dateStringSplit[1]
+    private static func setDateTime(date: NSDate){
+
     }
     func getDate()->String{
         return self.date
@@ -101,14 +74,19 @@ class Archive: NSObject, NSCoding{
     func getTime()->String{
         return self.time
     }
-    func getPath()->NSURL{
+    func getPath()->String{
         return path
     }
-    func getData(lead: String) ->[Int]{
-        return data[lead]!
-    }
     func getLeads() -> [String] {
-        return self.leads
+        let leadArray = self.leads.componentsSeparatedByString(" ")
+        return leadArray
+    }
+    func getLeadData(leadName: String) -> [Int]{
+        if(data.keys.count == 0 || !dataPopulated) {
+            data = getData()
+            dataPopulated = true
+        }
+        return data[leadName]!
     }
     
 }
