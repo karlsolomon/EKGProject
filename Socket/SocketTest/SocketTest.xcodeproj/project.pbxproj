@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		813EEB5F1E96B66700C9119E /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813EEB5E1E96B66700C9119E /* Connection.swift */; };
 		81BF09171E92A25D00E2044F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BF09161E92A25D00E2044F /* AppDelegate.swift */; };
 		81BF09191E92A25D00E2044F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BF09181E92A25D00E2044F /* ViewController.swift */; };
 		81BF091C1E92A25D00E2044F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81BF091A1E92A25D00E2044F /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		813EEB5E1E96B66700C9119E /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Connection.swift; path = ../Connection.swift; sourceTree = "<group>"; };
 		81BF09131E92A25D00E2044F /* SocketTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocketTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81BF09161E92A25D00E2044F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81BF09181E92A25D00E2044F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				81BF09161E92A25D00E2044F /* AppDelegate.swift */,
+				813EEB5E1E96B66700C9119E /* Connection.swift */,
 				81BF09281E92A28A00E2044F /* SocketAckEmitter.swift */,
 				81BF09291E92A28A00E2044F /* SocketAckManager.swift */,
 				81BF092A1E92A28A00E2044F /* SocketAnyEvent.swift */,
@@ -234,6 +237,7 @@
 				81BF09171E92A25D00E2044F /* AppDelegate.swift in Sources */,
 				81BF094D1E92A28A00E2044F /* SocketIOClientConfiguration.swift in Sources */,
 				81BF09561E92A28A00E2044F /* SSLSecurity.swift in Sources */,
+				813EEB5F1E96B66700C9119E /* Connection.swift in Sources */,
 				81BF09471E92A28A00E2044F /* SocketEnginePollable.swift in Sources */,
 				81BF09461E92A28A00E2044F /* SocketEnginePacketType.swift in Sources */,
 				81BF09431E92A28A00E2044F /* SocketClientManager.swift in Sources */,
