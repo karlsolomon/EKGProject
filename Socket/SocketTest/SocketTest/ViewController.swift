@@ -9,21 +9,19 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var inputStream = NSInputStream()
-    var outputStream = NSOutputStream()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        initNetworkCommunication()
-        receiveData()
- /*       let socket = SocketIOClient(socketURL: NSURL(string: "http://10.146.26.31:8080")!)
-
-        socket.emit("fileRead", 1)
-
-        print("waiting for connection")
-        socket.connect()
-        socket.emit("message", [1,2,3,4])
-        socket.on*/
+       initNetworkCommunication()
+        
+//        let socket = SocketIOClient(socketURL: NSURL(string: "http://10.46.6.161:8080")!)
+//
+//        socket.emit("fileRead", 1)
+//
+//        print("waiting for connection")
+//        socket.connect()
+//        socket.emit("message", [1,2,3,4])
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,23 +37,32 @@ class ViewController: UIViewController {
         return result
     }
     func initNetworkCommunication(){
-        let addr = "10.146.26.31"
-        let port = 9999
+        let addr = "10.146.6.161"
+        let port = 4000
         
       //  var host :NSHost = NSHost(address : addr)
         var inp :NSInputStream?
         var out :NSOutputStream?
         NSStream.getStreamsToHostWithName(addr, port: port, inputStream: &inp, outputStream: &out)
       //  NSStream.getStreamsToHost(host, port: port, inputStream: &inp, outputStream: &out)
-        
-        self.inputStream = inp!
-        self.outputStream = out!
+        let inputStream = inp!
+        let outputStream = out!
         inputStream.open()
         outputStream.open()
+        var dataList = [String]()
+        var buffer: [UInt8] = [1,2,3]
+        var readByte = [UInt8](count: 4, repeatedValue: 0)
+        while inputStream.hasBytesAvailable {
+            inputStream.read(&readByte, maxLength: 5)
+            outputStream.write(&buffer, maxLength: buffer.count)
+            print(dataList.append(asciiToInt(readByte)))
+        }
+        print(readByte)
+      //  receiveData(inputStream, outputStream: outputStream)
 
 
     }
-    func receiveData()->[String]{
+    func receiveData(inputStream: NSInputStream, outputStream: NSOutputStream)->[String]{
         var dataList = [String]()
         var buffer: [UInt8] = [1,2,3]
         var readByte = [UInt8](count: 4, repeatedValue: 0)
