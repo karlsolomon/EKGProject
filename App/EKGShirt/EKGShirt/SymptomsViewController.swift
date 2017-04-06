@@ -7,6 +7,7 @@
 // Tags: Definitions Button = 0, TableView = 1, RecordButton = 2
 
 import UIKit
+import CoreData
 
 class SymptomsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -98,8 +99,7 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return contents.count
-    }
-    
+    }    
     
     
 //UI TABLE VIEW DELEGATE
@@ -119,8 +119,13 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
 //MARK: SEND SYMPTOMS
     func sendSymptoms() {
         let date = NSDate()
-        if let filePath = NSBundle.mainBundle().URLForResource("samples", withExtension: "csv"){
-            Archive(date: date, path: filePath, symptoms: selectedSymptoms)
+        if let filePath = NSBundle.mainBundle().pathForResource("samples", ofType: "csv") {
+            guard let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate else { return }
+            let managedContext = appDelegate.managedObjectContext
+            let entity = NSEntityDescription.entityForName("Archive", inManagedObjectContext: managedContext)!
+            
+            let newArchive = Archive(date: date, path: filePath, symptoms: selectedSymptoms, entity: entity, context: managedContext)
+            ArchivesViewController().addArchive(newArchive)
         } else {
             let noFileFound = UIAlertController(title: "FILE NOT FOUND", message: "File at specified location not found", preferredStyle: .Alert)
             presentViewController(noFileFound, animated: true, completion: nil)

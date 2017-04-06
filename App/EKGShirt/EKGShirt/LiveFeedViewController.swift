@@ -39,7 +39,7 @@ class LiveFeedViewController: UIViewController {
     
     func updateChartWithData() {
         viewTitle.title = LiveFeedViewController.displayedLead
-        let values = LiveFeedViewController.displayedArchive?.getData(LiveFeedViewController.displayedLead)
+        let values = LiveFeedViewController.displayedArchive?.getLeadData(LiveFeedViewController.displayedLead)
         
         var entries: [ChartDataEntry] = Array()
         var xValues: [String] = Array()

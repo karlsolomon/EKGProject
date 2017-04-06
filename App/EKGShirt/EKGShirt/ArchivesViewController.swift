@@ -9,76 +9,85 @@
 import UIKit
 import Foundation
 import MessageUI
+import CoreData
 
-class ArchivesViewController: UITableViewController, MFMailComposeViewControllerDelegate {
-
-    var ArchiveList = [Archive]()
-    
-    // MARK: Properties
+class ArchivesViewController: UIViewController {
+    static var ArchiveList = [NSManagedObject]()
     @IBOutlet var archivesTableView: UITableView!
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let savedArchives = loadArchives() {
-            ArchiveList += savedArchives
+        
+        guard let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate else {
+            return
+        }
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName: "Archive")
+        do {
+            ArchivesViewController.ArchiveList = try managedContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
+        } catch let error as NSError {
+            print ("Could not fetch. \(error), \(error.userInfo)")
         }
     }
     
     override func viewDidDisappear(animated: Bool) {
-        saveArchives()
     }
     
     override func viewDidAppear(animated: Bool) {
-        ArchiveList += Archive.getNewArchiveList()
-        self.archivesTableView.reloadData()
+        archivesTableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    //MARK: NSCODING
-    
-    private func saveArchives() {
-       let success = NSKeyedArchiver.archiveRootObject(ArchiveList, toFile: Archive.ArchiveURL.path!)
-        print("Save successful: \(success)" )
-    }
     
     func addArchive(archive: Archive) {
-        ArchiveList.append(archive)
-        saveArchives()
-    }
-    
-    private func loadArchives() -> [Archive]? {
-        print("Loading Archives")
-        return NSKeyedUnarchiver.unarchiveObjectWithFile(Archive.ArchiveURL.path!) as? [Archive]
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-
-        return 1
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return ArchiveList.count
-    }
-
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ArchiveCell", forIndexPath: indexPath)
-        let archive = ArchiveList[indexPath.row]
-        cell.textLabel?.text = archive.getDate() + " " + archive.getTime()
-        cell.detailTextLabel?.text = archive.getSymptomsAbbreviations()
         
+        guard let appDelegate =
+            UIApplication.sharedApplication().delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext = appDelegate.managedObjectContext
+        archive.setValue(archive.getDate(), forKeyPath: "date")
+        archive.setValue(archive.getPath(), forKeyPath: "path")
+        archive.setValue(archive.getTime(), forKeyPath: "time")
+        archive.setValue(archive.getSymptoms(), forKey: "symptoms")
+        archive.setValue(archive.getSymptomsAbbreviations(), forKey: "symptomsAbbreviations")
+        archive.setValue(archive.leads, forKey: "leads")
+        
+        // 4
+        do {
+            try managedContext.save()
+            ArchivesViewController.ArchiveList.append(archive)
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    
+}
+
+
+extension ArchivesViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return ArchivesViewController.ArchiveList.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("ArchiveCell", forIndexPath: indexPath)
+        let archive = ArchivesViewController.ArchiveList[indexPath.row]
+        let date = archive.valueForKeyPath("date") as? String
+        let time = archive.valueForKeyPath("time") as? String
+        cell.textLabel?.text = date! + " " + time!
+        cell.detailTextLabel?.text = archive.valueForKeyPath("symptomsAbbreviations") as? String
         return cell
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let archive = ArchiveList[indexPath.row]
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let archive = ArchivesViewController.ArchiveList[indexPath.row]
         let email = UITableViewRowAction(style: .Normal, title: "Email", handler: {_,_ in
             let mailComposeViewController = self.configuredMailComposeViewController(archive)
             if MFMailComposeViewController.canSendMail() {
@@ -88,37 +97,52 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
             }
             
         })
-        let delete = UITableViewRowAction(style: .Default, title: "Delete", handler: {_,_ in 
-            self.ArchiveList.removeAtIndex(indexPath.row)
+        let delete = UITableViewRowAction(style: .Default, title: "Delete", handler: {_,_ in
+            ArchivesViewController.ArchiveList.removeAtIndex(indexPath.row)
             self.archivesTableView.reloadData()
         })
         return [email, delete]
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        LiveFeedViewController.displayedArchive = ArchiveList[indexPath.row]
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let selectedArchive = ArchivesViewController.ArchiveList[indexPath.row] as? Archive
+        
+        
+        LiveFeedViewController.displayedArchive = selectedArchive
         let destinationVC = self.storyboard?.instantiateViewControllerWithIdentifier("LiveFeedViewController") as! LiveFeedViewController
-        self.showViewController(destinationVC, sender: self)       
+        self.showViewController(destinationVC, sender: self)
     }
     
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             archivesTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
     }
+}
+
+
+extension ArchivesViewController : MFMailComposeViewControllerDelegate {
     
-    // MARK: EMAIL VIEW DELEGATE   
-    func configuredMailComposeViewController(archive: Archive) -> MFMailComposeViewController {
+    func configuredMailComposeViewController(archive: NSManagedObject) -> MFMailComposeViewController {
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self
         mailComposerVC.setToRecipients(["ksolomon@utexas.edu"])
-        mailComposerVC.setSubject("Patient EKG Record: " + archive.getDate() + " " + archive.getTime() )
-        mailComposerVC.setMessageBody("Symptoms: \n" + archive.getSymptoms(), isHTML: false)
-        if let fileData = NSData(contentsOfURL: archive.getPath()){
-            mailComposerVC.addAttachmentData(fileData, mimeType: "text/csv", fileName: "Sample CSV")
+        let date = archive.valueForKeyPath("archive") as? String
+        let time = archive.valueForKeyPath("time") as? String
+        let symptoms = archive.valueForKeyPath("symptoms") as? String
+        let path = archive.valueForKeyPath("path") as? String
+        
+        
+        
+        mailComposerVC.setSubject("Patient EKG Record: " + date! + " " + time! )
+        mailComposerVC.setMessageBody("Symptoms: \n" + symptoms!, isHTML: false)
+        if let fileData = NSData(contentsOfFile: path!){
+            mailComposerVC.addAttachmentData(fileData, mimeType: "text/csv", fileName: "EKG Recording: \(date!) \(time!)")
         } else {
-            let alert = UIAlertController(title: "File Not Found", message: "The file for this archive could not be found", preferredStyle: .Alert)
+            let alert = UIAlertController(title: "File Not Found", message: "The file for this archive could not be found", preferredStyle: .ActionSheet)
+            let cancel = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+            alert.addAction(cancel)
             presentViewController(alert, animated: true, completion: nil)
         }
         return mailComposerVC
@@ -129,9 +153,8 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
         sendMailErrorAlert.show()
     }
     
-    // MARK: MFMailComposeViewControllerDelegate Method
-    
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
+    
 }

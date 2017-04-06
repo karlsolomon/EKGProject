@@ -16,9 +16,9 @@ class CSVParse {
     var header = [String]()
     var initial = [Int]()
     
-    init(url: NSURL) {
+    init(path: String) {
         do {
-            self.text = try String(contentsOfURL: url, encoding: encoding)
+            self.text = try String(contentsOfFile: path)
             let rows = text.componentsSeparatedByString("\r\n")
             self.header = rows[0].componentsSeparatedByString(",")
             print("Header: \(self.header.count)")
@@ -44,8 +44,12 @@ class CSVParse {
         return columns
     }
     
-    func getHeader() -> [String] {
-        return self.header
+    func getHeader() -> String {
+        var headerAppended = String()
+        for i in header {
+            headerAppended += "\(i) "
+        }
+        return headerAppended
     }
     
 }
