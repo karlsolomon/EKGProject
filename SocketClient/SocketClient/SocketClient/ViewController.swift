@@ -8,28 +8,37 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, NSStreamDelegate{
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
         let addr = "10.146.6.161"
         let port = 8080
-        var inp :NSInputStream?
+        var inp : NSInputStream?
         var out :NSOutputStream?
+    
         
         NSStream.getStreamsToHostWithName(addr, port: port, inputStream: &inp, outputStream: &out)
+        
         let inputStream = inp!
         let outputStream = out!
-        
+//        inputStream.delegate = self
+//        outputStream.delegate = self
+//        inputStream.scheduleInRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+//        outputStream.scheduleInRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
         inputStream.open()
         outputStream.open()
-        
-        var readByte = [UInt8](count: 4, repeatedValue: 0)
+        var buffer : [UInt8] = [97]
+        var readBytes = [UInt8](count: 4, repeatedValue: 0)
+        while true{
         while inputStream.hasBytesAvailable{
-            inputStream.read(&readByte, maxLength: 5)
-            print(readByte)
+            inputStream.read(&readBytes, maxLength: 5)
+            outputStream.write(buffer, maxLength: buffer.count)
+            print(readBytes)
+           
+        }
+            
         }
     
     }

@@ -13,16 +13,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        initNetworkCommunication()
+       initNetworkCommunication()
         
- /*       let socket = SocketIOClient(socketURL: NSURL(string: "http://10.146.26.31:8080")!)
-
-        socket.emit("fileRead", 1)
-
-        print("waiting for connection")
-        socket.connect()
-        socket.emit("message", [1,2,3,4])
-        socket.on*/
+//        let socket = SocketIOClient(socketURL: NSURL(string: "http://10.46.6.161:8080")!)
+//
+//        socket.emit("fileRead", 1)
+//
+//        print("waiting for connection")
+//        socket.connect()
+//        socket.emit("message", [1,2,3,4])
     }
 
     override func didReceiveMemoryWarning() {
