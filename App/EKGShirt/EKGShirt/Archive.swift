@@ -37,7 +37,6 @@ class Archive: NSObject, NSCoding{
         self.leads = csv.getHeader()
         self.symptoms = symptoms.joinWithSeparator(", ")
         self.symptomsAbbreviations = Symptoms.instance.getSymptomsAbbreviations(symptoms).joinWithSeparator(",")
-        Archive.newArchiveList.append(self)
     }
     
     init(date: String, time: String, path: NSURL, symptoms: String, symptomsAbbreviations: String) {
@@ -59,14 +58,6 @@ class Archive: NSObject, NSCoding{
         let symptomsAbbreviations = aDecoder.decodeObjectForKey("symptomsAbbreviations") as? String
         self.init(date: date, time: time!, path: path!, symptoms: symptoms!, symptomsAbbreviations: symptomsAbbreviations!)
     }
-    
-    
-    static func getNewArchiveList() -> [Archive] {
-        let list = Archive.newArchiveList
-        Archive.newArchiveList = [Archive]()
-        return list
-    }
-
     
 //MARK: NSCoding
     func encodeWithCoder(aCoder: NSCoder) {
