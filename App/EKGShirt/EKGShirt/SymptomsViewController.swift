@@ -119,7 +119,14 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
 //MARK: SEND SYMPTOMS
     func sendSymptoms() {
         let date = NSDate()
-        if let filePath = NSBundle.mainBundle().URLForResource("samples", withExtension: "csv"){
+        let formatter = NSDateFormatter()
+        // initially set the format based on your datepicker date
+        formatter.dateFormat = "MM/dd/yy hh:mm"
+        let dateString = formatter.stringFromDate(date)
+        let client = SocketClient(fileName: dateString)
+
+
+        if let filePath = NSBundle.mainBundle().URLForResource(dateString, withExtension: "csv"){
             let archive = Archive(date: date, path: filePath, symptoms: selectedSymptoms)
             ArchivesViewController().addArchive(archive)
         } else {

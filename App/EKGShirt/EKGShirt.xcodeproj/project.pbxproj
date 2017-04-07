@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		816916A81E97289A00D3B86C /* SocketClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816916A71E97289A00D3B86C /* SocketClient.swift */; };
 		817197491E8DFF12004189E5 /* TextFileReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817197481E8DFF12004189E5 /* TextFileReader.swift */; };
 		81E7B9A61E91E5CF0027A92C /* Archive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7B9A51E91E5CF0027A92C /* Archive.swift */; };
 		960040E31E8D946700EC63E9 /* ArchivesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960040E21E8D946700EC63E9 /* ArchivesViewController.swift */; };
@@ -82,6 +83,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		816916A71E97289A00D3B86C /* SocketClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketClient.swift; sourceTree = "<group>"; };
 		817197481E8DFF12004189E5 /* TextFileReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFileReader.swift; sourceTree = "<group>"; };
 		81E7B9A51E91E5CF0027A92C /* Archive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Archive.swift; sourceTree = "<group>"; };
 		960040E21E8D946700EC63E9 /* ArchivesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchivesViewController.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				96012F011E8C1EA300973986 /* AppDelegate.swift */,
+				816916A71E97289A00D3B86C /* SocketClient.swift */,
 				96BBE2091E9547C90036027F /* CSVParse.swift */,
 				81E7B9A51E91E5CF0027A92C /* Archive.swift */,
 				964EA70F1E8DC4BB004E2A9F /* archives.png */,
@@ -298,6 +301,7 @@
 				96012F061E8C1EA300973986 /* LiveFeedViewController.swift in Sources */,
 				817197491E8DFF12004189E5 /* TextFileReader.swift in Sources */,
 				81E7B9A61E91E5CF0027A92C /* Archive.swift in Sources */,
+				816916A81E97289A00D3B86C /* SocketClient.swift in Sources */,
 				96012F021E8C1EA300973986 /* AppDelegate.swift in Sources */,
 				96012F041E8C1EA300973986 /* SymptomsViewController.swift in Sources */,
 				96CB31AE1E8EB6040038762F /* Symptoms.swift in Sources */,
