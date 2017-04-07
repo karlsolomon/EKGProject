@@ -123,10 +123,10 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
         // initially set the format based on your datepicker date
         formatter.dateFormat = "MM/dd/yy hh:mm"
         let dateString = formatter.stringFromDate(date)
-        let client = SocketClient(fileName: dateString)
+        //let client = SocketClient(fileName: dateString)
 
 
-        if let filePath = NSBundle.mainBundle().URLForResource(dateString, withExtension: "csv"){
+        if let filePath = NSBundle.mainBundle().URLForResource("samples", withExtension: "csv"){
             let archive = Archive(date: date, path: filePath, symptoms: selectedSymptoms)
             ArchivesViewController().addArchive(archive)
         } else {

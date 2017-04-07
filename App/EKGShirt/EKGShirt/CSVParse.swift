@@ -34,7 +34,6 @@ class CSVParse {
                     self.columns[header[j]]!.append(value)
                 }
             }
-            print(columns)
         } catch {
             print("Error parsing CSV")
         }

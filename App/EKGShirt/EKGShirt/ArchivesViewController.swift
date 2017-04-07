@@ -20,16 +20,10 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let savedArchives = loadArchives() {
-            ArchivesViewController.ArchiveList += savedArchives
-        }
-    }
-    
-    override func viewDidDisappear(animated: Bool) {
-        saveArchives()
     }
     
     override func viewDidAppear(animated: Bool) {
+        ArchivesViewController.ArchiveList = loadArchives()!
         self.archivesTableView.reloadData()
     }
 
@@ -37,16 +31,10 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
         super.didReceiveMemoryWarning()
     }
     
-    //MARK: NSCODING
-    
-    func saveArchives() {
-       let success = NSKeyedArchiver.archiveRootObject(ArchivesViewController.ArchiveList, toFile: Archive.ArchiveURL.path!)
-        print("Save successful: \(success)" )
-    }
-    
     func addArchive(archive: Archive) {
         ArchivesViewController.ArchiveList.append(archive)
-        saveArchives()
+        let success = NSKeyedArchiver.archiveRootObject(ArchivesViewController.ArchiveList, toFile: Archive.ArchiveURL.path!)
+        print("Save successful: \(success)" )
     }
     
     private func loadArchives() -> [Archive]? {
@@ -62,7 +50,6 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return ArchivesViewController.ArchiveList.count
     }
 

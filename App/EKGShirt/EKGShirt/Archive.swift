@@ -95,8 +95,8 @@ class Archive: NSObject, NSCoding{
     func getPath()->NSURL{
         return path
     }
-    func getData(lead: String) ->[Int]{
-        return data[lead]!
+    func getData(lead: String) ->[Int]?{
+        return data[lead]
     }
     func getLeads() -> [String] {
         return self.leads

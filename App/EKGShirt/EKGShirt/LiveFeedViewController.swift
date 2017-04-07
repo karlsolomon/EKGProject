@@ -37,15 +37,20 @@ class LiveFeedViewController: UIViewController {
     }
     
     func updateChartWithData() {
+        min = 0
+        max = 0
         viewTitle.title = LiveFeedViewController.displayedLead
-        let values = LiveFeedViewController.displayedArchive?.getData(LiveFeedViewController.displayedLead)
+        guard let values = LiveFeedViewController.displayedArchive?.getData(LiveFeedViewController.displayedLead) else {
+            changeLeadButton.enabled = false
+            return
+        }
         
         var entries: [ChartDataEntry] = Array()
         var xValues: [String] = Array()
         
-        for (i, value) in values!.enumerate()
+        for (i, value) in values.enumerate()
         {
-            entries.append(ChartDataEntry.init(value: Double(value), xIndex: i))
+            entries.append(ChartDataEntry.init(value: Double(value)/440, xIndex: i))
             xValues.append("\(i)")
             if(value > max) { max = value }
             if(value < min) { min = value }
@@ -55,13 +60,9 @@ class LiveFeedViewController: UIViewController {
         dataSet = LineChartDataSet(yVals: entries, label: "First unit test data")
         dataSet.drawCirclesEnabled = false
         dataSet.lineWidth = 2
-        linePlotView.leftAxis.axisMinValue = Double(min)
-        linePlotView.rightAxis.axisMinValue = Double(min)
-        linePlotView.rightAxis.axisMaxValue = Double(max)
-        linePlotView.leftAxis.axisMaxValue = Double(max)
+        min -= 10
+        max += 10
         linePlotView.data = LineChartData(xVals: xValues, dataSet: dataSet)
-        linePlotView.dragEnabled = true
-        linePlotView.doubleTapToZoomEnabled = false
         formatArchivePlot(linePlotView, data: dataSet)
     }
     
@@ -81,14 +82,22 @@ class LiveFeedViewController: UIViewController {
     }
     
     func formatPlot(plot: LineChartView, data: LineChartDataSet) {
+        linePlotView.leftAxis.axisMinValue = Double(min)/440
+        linePlotView.rightAxis.axisMinValue = Double(min)/440
+        linePlotView.rightAxis.axisMaxValue = Double(max)/440
+        linePlotView.leftAxis.axisMaxValue = Double(max)/440
+        linePlotView.dragEnabled = true
+        linePlotView.doubleTapToZoomEnabled = false
         plot.doubleTapToZoomEnabled = false
-        plot.setVisibleXRangeMaximum(300)  //300 to match 2.4s 125Hz readout
+        plot.setVisibleXRangeMaximum(400)
         plot.highlightPerTapEnabled = false
         plot.highlightPerDragEnabled = true
         plot.highlightFullBarEnabled = false
         plot.legend.enabled = false
         plot.descriptionText = ""
         plot.autoScaleMinMaxEnabled = false
+        plot.drawMarkers = true
+        plot.maxVisibleValueCount = 3
         let xAxis = plot.xAxis
         let gridColor = UIColor(red: 1, green: 0, blue: 0, alpha: 1)
         let yAxisL = plot.leftAxis
@@ -98,10 +107,11 @@ class LiveFeedViewController: UIViewController {
         yAxisR.gridColor = gridColor
         xAxis.gridColor = gridColor
         
+        xAxis.valueFormatter = AxisValueFormatter()
+        
         xAxis.axisLabelModulus = 5 // 25 = Big Grid Blocks, 5 = Small Grid Blocks. 1 Small Grid block = 40ms. FIXME: not working
         
         data.setColor(NSUIColor(red: 0, green: 0, blue: 0, alpha: 0.8))
     }
-
 }
 

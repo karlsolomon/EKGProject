@@ -355,6 +355,7 @@
                         <viewControllerLayoutGuide type="bottom" id="xvg-CC-fap"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="v17-3p-R9r">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L5b-Ln-XbO">
