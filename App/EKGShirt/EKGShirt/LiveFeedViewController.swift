@@ -15,7 +15,8 @@ class LiveFeedViewController: UIViewController {
     @IBOutlet weak var changeLeadButton: UIBarButtonItem! // Open PickerView Popup w/ Lead Options
     @IBOutlet weak var linePlotView: LineChartView!
     @IBOutlet weak var pickerView: UIPickerView!
-    
+    var min: Int = 0
+    var max: Int = 0
     
     var dataSet: LineChartDataSet!
     static var displayedArchive: Archive?
@@ -23,9 +24,7 @@ class LiveFeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateChartWithData()        
-        
-        // Do any additional setup after loading the view, typically from a nib.
+        updateChartWithData()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -48,13 +47,18 @@ class LiveFeedViewController: UIViewController {
         {
             entries.append(ChartDataEntry.init(value: Double(value), xIndex: i))
             xValues.append("\(i)")
+            if(value > max) { max = value }
+            if(value < min) { min = value }
+            
         }
         
         dataSet = LineChartDataSet(yVals: entries, label: "First unit test data")
         dataSet.drawCirclesEnabled = false
         dataSet.lineWidth = 2
-        linePlotView.leftAxis.axisMinValue = 0.0
-        linePlotView.rightAxis.axisMinValue = 0.0
+        linePlotView.leftAxis.axisMinValue = Double(min)
+        linePlotView.rightAxis.axisMinValue = Double(min)
+        linePlotView.rightAxis.axisMaxValue = Double(max)
+        linePlotView.leftAxis.axisMaxValue = Double(max)
         linePlotView.data = LineChartData(xVals: xValues, dataSet: dataSet)
         linePlotView.dragEnabled = true
         linePlotView.doubleTapToZoomEnabled = false
@@ -65,15 +69,13 @@ class LiveFeedViewController: UIViewController {
         plot.dragEnabled = false
         plot.backgroundColor = NSUIColor(white: 255, alpha: 1.0)    // white background
         plot.noDataText = "Waiting for EKG Data"
-        plot.autoScaleMinMaxEnabled = true
         formatPlot(plot, data: data)
     }
     
     func formatArchivePlot(plot: LineChartView, data: LineChartDataSet) {
         plot.dragEnabled = true
         plot.dragDecelerationEnabled = true
-        plot.dragDecelerationFrictionCoef = 0.75
-        plot.autoScaleMinMaxEnabled = true
+        plot.dragDecelerationFrictionCoef = 0.8
         plot.keepPositionOnRotation = true
         formatPlot(plot, data: data)
     }
@@ -86,6 +88,7 @@ class LiveFeedViewController: UIViewController {
         plot.highlightFullBarEnabled = false
         plot.legend.enabled = false
         plot.descriptionText = ""
+        plot.autoScaleMinMaxEnabled = false
         let xAxis = plot.xAxis
         let gridColor = UIColor(red: 1, green: 0, blue: 0, alpha: 1)
         let yAxisL = plot.leftAxis
