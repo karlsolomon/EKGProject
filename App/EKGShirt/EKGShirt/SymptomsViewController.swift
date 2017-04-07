@@ -52,7 +52,7 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
             recordButton.setTitle("Record EKG", forState: UIControlState.Normal)
             recordButton.enabled = false
             allowSelection(false)
-            sendSymptoms()
+            saveArchive()
             resetTable()
         } else {
             recordButton.setTitle("Submit Symptoms", forState: UIControlState.Normal)//titleLabel = "Submit Symptoms"
@@ -116,16 +116,41 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     
-//MARK: SEND SYMPTOMS
-    func sendSymptoms() {
-        let date = NSDate()
+//MARK: ARCHIVES
+    func saveArchive() {
+        //get csv from server
+        // store
+        
+        
         if let filePath = NSBundle.mainBundle().pathForResource("samples", ofType: "csv") {
-            guard let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate else { return }
-            let managedContext = appDelegate.managedObjectContext
-            let entity = NSEntityDescription.entityForName("Archive", inManagedObjectContext: managedContext)!
             
-            let newArchive = Archive(date: date, path: filePath, symptoms: selectedSymptoms, entity: entity, context: managedContext)
-            ArchivesViewController().addArchive(newArchive)
+            let entity = NSEntityDescription.entityForName("Archive", inManagedObjectContext: AppDelegate().managedObjectContext)!// .insertNewObjectForEntityForName("Archive", inManagedObjectContext: AppDelegate().managedObjectContext)
+            var archive = Archive(entity: entity, insertIntoManagedObjectContext: AppDelegate().managedObjectContext)
+            print(archive)
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "MM/dd/yy hh:mm"
+            
+            
+            let csv = CSVParse(path: filePath)
+            archive.leads = csv.getHeader()
+            archive.path = filePath
+            archive.symptoms = selectedSymptoms.joinWithSeparator(", ")
+            archive.symptomsAbbreviations = Symptoms.instance.getSymptomsAbbreviations(selectedSymptoms).joinWithSeparator(",")
+            archive.timeStamp = formatter.stringFromDate(NSDate())
+            
+            
+            
+//            archive.setValue(formatter.stringFromDate(NSDate()), forKey: "timeStamp")
+//            archive.setValue(filePath, forKeyPath: "path")
+//            archive.setValue(selectedSymptoms.joinWithSeparator(", "), forKey: "symptoms")
+//            archive.setValue(Symptoms.instance.getSymptomsAbbreviations(selectedSymptoms).joinWithSeparator(","), forKey: "symptomsAbbreviations")
+//            archive.setValue(csv.getHeader(), forKey: "leads")
+            
+            do {
+                try AppDelegate().managedObjectContext.save()
+            } catch {
+                fatalError("Failure to save context: \(error)")
+            }
         } else {
             let noFileFound = UIAlertController(title: "FILE NOT FOUND", message: "File at specified location not found", preferredStyle: .Alert)
             presentViewController(noFileFound, animated: true, completion: nil)

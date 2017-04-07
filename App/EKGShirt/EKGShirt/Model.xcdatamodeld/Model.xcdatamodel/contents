@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="Archive" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15G1421" minimumToolsVersion="Xcode 7.0">
-    <entity name="Archive" representedClassName="Archive" syncable="YES">
-        <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
+    <entity name="Archive" representedClassName=".Archive" syncable="YES">
         <attribute name="leads" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="symptoms" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="symptomsAbbreviations" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="time" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timeStamp" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Archive" positionX="-63" positionY="-18" width="128" height="135"/>
+        <element name="Archive" positionX="-63" positionY="-18" width="128" height="120"/>
     </elements>
 </model>

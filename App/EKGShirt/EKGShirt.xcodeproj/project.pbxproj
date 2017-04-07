@@ -26,6 +26,7 @@
 		96B674D11E9599EF00DF25D5 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 96701F981E940CFC003CF8CF /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		96BBE20A1E9547C90036027F /* CSVParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BBE2091E9547C90036027F /* CSVParse.swift */; };
 		96CB31AE1E8EB6040038762F /* Symptoms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CB31AD1E8EB6040038762F /* Symptoms.swift */; };
+		96DBE1C41E97092F00457BA7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96DBE1C31E97092F00457BA7 /* CoreData.framework */; };
 		96F01CBE1E91D3AC002E5A32 /* SymptomsLegendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F01CBD1E91D3AC002E5A32 /* SymptomsLegendController.swift */; };
 		96F01CC01E91D4A2002E5A32 /* samples.csv in Resources */ = {isa = PBXBuildFile; fileRef = 96F01CBF1E91D4A2002E5A32 /* samples.csv */; };
 /* End PBXBuildFile section */
@@ -111,6 +112,7 @@
 		96B674CB1E9596E700DF25D5 /* PickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		96BBE2091E9547C90036027F /* CSVParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSVParse.swift; sourceTree = "<group>"; };
 		96CB31AD1E8EB6040038762F /* Symptoms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symptoms.swift; sourceTree = "<group>"; };
+		96DBE1C31E97092F00457BA7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		96F01CBD1E91D3AC002E5A32 /* SymptomsLegendController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SymptomsLegendController.swift; path = ../SymptomsLegendController.swift; sourceTree = "<group>"; };
 		96F01CBF1E91D4A2002E5A32 /* samples.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = samples.csv; sourceTree = SOURCE_ROOT; };
 		96F01CC31E91E991002E5A32 /* Archive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Archive.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96DBE1C41E97092F00457BA7 /* CoreData.framework in Frameworks */,
 				96B674D01E9599EF00DF25D5 /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,6 +142,7 @@
 		96012EF51E8C1EA300973986 = {
 			isa = PBXGroup;
 			children = (
+				96DBE1C31E97092F00457BA7 /* CoreData.framework */,
 				813EEBB81E96BA9100C9119E /* SocketClient.xcodeproj */,
 				96012F001E8C1EA300973986 /* EKGShirt */,
 				96012EFF1E8C1EA300973986 /* Products */,

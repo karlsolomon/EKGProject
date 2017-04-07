@@ -17,23 +17,13 @@ class ArchivesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        guard let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate else {
-            return
-        }
-        let managedContext = appDelegate.managedObjectContext
-        let fetchRequest = NSFetchRequest(entityName: "Archive")
-        do {
-            ArchivesViewController.ArchiveList = try managedContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
-        } catch let error as NSError {
-            print ("Could not fetch. \(error), \(error.userInfo)")
-        }
     }
     
     override func viewDidDisappear(animated: Bool) {
     }
     
     override func viewDidAppear(animated: Bool) {
+        fetch()
         archivesTableView.reloadData()
     }
 
@@ -41,31 +31,16 @@ class ArchivesViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    
-    func addArchive(archive: Archive) {
+    func fetch() {
+        let moc = AppDelegate().managedObjectContext
+        let archiveFetch = NSFetchRequest(entityName: "Archive")
         
-        guard let appDelegate =
-            UIApplication.sharedApplication().delegate as? AppDelegate else {
-                return
-        }
-        
-        let managedContext = appDelegate.managedObjectContext
-        archive.setValue(archive.getDate(), forKeyPath: "date")
-        archive.setValue(archive.getPath(), forKeyPath: "path")
-        archive.setValue(archive.getTime(), forKeyPath: "time")
-        archive.setValue(archive.getSymptoms(), forKey: "symptoms")
-        archive.setValue(archive.getSymptomsAbbreviations(), forKey: "symptomsAbbreviations")
-        archive.setValue(archive.leads, forKey: "leads")
-        
-        // 4
         do {
-            try managedContext.save()
-            ArchivesViewController.ArchiveList.append(archive)
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
+            ArchivesViewController.ArchiveList = try moc.executeFetchRequest(archiveFetch) as! [Archive]
+        } catch {
+            fatalError("Failed to get Archives: \(error)")
         }
     }
-    
     
 }
 
