@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Charts
+import Charts   //External Chart Library
 
 class LiveFeedViewController: UIViewController {
     
@@ -17,10 +17,11 @@ class LiveFeedViewController: UIViewController {
     @IBOutlet weak var pickerView: UIPickerView!
     var min: Int = 0
     var max: Int = 0
+    let gain = 1023/5  // = DAC Precision / Max Voltage
     
     var dataSet: LineChartDataSet!
     static var displayedArchive: Archive?
-    static var displayedLead = "Lead 1"
+    static var displayedLead = "Lead 1" //default for first view
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +31,13 @@ class LiveFeedViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         updateChartWithData()
     }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        updateChartWithData() // reinitializes scaling
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func updateChartWithData() {
@@ -50,17 +54,17 @@ class LiveFeedViewController: UIViewController {
         
         for (i, value) in values.enumerate()
         {
-            entries.append(ChartDataEntry.init(value: Double(value)/440, xIndex: i))
+            entries.append(ChartDataEntry.init(value: Double(value)/gain, xIndex: i))
             xValues.append("\(i)")
             if(value > max) { max = value }
             if(value < min) { min = value }
             
         }
-        
         dataSet = LineChartDataSet(yVals: entries, label: "First unit test data")
         dataSet.drawCirclesEnabled = false
         dataSet.lineWidth = 2
-        min -= 10
+        
+        min -= 10   // 10 dip margin in Y
         max += 10
         linePlotView.data = LineChartData(xVals: xValues, dataSet: dataSet)
         formatArchivePlot(linePlotView, data: dataSet)
@@ -68,7 +72,6 @@ class LiveFeedViewController: UIViewController {
     
     func formatLiveFeedPlot(plot: LineChartView, data: LineChartDataSet) {
         plot.dragEnabled = false
-        plot.backgroundColor = NSUIColor(white: 255, alpha: 1.0)    // white background
         plot.noDataText = "Waiting for EKG Data"
         formatPlot(plot, data: data)
     }
@@ -82,22 +85,28 @@ class LiveFeedViewController: UIViewController {
     }
     
     func formatPlot(plot: LineChartView, data: LineChartDataSet) {
-        linePlotView.leftAxis.axisMinValue = Double(min)/440
-        linePlotView.rightAxis.axisMinValue = Double(min)/440
-        linePlotView.rightAxis.axisMaxValue = Double(max)/440
-        linePlotView.leftAxis.axisMaxValue = Double(max)/440
+        //Shift to mV Scale
+        linePlotView.leftAxis.axisMinValue = Double(min)/gain
+        linePlotView.rightAxis.axisMinValue = Double(min)/gain
+        linePlotView.rightAxis.axisMaxValue = Double(max)/gain
+        linePlotView.leftAxis.axisMaxValue = Double(max)/gain
+        
+        //Interactivity
         linePlotView.dragEnabled = true
         linePlotView.doubleTapToZoomEnabled = false
         plot.doubleTapToZoomEnabled = false
-        plot.setVisibleXRangeMaximum(400)
         plot.highlightPerTapEnabled = false
         plot.highlightPerDragEnabled = true
         plot.highlightFullBarEnabled = false
+        
+        //Marking
+        plot.setVisibleXRangeMaximum(400)   // Max for Data Visualization Rendering to be seamless
         plot.legend.enabled = false
-        plot.descriptionText = ""
+        plot.descriptionText = ""   //silences description
         plot.autoScaleMinMaxEnabled = false
         plot.drawMarkers = true
-        plot.maxVisibleValueCount = 3
+        plot.maxVisibleValueCount = 3 // most XLabels Visible w/o cluttering screen
+        
         let xAxis = plot.xAxis
         let gridColor = UIColor(red: 1, green: 0, blue: 0, alpha: 1)
         let yAxisL = plot.leftAxis
@@ -106,11 +115,7 @@ class LiveFeedViewController: UIViewController {
         yAxisL.gridColor = gridColor
         yAxisR.gridColor = gridColor
         xAxis.gridColor = gridColor
-        
-        xAxis.valueFormatter = AxisValueFormatter()
-        
-        xAxis.axisLabelModulus = 5 // 25 = Big Grid Blocks, 5 = Small Grid Blocks. 1 Small Grid block = 40ms. FIXME: not working
-        
+        xAxis.valueFormatter = AxisValueFormatter() // Shift to Time Scale
         data.setColor(NSUIColor(red: 0, green: 0, blue: 0, alpha: 0.8))
     }
 }

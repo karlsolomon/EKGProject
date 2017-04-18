@@ -6,6 +6,8 @@
 //  Copyright © 2017 Solomon, Karl. All rights reserved.
 //
 
+//TODO: DEPRECATED
+
 import Foundation
 
 class TextFileReader {

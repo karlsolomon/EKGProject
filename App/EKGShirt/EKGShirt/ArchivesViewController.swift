@@ -11,13 +11,13 @@ import Foundation
 import MessageUI
 
 class ArchivesViewController: UITableViewController, MFMailComposeViewControllerDelegate {
-
-    static var ArchiveList = [Archive]()
     
-    // MARK: Properties
+// MARK: Statics
+    static var ArchiveList = [Archive]() // data source
+    
+// MARK: Properties
     @IBOutlet var archivesTableView: UITableView!
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -33,38 +33,29 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
     
     func addArchive(archive: Archive) {
         ArchivesViewController.ArchiveList.append(archive)
-        let success = NSKeyedArchiver.archiveRootObject(ArchivesViewController.ArchiveList, toFile: Archive.ArchiveURL.path!)
-        print("Save successful: \(success)" )
+        let success = NSKeyedArchiver.archiveRootObject(ArchivesViewController.ArchiveList, toFile: Archive.ArchiveURL.path!)   // saves archive to documents directory (semi-permanent) memory
     }
     
     private func loadArchives() -> [Archive]? {
-        print("Loading Archives")
-        return NSKeyedUnarchiver.unarchiveObjectWithFile(Archive.ArchiveURL.path!) as? [Archive]
+        return NSKeyedUnarchiver.unarchiveObjectWithFile(Archive.ArchiveURL.path!) as? [Archive] // loads all saved archives from memory
     }
 
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-
-        return 1
-    }
-
+// MARK: Table view data source
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ArchivesViewController.ArchiveList.count
     }
 
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ArchiveCell", forIndexPath: indexPath)
         let archive = ArchivesViewController.ArchiveList[indexPath.row]
         cell.textLabel?.text = archive.getDate() + " " + archive.getTime()
         cell.detailTextLabel?.text = archive.getSymptomsAbbreviations()
-        
         return cell
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let archive = ArchivesViewController.ArchiveList[indexPath.row]
+        
         let email = UITableViewRowAction(style: .Normal, title: "Email", handler: {_,_ in
             let mailComposeViewController = self.configuredMailComposeViewController(archive)
             if MFMailComposeViewController.canSendMail() {
@@ -74,6 +65,7 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
             }
             
         })
+        
         let delete = UITableViewRowAction(style: .Default, title: "Delete", handler: {_,_ in 
             ArchivesViewController.ArchiveList.removeAtIndex(indexPath.row)
             self.archivesTableView.reloadData()
@@ -81,20 +73,21 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
         return [email, delete]
     }
     
+    // Open Data Vis View of Archive Data
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         LiveFeedViewController.displayedArchive = ArchivesViewController.ArchiveList[indexPath.row]
         let destinationVC = self.storyboard?.instantiateViewControllerWithIdentifier("LiveFeedViewController") as! LiveFeedViewController
         self.showViewController(destinationVC, sender: self)       
     }
     
-    
+    //Delete Archive From memory
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            archivesTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            archivesTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)  //TODO: CHECK FOR MEMORY LEAK
         }
     }
     
-    // MARK: EMAIL VIEW DELEGATE   
+// MARK: EMAIL VIEW DELEGATE
     func configuredMailComposeViewController(archive: Archive) -> MFMailComposeViewController {
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self
@@ -115,8 +108,7 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
         sendMailErrorAlert.show()
     }
     
-    // MARK: MFMailComposeViewControllerDelegate Method
-    
+    // MFMailComposeViewControllerDelegate Method
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }

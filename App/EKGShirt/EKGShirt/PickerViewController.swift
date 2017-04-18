@@ -5,6 +5,7 @@
 //  Created by Solomon, Karl on 4/5/17.
 //  Copyright © 2017 Solomon, Karl. All rights reserved.
 //
+// Allows the User to Change Leads Views in the Data Visualizer
 
 import Foundation
 import UIKit
@@ -30,8 +31,6 @@ class PickerViewController : UIViewController, UIPickerViewDelegate, UIPickerVie
         LiveFeedViewController.displayedLead = (archive?.getLeads()[row])!
         print(LiveFeedViewController.displayedLead)
     }
-    
-    
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1

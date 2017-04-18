@@ -10,7 +10,7 @@ import UIKit
 
 class SymptomsLegendController: UITableViewController {
     
-    let symptomsLegend = Symptoms.instance.getSymptomsLegend()
+    let symptomsLegend = Symptoms.instance.getSymptomsLegend()  // DATA SOURCE
     let cellIdentifier = "legendCell"
     
     override func viewDidLoad() {
@@ -22,11 +22,7 @@ class SymptomsLegendController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
     
-    //MARK: UITableViewDataSource
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
+//MARK: UITableViewDataSource
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return symptomsLegend.count
     }

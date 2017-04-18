@@ -9,6 +9,7 @@
 import Foundation
 
 class Symptoms {
+// MARK: SYMTPOM STRING LITERALS
     private let chestPain = "Chest Pain/Pressure/Burning"
     private let heartburn = "Heartburn or Indigestion"
     private let discomfort = "Discomfort in Back/Throat/Arm"
@@ -32,6 +33,7 @@ class Symptoms {
     private let lowFever = "Low-grade Fever"
     private let sharpChestPain = "Sharp Central Chest Pain"
     
+// MARK: Disease List of Symptoms
     private var coronaryArteryDisease = Set<String>()
     private var heartAttack = Set<String>()
     private var arrhythmia = Set<String>()
@@ -45,31 +47,75 @@ class Symptoms {
     private var symptomsToAbbreviations = [String: String]()
     private var symptomsLegend = [String]()
     
+    //Singleton
     static let instance = Symptoms()
     
+    // Populate Symtpoms & EmergencySymptoms List
     private init (){
         populateLists()
         emergencySymptomsList = Array(heartAttack.union(heartFailure).union(pericarditis))
         symptomsList = Array(coronaryArteryDisease.union(heartAttack).union(arrhythmia).union(atrialFibrillation).union(heartValveDisease).union(heartFailure).union(cardiomyopathy).union(pericarditis))
         
         let symptoms = symptomsList.sort()
-        //print("\(symptoms)")
         for i in symptoms{
             symptomsToAbbreviations.updateValue("", forKey: i)
             
         }
-        // print("intial \(symptomsToAbbreviations)")
-        
         for (word,_) in symptomsToAbbreviations {
-            //print(" generated key is \(generateKey(word))")
             symptomsToAbbreviations.updateValue(generateKey(word), forKey: word)
         }
-        //print("keys made \(symptomsToAbbreviations)")
         for x in symptomsToAbbreviations.keys{
             symptomsLegend.append(symptomsToAbbreviations[x]! + " - " + x)
         }
         symptomsLegend.sortInPlace()
         
+    }
+    
+    // Returns unique legend key for the string based on the first letters in the first word of the symptom
+    private func generateKey(word: String) -> String {
+        for index in 1 ... word.characters.count {
+            let substring = word[word.startIndex..<word.startIndex.advancedBy(index)]
+            
+            if symptomsToAbbreviations.values.contains(substring) == false {
+                let abbreviation = word[word.startIndex..<word.startIndex.advancedBy(index)]
+                return abbreviation
+            }
+            
+        }
+        return "Failed Key Generation"
+    }
+    
+    func getSymptomsLegend() -> [String]{
+        return symptomsLegend
+    }
+    
+    func getAllSymptoms() -> [String]{
+        let sorted = symptomsList.sort()
+        return sorted
+    }
+    
+    func getSymptomsAbbreviations(selected: [String]) -> [String] {
+        var abbreviations = [String]()
+        
+        for i in selected {
+            abbreviations.append(symptomsToAbbreviations[i]!)
+        }
+        return abbreviations
+    }
+    
+    func dangerousSymptoms(selected: [String]) -> Bool {
+        var dangerousCounter = 0
+        for x in selected{
+            if emergencySymptomsList.contains(x) {
+                dangerousCounter += 1
+            }
+        }
+        if dangerousCounter >= 3 {
+            return true
+        }
+        else {
+            return false
+        }
     }
     
     private func populateLists() {
@@ -109,82 +155,34 @@ class Symptoms {
                        irregular]
         
         coronaryArteryDisease = [chestPain,
-                                                        heartburn,
-                                                        outOfBreath,
-                                                        palpitations,
-                                                        fatigue,
-                                                        nausea,
-                                                        sweating]
+                                 heartburn,
+                                 outOfBreath,
+                                 palpitations,
+                                 fatigue,
+                                 nausea,
+                                 sweating]
         
         arrhythmia = [ dizziness,
-                                              fatigue,
-                                              lightHeaded,
-                                              palpitations,
-                                              chestPain,
-                                              outOfBreath,
-                                              pounding]
+                       fatigue,
+                       lightHeaded,
+                       palpitations,
+                       chestPain,
+                       outOfBreath,
+                       pounding]
         
         atrialFibrillation = [ dizziness,
-                                                      fatigue,
-                                                      lightHeaded,
-                                                      palpitations,
-                                                      chestPain,
-                                                      outOfBreath]
+                               fatigue,
+                               lightHeaded,
+                               palpitations,
+                               chestPain,
+                               outOfBreath]
+        
         heartValveDisease = [outOfBreath,
-                                                    dizziness,
-                                                    fatigue,
-                                                    palpitations,
-                                                    chestPain,
-                                                    swelling]
-      
-        
-        
+                             dizziness,
+                             fatigue,
+                             palpitations,
+                             chestPain,
+                             swelling]
     }
-    
-    private func generateKey(word: String) -> String {
-        for index in 1 ... word.characters.count {
-            let substring = word[word.startIndex..<word.startIndex.advancedBy(index)]
-            
-            if symptomsToAbbreviations.values.contains(substring) == false {
-                let abbreviation = word[word.startIndex..<word.startIndex.advancedBy(index)]
-                return abbreviation
-            }
-            
-        }
-        return "Failed Key Generation"
-    }
-    
-    func getSymptomsLegend() -> [String]{
-        return symptomsLegend
-    }
-    
-    func getAllSymptoms() -> [String]{
-        let sorted = symptomsList.sort()
-        return sorted
-    }
-    
-    func getSymptomsAbbreviations(selected: [String]) -> [String]{
-        var abbreviations = [String]()
-        
-        for i in selected {
-            abbreviations.append(symptomsToAbbreviations[i]!)
-        }
-        return abbreviations
-    }
-    func dangerousSymptoms(selected: [String]) -> Bool{
-        var dangerousCounter = 0
-        
-        for x in selected{
-            if emergencySymptomsList.contains(x) {
-                dangerousCounter += 1
-            }
-        }
-        print(dangerousCounter)
-        if dangerousCounter >= 3 {
-            return true
-        }
-        else{
-            return false
-        }
-    }
+
 }

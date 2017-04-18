@@ -4,20 +4,18 @@
 //
 //  Created by Solomon, Karl on 3/29/17.
 //  Copyright © 2017 Solomon, Karl. All rights reserved.
-// Tags: Definitions Button = 0, TableView = 1, RecordButton = 2
 
 import UIKit
 
 class SymptomsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    // MARK: Properties
-    
+// MARK: Properties
     @IBOutlet weak var definitions: UIBarButtonItem!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sampleCell: UIView!
     
-    let contents = Symptoms.instance.getAllSymptoms()
+    let contents = Symptoms.instance.getAllSymptoms()   // Symtpoms Table Data Source
 	var selectedSymptoms = [String]()
     let cellIdentifier = "symptomsCell"
 	var symptomsSelected = false
@@ -25,7 +23,7 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         recordButton.setTitle("Record EKG", forState: UIControlState.Normal)
-        tableView.delegate = self	// must name tableView "symptomsView" in storyboard
+        tableView.delegate = self
         tableView.dataSource = self
         allowSelection(false)
         let tapRecord = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
@@ -33,7 +31,14 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
         recordButton.addGestureRecognizer(tapRecord)
     }
     
-//Custom Button Handling
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+/*  If User is likely having cardiac emergency, prompts user to call 911.
+    Toggles Button between "Record EKG" & "Submit Symtpoms"
+    Disables Button while EKG Data is being captured to avoid duplicate data
+     */
     func tap(sender: UITapGestureRecognizer) {
         if(symptomsSelected) {
             if(Symptoms.instance.dangerousSymptoms(selectedSymptoms)) {
@@ -47,7 +52,7 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
             }))
             presentViewController(alert, animated: true, completion: nil)
             }
-            NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: #selector(self.enableButton), userInfo: nil, repeats: false)
+            NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: #selector(self.enableButton), userInfo: nil, repeats: false)  //TODO: IN FINAL RELEASE CHANGE TIME INTERVAL TO 150 (2.5 MINUTES)
             recordButton.setTitle("Record EKG", forState: UIControlState.Normal)
             recordButton.enabled = false
             allowSelection(false)
@@ -75,6 +80,7 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
         self.recordButton.enabled = true
     }
     
+    //Refreshes Symptoms Table between events to deselect all symptoms
     func resetTable() {
         var symptom = ""
         var symptomIndex = 0
@@ -88,21 +94,19 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
 
-//UI TABLE VIEW DATA SOURCE
+//MARK: UI TABLE VIEW DATA SOURCE
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 	    let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
 	    cell.textLabel?.text = contents[indexPath.row]	 
 	    return cell
 	}
 
-
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return contents.count
     }
     
     
-    
-//UI TABLE VIEW DELEGATE
+//MARK: UI TABLE VIEW DELEGATE
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         selectedSymptoms.append(contents[indexPath.row])
     }
@@ -111,26 +115,22 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
         selectedSymptoms.removeAtIndex(selectedSymptoms.indexOf(contents[indexPath.row])!)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
     
 //MARK: SEND SYMPTOMS
     func sendSymptoms() {
         let date = NSDate()
         let formatter = NSDateFormatter()
-        // initially set the format based on your datepicker date
         formatter.dateFormat = "MM/dd/yy hh:mm"
         let dateString = formatter.stringFromDate(date)
-        //let client = SocketClient(fileName: dateString)
-
-
+        //let client = SocketClient(fileName: dateString)       //TODO: REMOVE COMMENT WHEN RPI SOCKET IS VERIFIED, Update URLForResource string to be the datetime string
+        
         if let filePath = NSBundle.mainBundle().URLForResource("samples", withExtension: "csv"){
             let archive = Archive(date: date, path: filePath, symptoms: selectedSymptoms)
             ArchivesViewController().addArchive(archive)
         } else {
             let noFileFound = UIAlertController(title: "FILE NOT FOUND", message: "File at specified location not found", preferredStyle: .Alert)
+            let cancel = UIAlertAction(title: "Cancel", style: .Default, handler: {})
+            noFileFound.addAction(cancel)
             presentViewController(noFileFound, animated: true, completion: nil)
         }
     }

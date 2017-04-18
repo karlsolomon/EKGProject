@@ -16,6 +16,7 @@ class CSVParse {
     var header = [String]()
     var initial = [Int]()
     
+    //Parses CSV File in memory as Map of [LeadName : [LeadData]]
     init(url: NSURL) {
         do {
             self.text = try String(contentsOfURL: url, encoding: encoding)
@@ -35,14 +36,16 @@ class CSVParse {
                 }
             }
         } catch {
-            print("Error parsing CSV")
+            print("Could Not Find File")
         }
     }
     
+    //Returns EKG map keyed on Lead Name, valued on lead data
     func getcolumns() -> [String: [Int]]{
         return columns
     }
     
+    //Returns Lead Names
     func getHeader() -> [String] {
         return self.header
     }
