@@ -1,6 +1,9 @@
 # EKGProject
+
 Made in part for BME261L at the University of Texas at Austin
+
 Wednesday Section Group 1
+
 Contributors: Karl Solomon, Peter Yu
 
 ## Project Overview
