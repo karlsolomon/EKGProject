@@ -22,7 +22,7 @@ Contributors: Karl Solomon, Peter Yu
 * Symptoms
 
 ### Hardware
-* Analog Logic
-⋅⋅1. Amplification
-⋅⋅2. Filtration
-* ADC
+1. Analog Logic
+    1. Amplification
+    2. Filtration
+2. ADC
