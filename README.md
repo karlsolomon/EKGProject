@@ -58,7 +58,10 @@ This software allows the user to input symptoms and toggle an ECG recording when
    The Symptoms class holds static lists of common symptoms that occur during cardiac anomalies. These symptoms are tabulated and abbreviated, and they can be viewed and selected via the Symptoms Tab. 
 
 ### Hardware
-1. Analog Logic
+1. Analog Logic (For each of 3 leads)
     1. Amplification
+    	AD620 Instrumentation Amplifier at 5.45 gain
     2. Filtration
+    	OP07 Bandbass Filter w/ Fc = 0.5-40
 2. ADC
+	MCP3008 10 bit
