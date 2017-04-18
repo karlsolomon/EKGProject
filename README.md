@@ -23,6 +23,6 @@ Contributors: Karl Solomon, Peter Yu
 
 ### Hardware
 * Analog Logic
-...Amplification
-...Filtration
+⋅⋅*Amplification
+⋅⋅*Filtration
 * ADC
