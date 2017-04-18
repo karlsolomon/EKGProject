@@ -37,6 +37,4 @@ class ECGRead(Thread):
 			startIndex  = startIndex % len(dataBuffer)
 			endIndex += 1
 			endIndex = endIndex % len(dataBuffer)
-
-			dataBuffer[]
-			delay(8);
+			delay(4);

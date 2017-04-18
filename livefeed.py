@@ -41,7 +41,7 @@ class LiveFeed(Thread):
 		self.start()
 
 	def run(self):
- 		global dataBuffer
+ 		global dataBuffer #access blobal variables to be modified
  		global startIndex
  		global endIndex
  		i = startIndex
@@ -49,12 +49,11 @@ class LiveFeed(Thread):
  		temp = dataBuffer[:]
  		result = []
  		while i != j:
-			result.append(temp[i])
+			result.append(temp[i]) #move data to be sent into temp array
 			i = i % len(dataBuffer)
-
-		conn.send(data)
-		conn.close()
-		s.close()
+		
+		conn.send(result) #send data
+		delay(6000) # 1 minute delay
 
 	def getDataBuffer():
 		return dataBuffer

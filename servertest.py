@@ -24,7 +24,7 @@ class Server(Thread):
 			#Bind socket to local host and port
 			data = []
 
-			with open('samples.csv','rU') as file:
+			with open('samples.csv','rU') as file: # 
 				reader = csv.reader(file,delimiter=",")
 				for row in reader:
 					data.append(row)
@@ -42,20 +42,14 @@ class Server(Thread):
 			print 'Socket now listening'
 
 			with open('samples.csv','rU') as f:
-				data = f.read()
+				data = f.read() #open the csv and read into array
 			#now keep talking with the client
 			conn, addr = s.accept()
 			print 'Connected with ' + addr[0] + ':' + str(addr[1])
 			index = len(data)
 			i = 0
-			# for i in range(0,index):
-			#     #wait to accept a connection - blocking call
-			#     for j in range(0,len(data[0])):
 
-			# 	    sent = conn.send(data[i][j])
-			# 	    print("sent : " +str(sent))
-			# 	    print(conn.recv(1024))
-			conn.send(data)
+			conn.send(data) #send the archived data from .csv 
 			conn.recv(1024)
 			#conn.send("end")
 			print('end data')
