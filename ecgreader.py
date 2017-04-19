@@ -20,6 +20,7 @@ class ECGRead(Thread):
 		global startIndex #pointer 1
 		global endIndex #pointer 2
 		BASE = 100
+		DataBuffer.getLiveData()
 		while True:
 			e1=wpi.analogRead(BASE);
 			e2=wpi.analogRead(BASE+1);

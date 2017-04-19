@@ -3,16 +3,21 @@ class DataBuffer():
     start = 1 # Index of Oldest Value
     end = 0 # Index of Most Recent Value
     delay = 8.0 #miliseconds
-    samplingRate = 1.0/delay * 1000 #Check if accessing samplingRate    
+    samplingRate = 1.0/delay * 1000    
     bufferSize = 150 * samplingRate
     print("buffer size" + str(bufferSize))   
     data = [0] * int(bufferSize)
     print("size initial: " + str(len(data)))
+
     @staticmethod
     def getLiveData():
-        c = samplingRate - DataBuffer.end
+        c = DataBuffer.samplingRate - DataBuffer.end
         startLiveIndex = (len(DataBuffer.data) - c) % len(DataBuffer.data)
-        liveBuffer = DataBuffer.data[startLiveIndex:DataBuffer.end].copy()
+        liveBuffer = DataBuffer.data[int(startLiveIndex):int(DataBuffer.end)].copy()
+	print("Live Feed Buffer Size: ")
+	print(len(liveBuffer))
+	print("\n")
+	print(liveBuffer)
         return liveBuffer
 
     @staticmethod
@@ -42,9 +47,7 @@ class DataBuffer():
         
     @staticmethod
     def addData(value):
-	print("start index: " +str( DataBuffer.start) + " buffer lenth: " +str( len(DataBuffer.data)))
         DataBuffer.data[DataBuffer.start] = value
         DataBuffer.increment()
-        print("Added: " + str(value) + "\n")
         return
     
