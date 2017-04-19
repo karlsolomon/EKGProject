@@ -5,7 +5,7 @@ import csv
 import servertest
 import wiringpi2 as wpi
 from threading import Thread
-
+from dataBuffer import DataBuffer
 class ECGRead(Thread):
 	def __init__(self):
 		Thread.__init__(self)
@@ -31,10 +31,5 @@ class ECGRead(Thread):
 		#	avr=e3-e1;
 		#	avl=e3-e2;
 		#	avf=e3-e4;
-
-			dataBuffer[startIndex] = lead1
-			startIndex +=1 
-			startIndex  = startIndex % len(dataBuffer)
-			endIndex += 1
-			endIndex = endIndex % len(dataBuffer)
-			delay(4);
+                        DataBuffer.addData(lead1)
+                
