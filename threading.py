@@ -14,7 +14,14 @@ from livefeed import LiveFeed
 global dataBuffer
 global startIndex
 global endIndex
-dataBuffer = [0]*1000
+global ip
+
+delay = 8 #miliseconds
+samplingRate = 1/delay * 1000
+dataBuffer = [0]*samplingRate * 5 #5 minutes of data sampled at samplingRate
+endIndex = 0
+startIndex = 0
+ip = "10.146.6.161"
 print("length is " + len(dataBuffer))
 try:
 
