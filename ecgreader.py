@@ -2,8 +2,8 @@
 import socket
 
 import csv
-import servertest
-import wiringpi2 as wpi
+#import servertest
+import wiringpi as wpi
 from threading import Thread
 from dataBuffer import DataBuffer
 class ECGRead(Thread):
@@ -19,9 +19,10 @@ class ECGRead(Thread):
 		global dataBuffer #store data here
 		global startIndex #pointer 1
 		global endIndex #pointer 2
+		BASE = 100
 		while True:
-			e1=analogRead (BASE);
-			e2=analogRead (BASE+1);
+			e1=wpi.analogRead(BASE);
+			e2=wpi.analogRead(BASE+1);
 		#	e3=analogRead (BASE+2);
 		#	e4=analogRead(BASE+3);
 
