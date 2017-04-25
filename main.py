@@ -6,10 +6,10 @@ import wiringpi as wpi
 import thread
 
 #from servertest import Server
-#from livefeed import livefeed
 from ecgreader import ECGRead
 #from livefeed import LiveFeed
-#from dataBuffer import DataBuffer
+from dataBuffer import DataBuffer
+#from testlive import LiveTest
 # Create threads, initialize globals
 global samplingRate
 global delay 
@@ -18,14 +18,13 @@ samplingRate = 1/delay * 1000
 
 
 try:
-
-  ECGRead()
-  #LiveFeed()
-  #Server()
-
-
+	#ECGRead()
+	#LiveFeed()
+	#Server()
+#	LiveTest()
+	ECGRead()
 except:
-   print "Error: unable to start thread"
+	print "Error: unable to start thread"
 
 while 1:
-   pass
+	pass

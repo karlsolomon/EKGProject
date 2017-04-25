@@ -5,7 +5,7 @@
 import socket
 import sys
 import csv
-import wiringpi2 as wpi
+import wiringpi as wpi
 from threading import Thread
 from dataBuffer import DataBuffer
 #import pandas

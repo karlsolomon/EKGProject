@@ -1,22 +1,23 @@
+import copy
 import time
 class DataBuffer():
     start = 1 # Index of Oldest Value
     end = 0 # Index of Most Recent Value
     delay = 8.0 #miliseconds
-    samplingRate = 1.0/delay * 1000    
+    samplingRate = 1.0/delay * 1000.0    
     bufferSize = 150 * samplingRate
-    print("buffer size" + str(bufferSize))   
+#    print("buffer size" + str(bufferSize))   
     data = [0] * int(bufferSize)
-    print("size initial: " + str(len(data)))
+ #   print("size initial: " + str(len(data)))
 
     @staticmethod
     def getLiveData():
-        c = DataBuffer.samplingRate - DataBuffer.end
+        c = int(DataBuffer.samplingRate) - DataBuffer.end
         startLiveIndex = (len(DataBuffer.data) - c) % len(DataBuffer.data)
-        liveBuffer = DataBuffer.data[int(startLiveIndex):int(DataBuffer.end)].copy()
-	print("Live Feed Buffer Size: ")
-	print(len(liveBuffer))
-	print("\n")
+        print("start index" + str(startLiveIndex))
+	print("end index" + str(DataBuffer.end))
+	liveBuffer =copy.deepcopy(DataBuffer.data[int(startLiveIndex):int(DataBuffer.end)])
+	print("Live Feed Buffer Size:"+ str(len(liveBuffer)))
 	print(liveBuffer)
         return liveBuffer
 
@@ -48,6 +49,8 @@ class DataBuffer():
     @staticmethod
     def addData(value):
         DataBuffer.data[DataBuffer.start] = value
-        DataBuffer.increment()
+	print("start index: " + str(DataBuffer.start)+ " buffer length: " + str(len(DataBuffer.data)))
+	DataBuffer.increment()       
+	print("Added: " + str(value) + "\n")
         return
     
