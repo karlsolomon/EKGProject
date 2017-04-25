@@ -1,3 +1,4 @@
+import copy
 import time
 class DataBuffer():
     start = 1 # Index of Oldest Value
@@ -10,9 +11,10 @@ class DataBuffer():
     print("size initial: " + str(len(data)))
     @staticmethod
     def getLiveData():
-        c = samplingRate - DataBuffer.end
-        startLiveIndex = (len(DataBuffer.data) - c) % len(DataBuffer.data)
-        liveBuffer = DataBuffer.data[startLiveIndex:DataBuffer.end].copy()
+        c = DataBuffer.samplingRate - DataBuffer.end
+       	startLiveIndex = (len(DataBuffer.data) - c) % len(DataBuffer.data)
+        print("start live index:" + str(startLiveIndex))
+	liveBuffer = copy.deepcopy(DataBuffer.data[int(startLiveIndex):DataBuffer.end])
         return liveBuffer
 
     @staticmethod
