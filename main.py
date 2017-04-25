@@ -5,11 +5,10 @@ import csv
 import wiringpi as wpi
 import thread
 
-#from servertest import Server
-#from livefeed import livefeed
+from servertest import Server
 from ecgreader import ECGRead
-#from livefeed import LiveFeed
-#from dataBuffer import DataBuffer
+from livefeed import LiveFeed
+from dataBuffer import DataBuffer
 # Create threads, initialize globals
 global samplingRate
 global delay 
@@ -20,8 +19,8 @@ samplingRate = 1/delay * 1000
 try:
 
   ECGRead()
-  #LiveFeed()
-  #Server()
+  LiveFeed()
+  Server()
 
 
 except:

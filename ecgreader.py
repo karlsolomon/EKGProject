@@ -33,5 +33,5 @@ class ECGRead(Thread):
 		#	avl=e3-e2;
 		#	avf=e3-e4;
                         DataBuffer.addData(lead1)
-			DataBuffer.getLiveData()
+		#	DataBuffer.getLiveData()
                 

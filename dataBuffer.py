@@ -19,19 +19,24 @@ class DataBuffer():
 
     @staticmethod
     def getArchiveData():
+	oldStart = DataBuffer.start
+	oldEnd = DataBuffer.end
         #Get Past 2.5 minutes of data
-        archiveBuffer = DataBuffer.data[start:len(DataBuffer.data)-1].copy()
-        archiveBuffer.append(DataBuffer.data[0:DataBuffer.end].copy())
-        archiveBuffer = archiveBuffer[0:len(archiveBuffer)]
-
+	oldDataCopy = copy.deepcopy(DataBuffer.data)
+        archiveBuffer = oldDataCopy[oldStart:len(DataBuffer.data)-1]
+        archiveBuffer.append(oldDataCopy[0:oldEnd])
+       
         #2.5 minutes later (exactly)
         targetTime = time.clock() + 150000.0
         while time.clock() < targetTime:
             pass
         
+	newStart = DataBuffer.start
+	newEnd = DataBuffer.end
         #Get Next 2.5 minutes of data
-        archiveBuffer.append(DataBuffer.data[DataBuffer.start:len(DataBuffer.data)-1].copy())
-        archiveBuffer.append(DataBuffer.data[0:DataBuffer.end].copy())
+	dataCopy = copy.deepcopy(DataBuffer.data)
+        archiveBuffer.append(dataCopy[newStart:len(DataBuffer.data)-1])
+        archiveBuffer.append(dataCopy[0:newEnd])
         return archiveBuffer
 
     @staticmethod

@@ -14,7 +14,7 @@ class Server(Thread):
 		self.daemon = True
 		self.start()
 	def run(self):
-
+		while True:
 			HOST = "10.146.6.161"   # iPhone app IP address
 			PORT = 8080 # Arbitrary non-privileged port
 			 
@@ -22,13 +22,6 @@ class Server(Thread):
 			print 'Socket created'
 			 
 			#Bind socket to local host and port
-			data = []
-
-			with open('samples.csv','rU') as file: # 
-				reader = csv.reader(file,delimiter=",")
-				for row in reader:
-					data.append(row)
-			print data[0]
 			try:
 				s.bind((socket.gethostname(), PORT))
 			except socket.error as msg:
@@ -41,15 +34,11 @@ class Server(Thread):
 			s.listen(10000)
 			print 'Socket now listening'
 
-			with open('samples.csv','rU') as f:
-				data = f.read() #open the csv and read into array
 			#now keep talking with the client
 			conn, addr = s.accept()
 			print 'Connected with ' + addr[0] + ':' + str(addr[1])
-			index = len(data)
-			i = 0
-
-			conn.send(data) #send the archived data from .csv 
+						
+			conn.send(DataBuffer.getArchiveData()) #send the archived data from .csv 
 			conn.recv(1024)
 			#conn.send("end")
 			print('end data')
