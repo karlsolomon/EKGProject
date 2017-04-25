@@ -6,14 +6,14 @@ class DataBuffer():
     delay = 8.0 #miliseconds
     samplingRate = 1.0/delay * 1000 #Check if accessing samplingRate    
     bufferSize = 150 * samplingRate
-    print("buffer size" + str(bufferSize))   
+#    print("buffer size" + str(bufferSize))   
     data = [0] * int(bufferSize)
-    print("size initial: " + str(len(data)))
+ #   print("size initial: " + str(len(data)))
     @staticmethod
     def getLiveData():
         c = DataBuffer.samplingRate - DataBuffer.end
        	startLiveIndex = (len(DataBuffer.data) - c) % len(DataBuffer.data)
-        print("start live index:" + str(startLiveIndex))
+#        print("start live index:" + str(startLiveIndex))
 	liveBuffer = copy.deepcopy(DataBuffer.data[int(startLiveIndex):DataBuffer.end])
         return liveBuffer
 
@@ -27,8 +27,9 @@ class DataBuffer():
         archiveBuffer.append(oldDataCopy[0:oldEnd])
        
         #2.5 minutes later (exactly)
-        targetTime = time.clock() + 150000.0
+        targetTime = time.clock() + 10.0
         while time.clock() < targetTime:
+	    
             pass
         
 	newStart = DataBuffer.start
@@ -49,9 +50,9 @@ class DataBuffer():
         
     @staticmethod
     def addData(value):
-	print("start index: " +str( DataBuffer.start) + " buffer lenth: " +str( len(DataBuffer.data)))
+#	print("start index: " +str( DataBuffer.start) + " buffer lenth: " +str( len(DataBuffer.data)))
         DataBuffer.data[DataBuffer.start] = value
         DataBuffer.increment()
-        print("Added: " + str(value) + "\n")
+#        print("Added: " + str(value) + "\n")
         return
     

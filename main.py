@@ -17,10 +17,10 @@ samplingRate = 1/delay * 1000
 
 
 try:
-
-  ECGRead()
-  LiveFeed()
-  Server()
+	print("trheads starting")
+	Server()
+	ECGRead()
+	LiveFeed()
 
 
 except:

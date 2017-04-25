@@ -22,11 +22,11 @@ class ECGRead(Thread):
 		BASE = 100
 		while True:
 			e1=wpi.analogRead(BASE);
-			e2=wpi.analogRead(BASE+1);
+		#	e2=wpi.analogRead(BASE+1);
 		#	e3=analogRead (BASE+2);
 		#	e4=analogRead(BASE+3);
 
-			lead1=e1-e2;
+			lead1=e1
 		#	lead2=e1-e4;
 		#	lead3=e2-e4;
 		#	avr=e3-e1;
@@ -34,4 +34,4 @@ class ECGRead(Thread):
 		#	avf=e3-e4;
                         DataBuffer.addData(lead1)
 		#	DataBuffer.getLiveData()
-                
+			wpi.delay(8)                
