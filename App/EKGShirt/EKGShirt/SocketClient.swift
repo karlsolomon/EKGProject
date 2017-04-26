@@ -8,7 +8,7 @@
 import Foundation
 
 class SocketClient{
-    let addr = "10.146.6.161"
+    let addr = "172.16.25.116"
     let port = 8080
     var inp : NSInputStream?
     var out :NSOutputStream?
@@ -26,12 +26,13 @@ class SocketClient{
         inputStream.open()
         outputStream.open()
         var buffer : [UInt8] = [97]
-        var readBytes = [UInt8](count: 60000, repeatedValue: 0)
+        var readBytes = [UInt8](count: 600000, repeatedValue: 0)
         var dataList = String()
         var flag = true
+        outputStream.write(buffer, maxLength: buffer.count)
         while flag{
             while inputStream.hasBytesAvailable{
-                inputStream.read(&readBytes, maxLength: 60000)
+                inputStream.read(&readBytes, maxLength: 600000)
                 outputStream.write(buffer, maxLength: buffer.count)
                 let ascii = convertFromAscii(readBytes)
                 print(ascii)
@@ -41,7 +42,7 @@ class SocketClient{
             }
         }
         print(dataList)
-        writeCSV(dataList)
+        print(writeCSV(dataList))
         //    let adjustedList = adjustList(dataList)
         //    print(adjustedList)
     }
@@ -58,17 +59,20 @@ private func convertFromAscii(buffer: [UInt8]) -> String{
 }
 
 private func writeCSV(data: String) -> Bool{
-    var fileName = self.fileName
-    if let filePath = NSBundle.mainBundle().pathForResource(fileName, ofType: "csv"){
-        fileName = filePath
-    }
-    else {
-        fileName = NSBundle.mainBundle().bundlePath + "/" + fileName
-    }
-    print(fileName)
+    let fileName = self.fileName
+//    if let filePath = Archive.ArchiveURL.absoluteString +  //  ){
+//        fileName = filePath
+//    }
+//    else {
+//        fileName = NSBundle.mainBundle().bundlePath + "/" + fileName + ".csv"
+//    }
+    let path = Archive.ArchiveURL.absoluteString + "/" + fileName + ".txt"
+    print(path)
+    var csvText = "Lead1,Task,Time Started,Time Ended\n"
+    
     //write the file, return true if it works, false otherwise.
     do{
-        try data.writeToFile(fileName, atomically: true, encoding: NSUTF8StringEncoding )
+        try data.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding )
         return true
     } catch{
         return false

@@ -136,11 +136,11 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
     func sendSymptoms() {
         let date = NSDate()
         let formatter = NSDateFormatter()
-        formatter.dateFormat = "MM/dd/yy hh:mm"
+        formatter.dateFormat = "MM_dd_yy_hh_mm"
         let dateString = formatter.stringFromDate(date)
-        //let client = SocketClient(fileName: dateString)       //TODO: REMOVE COMMENT WHEN RPI SOCKET IS VERIFIED, Update URLForResource string to be the datetime string
+        let client = SocketClient(fileName: dateString)       //TODO: REMOVE COMMENT WHEN RPI SOCKET IS VERIFIED, Update URLForResource string to be the datetime string
         
-        if let filePath = NSBundle.mainBundle().URLForResource("samples", withExtension: "csv"){
+        if let filePath = NSBundle.mainBundle().URLForResource(dateString, withExtension: "csv"){
             let archive = Archive(date: date, path: filePath, symptoms: selectedSymptoms)
             ArchivesViewController().addArchive(archive)
         } else {
