@@ -18,7 +18,7 @@ class Server(Thread):
 	def run(self):
 		flag = True
 		while True:
-			HOST = "172.20.10.2"   # iPhone app IP address
+			HOST = "172.16.25.116"   # iPhone app IP address
 			PORT = 8080 # Arbitrary non-privileged port
 			try:
 				s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -53,7 +53,14 @@ class Server(Thread):
 		#		pass
 				print("converted message: "+ str(time.time()))
 		#	print("sent message " + messageStr)
-				conn.send(messageStr) #send the archived data from .csv 
+				with open('ecg.txt','w') as txtfile:
+					txtfile.write(messageStr)
+				txtfile.closed
+				with open('ecg.txt','r') as readFile:
+					data = readFile.read()
+				readFile.closed
+				conn.send(data) #send the archived data from .csv 
+				
 			#list1 = list(xrange(1000))
 			#list1.append(list(xrange(100)))
 			#list1.append(list(xrange(50)))
