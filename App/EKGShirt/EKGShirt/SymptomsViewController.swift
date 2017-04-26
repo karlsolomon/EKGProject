@@ -41,7 +41,23 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
      */
     func tap(sender: UITapGestureRecognizer) {
         if(symptomsSelected) {
-            if(Symptoms.instance.dangerousSymptoms(selectedSymptoms)) {
+            if(selectedSymptoms.count == 0) {
+                //must select at least one symptom
+                let alert = UIAlertController(title: "Invalid Symptoms", message: "Select at least one symptom", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { action in
+                }))
+                presentViewController(alert, animated: true, completion: nil)
+                return
+            }
+            else if(!Symptoms.instance.validSymptoms(selectedSymptoms)) {
+                let alert = UIAlertController(title: "Invalid Symptoms", message: "Cannot select \"None\" and other symptoms", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { action in
+                }))
+                presentViewController(alert, animated: true, completion: nil)
+                return
+            }            
+            
+            else if(Symptoms.instance.dangerousSymptoms(selectedSymptoms)) {
                 let alert = UIAlertController(title: "Cardiac Emergency", message: "You have 3 or more symptoms that are symptoms of cardiac emergencies. Would you like to call Emergency Medical Services?", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Call 911", style: .Default, handler: { action in
                     if let url = NSURL(string: "tel://2817452091") where UIApplication.sharedApplication().canOpenURL(url) {
@@ -129,7 +145,8 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
             ArchivesViewController().addArchive(archive)
         } else {
             let noFileFound = UIAlertController(title: "FILE NOT FOUND", message: "File at specified location not found", preferredStyle: .Alert)
-            let cancel = UIAlertAction(title: "Cancel", style: .Default, handler: {})
+            let cancel = UIAlertAction(title: "Cancel", style: .Default, handler: { action in
+            })
             noFileFound.addAction(cancel)
             presentViewController(noFileFound, animated: true, completion: nil)
         }

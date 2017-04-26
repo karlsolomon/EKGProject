@@ -10,6 +10,7 @@ import Foundation
 
 class Symptoms {
 // MARK: SYMTPOM STRING LITERALS
+    private let none = "None"
     private let chestPain = "Chest Pain/Pressure/Burning"
     private let heartburn = "Heartburn or Indigestion"
     private let discomfort = "Discomfort in Back/Throat/Arm"
@@ -55,6 +56,7 @@ class Symptoms {
         populateLists()
         emergencySymptomsList = Array(heartAttack.union(heartFailure).union(pericarditis))
         symptomsList = Array(coronaryArteryDisease.union(heartAttack).union(arrhythmia).union(atrialFibrillation).union(heartValveDisease).union(heartFailure).union(cardiomyopathy).union(pericarditis))
+        symptomsList.append(none)
         
         let symptoms = symptomsList.sort()
         for i in symptoms{
@@ -112,9 +114,16 @@ class Symptoms {
         }
         if dangerousCounter >= 3 {
             return true
-        }
-        else {
+        } else {
             return false
+        }
+    }
+    
+    func validSymptoms(selected: [String]) -> Bool {
+        if(selected.contains(none) && selected.count > 1) {
+            return false
+        } else {
+            return true
         }
     }
     

@@ -17,7 +17,7 @@ class LiveFeedViewController: UIViewController {
     @IBOutlet weak var pickerView: UIPickerView!
     var min: Int = 0
     var max: Int = 0
-    let gain = 1023/5  // = DAC Precision / Max Voltage
+    let gain = 1023.0/3.3  // = DAC Precision / Max Voltage
     
     var dataSet: LineChartDataSet!
     static var displayedArchive: Archive?
@@ -115,7 +115,7 @@ class LiveFeedViewController: UIViewController {
         yAxisL.gridColor = gridColor
         yAxisR.gridColor = gridColor
         xAxis.gridColor = gridColor
-        xAxis.valueFormatter = AxisValueFormatter() // Shift to Time Scale
+        //xAxis.valueFormatter = AxisValueFormatter() // Shift to Time Scale
         data.setColor(NSUIColor(red: 0, green: 0, blue: 0, alpha: 0.8))
     }
 }
