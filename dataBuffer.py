@@ -1,14 +1,17 @@
 import copy
 import time
 class DataBuffer():
-    start = 1 # Index of Oldest Value
-    delay = 8.0 #miliseconds
-    samplingRate = 1.0/delay * 1000 #Check if accessing samplingRate    
-    bufferSize = 150 * samplingRate
-#    print("buffer size" + str(bufferSize))   
-    data = ["0"] * int(bufferSize)
- #   print("size initial: " + str(len(data)))
-    @staticmethod
+
+    def __init__(self):
+ 	self.start = 1 # Index of Oldest Value
+    	self.delay = 8.0 #miliseconds
+    	self.samplingRate = 1.0/self.delay * 1000 #Check if accessing samplingRate    
+    	self.bufferSize = 150 * self.samplingRate
+#   	print("buffer size" + str(bufferSize))   
+    	self.data = ["0"] * int(self.bufferSize)
+ #  	print("size initial: " + str(len(data)))
+		
+
     def getLiveData():
         c = DataBuffer.samplingRate - DataBuffer.end
        	startLiveIndex = (len(DataBuffer.data) - c) % len(DataBuffer.data)
@@ -16,7 +19,7 @@ class DataBuffer():
 	liveBuffer = copy.deepcopy(DataBuffer.data[int(startLiveIndex):DataBuffer.start-1])
         return liveBuffer
 
-    @staticmethod
+
     def getArchiveData():
 	print("old data storing")
 	oldStart = DataBuffer.start
@@ -39,21 +42,20 @@ class DataBuffer():
         archiveBuffer.extend(dataCopy[0:newStart-1])
         return archiveBuffer
 
-    @staticmethod
-    def increment():
-        DataBuffer.start += 1
-        DataBuffer.start %= len(DataBuffer.data)
+    def increment(self):
+        self.start += 1
+        self.start %= len(self.data)
         return
         
-    @staticmethod
-    def addData(value):
-#	print("start index: " +str( DataBuffer.start) + " buffer lenth: " +str( len(DataBuffer.data)))
-        DataBuffer.data[DataBuffer.start] = value # update oldest value w/ newest value
-        DataBuffer.increment() #start now points to oldest value
+
+    def addData(self, value):
+#	print("start index: " +str(self.start) + " buffer lenth: " +str( len(self.data)))
+        self.data[self.start] = value # update oldest value w/ newest value
+        self.increment() #start now points to oldest value
 #        print("Added: " + str(value) + "\n")
         return
     
-    @staticmethod
+
     def copyArray(oldArray):
 	newArray = list(oldArray)
 	return newArray

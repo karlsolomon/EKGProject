@@ -8,7 +8,6 @@ import csv
 import wiringpi as wpi
 from threading import Thread
 from dataBuffer import DataBuffer
-from ecgreader import ECGRead
 #import pandas
 class Server(Thread):
 	def __init__(self):
@@ -44,10 +43,9 @@ class Server(Thread):
 				conn, addr = s.accept()
 				print 'Connected with ' + addr[0] + ':' + str(addr[1])
 				print("time after connection: " + str(time.time()))
-#				print(conn.recv(1024))		
+				print(conn.recv(1024))		
 				print("time after receiving 1:" + str(time.time()))
-			
-				message = ECGRead.DataBuffer1.getArchiveData()
+				message = DataBuffer.getArchiveData()
 				print("time to get databuffer:" + str(time.time()))
 				messageStr = ",".join(message)
 			#timeSet = time.time() + 10.0
@@ -55,25 +53,13 @@ class Server(Thread):
 		#		pass
 				print("converted message: "+ str(time.time()))
 		#	print("sent message " + messageStr)
-			#	'''
-			#	file = open("ecg.txt","w+")
-			#	for i in len(leads):
-			#		file.write("Lead %d," % i + message[i])
-			#	file.close()
-			#	'''
-				#
-				#
-				#
-				#
-				with open('ecg.txt','w+') as file:
-					print("\nlength of message: " + str(len(messageStr)) + "\n")
-					file.write("Lead A," + messageStr + "\r\n")
-					file.write("Lead B," + messageStr + "\r\n")
-				with open("ecg.txt", "r") as readFile:
+				with open('ecg','w') as txtfile:
+					txtfile.write(message
+				with open('ecg','r') as readFile:
 					data = readFile.read()
+				readFile.closed
 				conn.send(data) #send the archived data from .csv 
-				conn.recv(1024)
-				print(data)	
+				
 			#list1 = list(xrange(1000))
 			#list1.append(list(xrange(100)))
 			#list1.append(list(xrange(50)))
