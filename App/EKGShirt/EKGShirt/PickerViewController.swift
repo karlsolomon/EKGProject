@@ -14,6 +14,7 @@ class PickerViewController : UIViewController, UIPickerViewDelegate, UIPickerVie
     
     @IBOutlet weak var picker: UIPickerView!
     
+    var leadArray = ["Lead 1", "Lead 2", "Lead 3"]
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
@@ -23,13 +24,11 @@ class PickerViewController : UIViewController, UIPickerViewDelegate, UIPickerVie
     var archive = LiveFeedViewController.displayedArchive
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return archive?.getLeads()[row]
+        return leadArray[row]
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(LiveFeedViewController.displayedLead)
-        LiveFeedViewController.displayedLead = (archive?.getLeads()[row])!
-        print(LiveFeedViewController.displayedLead)
+        LiveFeedViewController.displayedLead = leadArray[row]
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -37,7 +36,7 @@ class PickerViewController : UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return (archive?.getLeads().count)!
+        return leadArray.count
     }
     
     

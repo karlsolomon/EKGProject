@@ -1,4 +1,12 @@
 //
+//  LiveFeedClient.swift
+//  EKGShirt
+//
+//  Created by BME261L on 4/27/17.
+//  Copyright © 2017 Solomon, Karl. All rights reserved.
+//
+
+//
 //  CSVParse.swift
 //  EKGShirt
 //
@@ -8,8 +16,8 @@
 
 import Foundation
 
-class CSVParse {
- 
+class LiveFeedClient {
+    
     final let encoding = NSUTF8StringEncoding
     var leads = [String:[Int]]()
     var text = String()

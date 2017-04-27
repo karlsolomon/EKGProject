@@ -21,7 +21,9 @@ class LiveFeedViewController: UIViewController {
     
     var dataSet: LineChartDataSet!
     static var displayedArchive: Archive?
+    static var liveFeedData = [Int]()
     static var displayedLead = "Lead 1" //default for first view
+    static var isLiveFeed = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,17 +43,22 @@ class LiveFeedViewController: UIViewController {
     }
     
     func updateChartWithData() {
-        min = 0
-        max = 0
         viewTitle.title = LiveFeedViewController.displayedLead
-        guard let values = LiveFeedViewController.displayedArchive?.getData(LiveFeedViewController.displayedLead) else {
-            changeLeadButton.enabled = false
-            return
-        }
-        
         var entries: [ChartDataEntry] = Array()
         var xValues: [String] = Array()
-        
+        min = 0
+        max = 0
+        var values = [Int]()
+        if !LiveFeedViewController.isLiveFeed {
+            guard let vals = LiveFeedViewController.displayedArchive?.getData(LiveFeedViewController.displayedLead) else {
+                changeLeadButton.enabled = false
+                return
+            }
+            values = vals
+        }
+        else {
+            values = LiveFeedViewController.liveFeedData
+        }
         for (i, value) in values.enumerate()
         {
             entries.append(ChartDataEntry.init(value: Double(value)/gain, xIndex: i))
@@ -67,24 +74,27 @@ class LiveFeedViewController: UIViewController {
         min -= 10   // 10 dip margin in Y
         max += 10
         linePlotView.data = LineChartData(xVals: xValues, dataSet: dataSet)
-        formatArchivePlot(linePlotView, data: dataSet)
+        
     }
     
     func formatLiveFeedPlot(plot: LineChartView, data: LineChartDataSet) {
         plot.dragEnabled = false
         plot.noDataText = "Waiting for EKG Data"
-        formatPlot(plot, data: data)
     }
     
     func formatArchivePlot(plot: LineChartView, data: LineChartDataSet) {
         plot.dragEnabled = true
         plot.dragDecelerationEnabled = true
-        plot.dragDecelerationFrictionCoef = 0.8
+        plot.dragDecelerationFrictionCoef = 0.95
         plot.keepPositionOnRotation = true
-        formatPlot(plot, data: data)
     }
     
     func formatPlot(plot: LineChartView, data: LineChartDataSet) {
+        if LiveFeedViewController.isLiveFeed {
+            formatLiveFeedPlot(plot, data: data)
+        } else {
+            formatArchivePlot(plot, data: data)
+        }
         //Shift to mV Scale
         linePlotView.leftAxis.axisMinValue = Double(min)/gain
         linePlotView.rightAxis.axisMinValue = Double(min)/gain
@@ -92,7 +102,6 @@ class LiveFeedViewController: UIViewController {
         linePlotView.leftAxis.axisMaxValue = Double(max)/gain
         
         //Interactivity
-        linePlotView.dragEnabled = true
         linePlotView.doubleTapToZoomEnabled = false
         plot.doubleTapToZoomEnabled = false
         plot.highlightPerTapEnabled = false
