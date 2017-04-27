@@ -25,22 +25,25 @@ class SocketClient{
         outputStream.open()
         var buffer : [UInt8] = [97]
         var readBytes = [UInt8](count: 150000, repeatedValue: 0)
-        var dataList = String()
         var flag = true
+        var dataString = String()
+        var ascii = String()
         outputStream.write(buffer, maxLength: buffer.count)
         while flag{
             while inputStream.hasBytesAvailable{
                 print(inputStream.read(&readBytes, maxLength: 150000))
                 outputStream.write(buffer, maxLength: buffer.count)
-                let ascii = convertFromAscii(readBytes)
-                print(ascii)
-                dataList = ascii
-                flag = false
-                break
+                ascii = convertFromAscii(readBytes)
+                dataString.appendContentsOf(ascii)
+                
+                if !inputStream.hasBytesAvailable{
+                    flag = false
+                    break
+                }
             }
         }
-        print(dataList)
-        print(writeCSV(dataList))
+        print(dataString)
+        print(writeCSV(dataString))
     }
 
 private func convertFromAscii(buffer: [UInt8]) -> String{
