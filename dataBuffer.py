@@ -1,59 +1,61 @@
 import copy
 import time
 class DataBuffer():
-    start = 1 # Index of Oldest Value
-    delay = 8.0 #miliseconds
-    samplingRate = 1.0/delay * 1000 #Check if accessing samplingRate    
-    bufferSize = 150 * samplingRate
-#    print("buffer size" + str(bufferSize))   
-    data = ["0"] * int(bufferSize)
- #   print("size initial: " + str(len(data)))
-    @staticmethod
-    def getLiveData():
+
+    def __init__(self):
+ 	self.start = 1 # Index of Oldest Value
+    	self.delay = 8.0 #miliseconds
+    	self.samplingRate = 1.0/self.delay * 1000 #Check if accessing samplingRate    
+    	self.bufferSize = 150 * self.samplingRate
+#   	print("buffer size" + str(bufferSize))   
+    	self.data = ["0"] * int(self.bufferSize)
+ #  	print("size initial: " + str(len(data)))
+		
+
+    def getLiveData(self):
         c = DataBuffer.samplingRate - DataBuffer.end
        	startLiveIndex = (len(DataBuffer.data) - c) % len(DataBuffer.data)
 #        print("start live index:" + str(startLiveIndex))
 	liveBuffer = copy.deepcopy(DataBuffer.data[int(startLiveIndex):DataBuffer.start-1])
         return liveBuffer
 
-    @staticmethod
-    def getArchiveData():
+
+    def getArchiveData(self):
 	print("old data storing")
-	oldStart = DataBuffer.start
+	oldStart = self.start
         #Get Past 2.5 minutes of data
 	#oldDataCopy = copy.deepcopy(DataBuffer.data)
-        oldDataCopy = DataBuffer.copyArray(DataBuffer.data)
-	archiveBuffer = oldDataCopy[oldStart:len(DataBuffer.data)-1]
+        oldDataCopy = self.copyArray(self.data)
+	archiveBuffer = oldDataCopy[oldStart:len(self.data)-1]
         archiveBuffer.extend(oldDataCopy[0:oldStart-1])
        
         #2.5 minutes later (exactly)
-        targetTime = time.clock() + 1.0
-        while time.clock() < targetTime:
-            pass
+#        targetTime = time.clock() + 1.0
+ #       while time.clock() < targetTime:
+ #           pass
         print("next data")
-	newStart = DataBuffer.start
+	newStart = self.start
         #Get Next 2.5 minutes of data
 	#dataCopy = copy.deepcopy(DataBuffer.data)
-        dataCopy = DataBuffer.copyArray(DataBuffer.data)
-	archiveBuffer.extend(dataCopy[newStart:len(DataBuffer.data)-1])
+        dataCopy = self.copyArray(self.data)
+	archiveBuffer.extend(dataCopy[newStart:len(self.data)-1])
         archiveBuffer.extend(dataCopy[0:newStart-1])
         return archiveBuffer
 
-    @staticmethod
-    def increment():
-        DataBuffer.start += 1
-        DataBuffer.start %= len(DataBuffer.data)
+    def increment(self):
+        self.start += 1
+        self.start %= len(self.data)
         return
         
-    @staticmethod
-    def addData(value):
-#	print("start index: " +str( DataBuffer.start) + " buffer lenth: " +str( len(DataBuffer.data)))
-        DataBuffer.data[DataBuffer.start] = value # update oldest value w/ newest value
-        DataBuffer.increment() #start now points to oldest value
+
+    def addData(self, value):
+#	print("start index: " +str(self.start) + " buffer lenth: " +str( len(self.data)))
+        self.data[self.start] = value # update oldest value w/ newest value
+        self.increment() #start now points to oldest value
 #        print("Added: " + str(value) + "\n")
         return
     
-    @staticmethod
-    def copyArray(oldArray):
+
+    def copyArray(self,oldArray):
 	newArray = list(oldArray)
 	return newArray
