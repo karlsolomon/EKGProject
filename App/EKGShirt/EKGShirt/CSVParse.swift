@@ -11,7 +11,7 @@ import Foundation
 class CSVParse {
  
     final let encoding = NSUTF8StringEncoding
-    var columns = [String:[Int]]()
+    var leads = [String:[Int]]()
     var text = String()
     var header = [String]()
     var initial = [Int]()
@@ -21,19 +21,10 @@ class CSVParse {
         do {
             self.text = try String(contentsOfURL: url, encoding: encoding)
             let rows = text.componentsSeparatedByString("\r\n")
-            self.header = rows[0].componentsSeparatedByString(",")
-            print("Header: \(self.header.count)")
-            for k in 0..<self.header.count {
-                self.columns[header[k]] = [Int]()
-            }
-            
-            print("Rows \(rows.count)")
-            for i in 1..<rows.count {
-                let cells = rows[i].componentsSeparatedByString(",")
-                for j in 0..<cells.count {
-                    let value = Int(cells[j])!
-                    self.columns[header[j]]!.append(value)
-                }
+            for k in 0..<rows.count {
+                var values = rows[k].componentsSeparatedByString(",")
+                let leadName = values.removeAtIndex(0)
+                self.leads[leadName] = values.map{Int($0)!}
             }
         } catch {
             print("Could Not Find File")
@@ -41,8 +32,8 @@ class CSVParse {
     }
     
     //Returns EKG map keyed on Lead Name, valued on lead data
-    func getcolumns() -> [String: [Int]]{
-        return columns
+    func getLeads() -> [String: [Int]]{
+        return self.leads
     }
     
     //Returns Lead Names
