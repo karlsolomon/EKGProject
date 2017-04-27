@@ -13,8 +13,6 @@ class Archive: NSObject, NSCoding{
     
 //MARK: Statics
     static var newArchiveList = [Archive]()
-    static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
-    static let ArchiveURL = DocumentsDirectory.URLByAppendingPathComponent("archives")  //Backend directory that stores input CSV files
     
 //MARK: Properties
     private var date = String()
@@ -31,7 +29,7 @@ class Archive: NSObject, NSCoding{
         setDateTime(date)
         self.path = path
         let csv = CSVParse(url: path)
-        self.data = csv.getcolumns()
+        self.data = csv.getLeads()
         self.leads = csv.getHeader()
         self.symptoms = symptoms.joinWithSeparator(", ")
         self.symptomsAbbreviations = Symptoms.instance.getSymptomsAbbreviations(symptoms).joinWithSeparator(",")
@@ -53,7 +51,7 @@ class Archive: NSObject, NSCoding{
         self.time = time
         self.path = path
         let csv = CSVParse(url: path)
-        self.data = csv.getcolumns()
+        self.data = csv.getLeads()
         self.leads = csv.getHeader()
         self.symptoms = symptoms
         self.symptomsAbbreviations = symptomsAbbreviations

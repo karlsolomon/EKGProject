@@ -33,11 +33,11 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
     
     func addArchive(archive: Archive) {
         ArchivesViewController.ArchiveList.append(archive)
-        let success = NSKeyedArchiver.archiveRootObject(ArchivesViewController.ArchiveList, toFile: Archive.ArchiveURL.path!)   // saves archive to documents directory (semi-permanent) memory
+        let success = NSKeyedArchiver.archiveRootObject(ArchivesViewController.ArchiveList, toFile: SymptomsViewController.ArchiveURL.path!)   // saves archive to documents directory (semi-permanent) memory
     }
     
     private func loadArchives() -> [Archive]? {
-        return NSKeyedUnarchiver.unarchiveObjectWithFile(Archive.ArchiveURL.path!) as? [Archive] // loads all saved archives from memory
+        return NSKeyedUnarchiver.unarchiveObjectWithFile(SymptomsViewController.ArchiveURL.path!) as? [Archive] // loads all saved archives from memory
     }
 
 // MARK: Table view data source
