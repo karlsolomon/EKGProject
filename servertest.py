@@ -47,28 +47,24 @@ class Server(Thread):
 #				print(conn.recv(1024))		
 				print("time after receiving 1:" + str(time.time()))
 			
-				message = ECGRead.DataBuffer1.getArchiveData()
+				buffer1 = ECGRead.DataBuffer1.getArchiveData()
+				buffer2 = ECGRead.DataBuffer2.getArchiveData()
+				buffer3 = ECGRead.DataBuffer3.getArchiveData()
 				print("time to get databuffer:" + str(time.time()))
-				messageStr = ",".join(message)
+				bufferStr1 = ",".join(buffer1)
+				bufferStr2 = ",".join(buffer2)
+				bufferStr3 = ",".join(buffer3)
+				
 			#timeSet = time.time() + 10.0
 		#	while time.time()<timeSet:
 		#		pass
 				print("converted message: "+ str(time.time()))
-		#	print("sent message " + messageStr)
-			#	'''
-			#	file = open("ecg.txt","w+")
-			#	for i in len(leads):
-			#		file.write("Lead %d," % i + message[i])
-			#	file.close()
-			#	'''
-				#
-				#
-				#
-				#
+	
 				with open('ecg.txt','w+') as file:
-					print("\nlength of message: " + str(len(messageStr)) + "\n")
-					file.write("Lead A," + messageStr + "\r\n")
-					file.write("Lead B," + messageStr + "\r\n")
+					#print("\nlength of message: " + str(len(bufferStr1)) + "\n")
+					file.write("Lead 1," + bufferStr1 + "\r\n")
+					file.write("Lead 2," + bufferStr2 + "\r\n")
+					file.write("Lead 3," + bufferStr3)
 				with open("ecg.txt", "r") as readFile:
 					data = readFile.read()
 				conn.send(data) #send the archived data from .csv 

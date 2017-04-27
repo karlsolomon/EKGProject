@@ -12,7 +12,7 @@ class DataBuffer():
  #  	print("size initial: " + str(len(data)))
 		
 
-    def getLiveData():
+    def getLiveData(self):
         c = DataBuffer.samplingRate - DataBuffer.end
        	startLiveIndex = (len(DataBuffer.data) - c) % len(DataBuffer.data)
 #        print("start live index:" + str(startLiveIndex))
@@ -20,25 +20,25 @@ class DataBuffer():
         return liveBuffer
 
 
-    def getArchiveData():
+    def getArchiveData(self):
 	print("old data storing")
-	oldStart = DataBuffer.start
+	oldStart = self.start
         #Get Past 2.5 minutes of data
 	#oldDataCopy = copy.deepcopy(DataBuffer.data)
-        oldDataCopy = DataBuffer.copyArray(DataBuffer.data)
-	archiveBuffer = oldDataCopy[oldStart:len(DataBuffer.data)-1]
+        oldDataCopy = self.copyArray(self.data)
+	archiveBuffer = oldDataCopy[oldStart:len(self.data)-1]
         archiveBuffer.extend(oldDataCopy[0:oldStart-1])
        
         #2.5 minutes later (exactly)
-        targetTime = time.clock() + 1.0
-        while time.clock() < targetTime:
-            pass
+#        targetTime = time.clock() + 1.0
+ #       while time.clock() < targetTime:
+ #           pass
         print("next data")
-	newStart = DataBuffer.start
+	newStart = self.start
         #Get Next 2.5 minutes of data
 	#dataCopy = copy.deepcopy(DataBuffer.data)
-        dataCopy = DataBuffer.copyArray(DataBuffer.data)
-	archiveBuffer.extend(dataCopy[newStart:len(DataBuffer.data)-1])
+        dataCopy = self.copyArray(self.data)
+	archiveBuffer.extend(dataCopy[newStart:len(self.data)-1])
         archiveBuffer.extend(dataCopy[0:newStart-1])
         return archiveBuffer
 
@@ -56,6 +56,6 @@ class DataBuffer():
         return
     
 
-    def copyArray(oldArray):
+    def copyArray(self,oldArray):
 	newArray = list(oldArray)
 	return newArray
