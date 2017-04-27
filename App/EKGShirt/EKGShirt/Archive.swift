@@ -13,8 +13,6 @@ class Archive: NSObject, NSCoding{
     
 //MARK: Statics
     static var newArchiveList = [Archive]()
-    static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
-    static let ArchiveURL = DocumentsDirectory.URLByAppendingPathComponent("archives")  //Backend directory that stores input CSV files
     
 //MARK: Properties
     private var date = String()

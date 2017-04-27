@@ -15,6 +15,11 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sampleCell: UIView!
     
+    static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+    static let ArchiveURL = DocumentsDirectory.URLByAppendingPathComponent("archives")  //Backend directory that stores input TXT files
+    
+    
+    
     let contents = Symptoms.instance.getAllSymptoms()   // Symtpoms Table Data Source
 	var selectedSymptoms = [String]()
     let cellIdentifier = "symptomsCell"
@@ -29,6 +34,13 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
         let tapRecord = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
         tapRecord.numberOfTapsRequired = 1
         recordButton.addGestureRecognizer(tapRecord)
+        
+        do {
+         try NSFileManager.defaultManager().createDirectoryAtPath(SymptomsViewController.ArchiveURL.absoluteString, withIntermediateDirectories: false, attributes: nil)
+        } catch {
+            let nsError = error as NSError
+            print(nsError.localizedDescription)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -138,18 +150,10 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
         let formatter = NSDateFormatter()
         formatter.dateFormat = "MM_dd_yy_hh_mm"
         let dateString = formatter.stringFromDate(date)
-        let client = SocketClient(fileName: dateString)       //TODO: REMOVE COMMENT WHEN RPI SOCKET IS VERIFIED, Update URLForResource string to be the datetime string
-        
-        if let filePath = NSBundle.mainBundle().URLForResource(dateString, withExtension: "csv"){
+        let client = SocketClient(fileName: dateString)
+        let filePath = client.getFilePath()
             let archive = Archive(date: date, path: filePath, symptoms: selectedSymptoms)
             ArchivesViewController().addArchive(archive)
-        } else {
-            let noFileFound = UIAlertController(title: "FILE NOT FOUND", message: "File at specified location not found", preferredStyle: .Alert)
-            let cancel = UIAlertAction(title: "Cancel", style: .Default, handler: { action in
-            })
-            noFileFound.addAction(cancel)
-            presentViewController(noFileFound, animated: true, completion: nil)
-        }
     }
 
 

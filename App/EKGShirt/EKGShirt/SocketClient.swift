@@ -13,26 +13,24 @@ class SocketClient{
     var inp : NSInputStream?
     var out :NSOutputStream?
     var fileName = String()
+    var filePath = NSURL()
     init(fileName :String) {
         self.fileName = fileName
         NSStream.getStreamsToHostWithName(addr, port: port, inputStream: &inp, outputStream: &out)
         
         let inputStream = inp!
         let outputStream = out!
-        //        inputStream.delegate = self
-        //        outputStream.delegate = self
-        //        inputStream.scheduleInRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
-        //        outputStream.scheduleInRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+        
         inputStream.open()
         outputStream.open()
         var buffer : [UInt8] = [97]
-        var readBytes = [UInt8](count: 600000, repeatedValue: 0)
+        var readBytes = [UInt8](count: 150000, repeatedValue: 0)
         var dataList = String()
         var flag = true
         outputStream.write(buffer, maxLength: buffer.count)
         while flag{
             while inputStream.hasBytesAvailable{
-                inputStream.read(&readBytes, maxLength: 600000)
+                print(inputStream.read(&readBytes, maxLength: 150000))
                 outputStream.write(buffer, maxLength: buffer.count)
                 let ascii = convertFromAscii(readBytes)
                 print(ascii)
@@ -43,8 +41,6 @@ class SocketClient{
         }
         print(dataList)
         print(writeCSV(dataList))
-        //    let adjustedList = adjustList(dataList)
-        //    print(adjustedList)
     }
 
 private func convertFromAscii(buffer: [UInt8]) -> String{
@@ -57,24 +53,23 @@ private func convertFromAscii(buffer: [UInt8]) -> String{
     }
     return s
 }
+    
+func getFilePath() -> NSURL {
+    return filePath
+}
 
 private func writeCSV(data: String) -> Bool{
     let fileName = self.fileName
-//    if let filePath = Archive.ArchiveURL.absoluteString +  //  ){
-//        fileName = filePath
-//    }
-//    else {
-//        fileName = NSBundle.mainBundle().bundlePath + "/" + fileName + ".csv"
-//    }
-    let path = Archive.ArchiveURL.absoluteString + "/" + fileName + ".txt"
+    let path = SymptomsViewController.DocumentsDirectory.URLByAppendingPathComponent(fileName + ".txt")
+    self.filePath = path
     print(path)
-    var csvText = "Lead1,Task,Time Started,Time Ended\n"
-    
-    //write the file, return true if it works, false otherwise.
+    //write the file, return true if it works, false otherwise.    
     do{
-        try data.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding )
+        try data.writeToURL(path, atomically: false, encoding: NSUTF8StringEncoding)
         return true
-    } catch{
+    } catch {
+        let nsError = error as NSError
+        print(nsError.localizedDescription)
         return false
     }
 }
