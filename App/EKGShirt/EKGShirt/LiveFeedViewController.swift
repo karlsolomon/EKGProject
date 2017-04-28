@@ -74,7 +74,8 @@ class LiveFeedViewController: UIViewController {
         
         min -= 10   // 10 dip margin in Y
         max += 10
-        linePlotView.data = LineChartData(xVals: xValues, dataSet: dataSet)
+        linePlotView.data = LineChartData(xVals: xValues, dataSet: dataSet) //fatal error: unexpectedly found nil while unwraping an optional value
+        // the dataSet points have values & indices, but the object is null. not entirely sure if this is is the ^ problem. Need to debug b/c don't get this w/ archives
         
     }
     

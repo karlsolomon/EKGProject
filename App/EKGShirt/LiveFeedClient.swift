@@ -11,7 +11,7 @@ import UIKit
 
 class LiveFeedClient {
     let addr = "172.16.25.116"
-    let port = 8080
+    let port = 8081
     var inp : NSInputStream?
     var out :NSOutputStream?
     var inputStream : NSInputStream
@@ -33,7 +33,7 @@ class LiveFeedClient {
         
         inputStream.open()
         outputStream.open()
-        outputStream.write(getSignalToSend(), maxLength: 16)
+        outputStream.write(getSignalToSend(), maxLength: 4)
         startTimer()
     }
     
@@ -50,21 +50,22 @@ class LiveFeedClient {
         
         while inputStream.hasBytesAvailable {
             print(inputStream.read(&readBytes, maxLength: 2000))
-            outputStream.write(getSignalToSend(), maxLength: 16)
+            outputStream.write(getSignalToSend(), maxLength: 4)
             ascii = convertFromAscii(readBytes)
             dataString.appendContentsOf(ascii)
         }
         
         print(dataString)
         let values = dataString.componentsSeparatedByString(",")
-        LiveFeedViewController.liveFeedData.enqueue(values.map{ Int($0)!})
-        liveFeed.updateChartWithData()
+        if (values.count > 1) {
+            LiveFeedViewController.liveFeedData.enqueue(convertToIntArray(values))
+            liveFeed.updateChartWithData()
+        }
     }
     
     private func getSignalToSend() -> String {
-        var activeLead = Array(arrayLiteral: LiveFeedViewController.displayedLead)
-        let leadNumber = activeLead.removeLast()
-        return leadNumber
+        let leadNumber = LiveFeedViewController.displayedLead.characters.last!
+        return String(leadNumber)
     }
     
     private func convertFromAscii(buffer: [UInt8]) -> String{
@@ -77,9 +78,12 @@ class LiveFeedClient {
         return s
     }
     
-    private func convertToIntArray(ascii: String) -> [Int] {
-        let stringData = ascii.componentsSeparatedByString(",")
-        let intData = stringData.map{Int($0)!}
+    private func convertToIntArray(stringData: [String]) -> [Int] {
+        var intData = [Int]()
+        for i in 0..<stringData.count {
+            print(stringData[i] + " " )
+            intData.append(Int(stringData[i])!)
+        }
         return intData
     }
     
