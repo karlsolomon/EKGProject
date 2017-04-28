@@ -27,7 +27,5 @@ class TabBarController : UITabBarController {
             self.liveFeed!.stopLiveFeed()
             //TODO: END LIVE FEED PROCESS
         }
-    }
-    
- 
+    } 
 }

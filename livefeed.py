@@ -44,7 +44,7 @@ class LiveFeed(Thread):
                 conn, addr = s.accept()
                 print 'Connected with ' + addr[0] + ':' + str(addr[1])
                 #Send 1s data until connection closed
-                while isConnected
+                while isConnected:
                     try:
                         
                         key = conn.recv(1024)
