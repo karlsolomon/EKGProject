@@ -27,6 +27,8 @@
 		96CB31AE1E8EB6040038762F /* Symptoms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CB31AD1E8EB6040038762F /* Symptoms.swift */; };
 		96F01CBE1E91D3AC002E5A32 /* SymptomsLegendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F01CBD1E91D3AC002E5A32 /* SymptomsLegendController.swift */; };
 		96F01CC01E91D4A2002E5A32 /* samples.csv in Resources */ = {isa = PBXBuildFile; fileRef = 96F01CBF1E91D4A2002E5A32 /* samples.csv */; };
+		DB42D5511EB2F3F60049AE64 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB42D5501EB2F3F60049AE64 /* Queue.swift */; };
+		DB42D5581EB399290049AE64 /* LiveFeedClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB42D5571EB399290049AE64 /* LiveFeedClient.swift */; };
 		DBBB78DA1EB1D25600C8A81D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBB78D91EB1D25600C8A81D /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
@@ -105,6 +107,8 @@
 		96F01CBD1E91D3AC002E5A32 /* SymptomsLegendController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SymptomsLegendController.swift; path = ../SymptomsLegendController.swift; sourceTree = "<group>"; };
 		96F01CBF1E91D4A2002E5A32 /* samples.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = samples.csv; sourceTree = SOURCE_ROOT; };
 		96F01CC31E91E991002E5A32 /* Archive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Archive.swift; sourceTree = "<group>"; };
+		DB42D5501EB2F3F60049AE64 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		DB42D5571EB399290049AE64 /* LiveFeedClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LiveFeedClient.swift; path = ../LiveFeedClient.swift; sourceTree = "<group>"; };
 		DBBB78D91EB1D25600C8A81D /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,6 +146,7 @@
 			children = (
 				96012F011E8C1EA300973986 /* AppDelegate.swift */,
 				816916A71E97289A00D3B86C /* SocketClient.swift */,
+				DB42D5571EB399290049AE64 /* LiveFeedClient.swift */,
 				96BBE2091E9547C90036027F /* CSVParse.swift */,
 				DBBB78D91EB1D25600C8A81D /* TabBarController.swift */,
 				81E7B9A51E91E5CF0027A92C /* Archive.swift */,
@@ -154,6 +159,7 @@
 				96012F051E8C1EA300973986 /* LiveFeedViewController.swift */,
 				96F01CC31E91E991002E5A32 /* Archive.swift */,
 				960040E21E8D946700EC63E9 /* ArchivesViewController.swift */,
+				DB42D5501EB2F3F60049AE64 /* Queue.swift */,
 				96F01CBF1E91D4A2002E5A32 /* samples.csv */,
 				96CB31AD1E8EB6040038762F /* Symptoms.swift */,
 				96012F071E8C1EA300973986 /* Main.storyboard */,
@@ -301,8 +307,10 @@
 				96012F061E8C1EA300973986 /* LiveFeedViewController.swift in Sources */,
 				81E7B9A61E91E5CF0027A92C /* Archive.swift in Sources */,
 				816916A81E97289A00D3B86C /* SocketClient.swift in Sources */,
+				DB42D5581EB399290049AE64 /* LiveFeedClient.swift in Sources */,
 				96012F021E8C1EA300973986 /* AppDelegate.swift in Sources */,
 				96012F041E8C1EA300973986 /* SymptomsViewController.swift in Sources */,
+				DB42D5511EB2F3F60049AE64 /* Queue.swift in Sources */,
 				96CB31AE1E8EB6040038762F /* Symptoms.swift in Sources */,
 				DBBB78DA1EB1D25600C8A81D /* TabBarController.swift in Sources */,
 				960040E31E8D946700EC63E9 /* ArchivesViewController.swift in Sources */,

@@ -21,9 +21,10 @@ class LiveFeedViewController: UIViewController {
     
     var dataSet: LineChartDataSet!
     static var displayedArchive: Archive?
-    static var liveFeedData = [Int]()
+    static var liveFeedData = Queue()
     static var displayedLead = "Lead 1" //default for first view
     static var isLiveFeed = false
+    static var maxDataPoints = 400
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +58,7 @@ class LiveFeedViewController: UIViewController {
             values = vals
         }
         else {
-            values = LiveFeedViewController.liveFeedData
+            values = LiveFeedViewController.liveFeedData.getDataSource()
         }
         for (i, value) in values.enumerate()
         {
@@ -109,7 +110,7 @@ class LiveFeedViewController: UIViewController {
         plot.highlightFullBarEnabled = false
         
         //Marking
-        plot.setVisibleXRangeMaximum(400)   // Max for Data Visualization Rendering to be seamless
+        plot.setVisibleXRangeMaximum(CGFloat(LiveFeedViewController.maxDataPoints))   // Max for Data Visualization Rendering to be seamless
         plot.legend.enabled = false
         plot.descriptionText = ""   //silences description
         plot.autoScaleMinMaxEnabled = false
