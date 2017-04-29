@@ -13,12 +13,12 @@ class DataBuffer():
 		
 
     def getLiveData(self):
-        c = DataBuffer.samplingRate - DataBuffer.end
-       	startLiveIndex = (len(DataBuffer.data) - c) % len(DataBuffer.data)
-#        print("start live index:" + str(startLiveIndex))
-	liveBuffer = copy.deepcopy(DataBuffer.data[int(startLiveIndex):DataBuffer.start-1])
-        return liveBuffer
-
+	#FIXME: Doesn't handle wrapping (start is at the very beggining of the buffer), should probably make a class or method for copying from this that handles wrapping
+	liveEnd = int(self.start - 1)
+	liveStart = int(liveEnd - self.samplingRate)
+	print("start: " + str(liveStart) + " end: " + str(liveEnd))
+	liveFeedBuffer = self.data[liveStart: liveEnd]
+	return liveFeedBuffer
 
     def getArchiveData(self):
 	print("old data storing")

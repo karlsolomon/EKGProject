@@ -67,17 +67,10 @@ class Server(Thread):
 					file.write("Lead 3," + bufferStr3)
 				with open("ecg.txt", "r") as readFile:
 					data = readFile.read()
-				conn.send(data) #send the archived data from .csv 
+				conn.send(data) 
 				conn.recv(1024)
 				print(data)	
-			#list1 = list(xrange(1000))
-			#list1.append(list(xrange(100)))
-			#list1.append(list(xrange(50)))
-			#print(",".join(str(elem) for elem in list1))
-			#conn.send("end")
 				print("time after sending data:" + str(time.time()))
 				print(conn.recv(1024))
-#			conn.flush()
 				conn.close()
-#		    	s.shutdown(2)
 		s.close()
