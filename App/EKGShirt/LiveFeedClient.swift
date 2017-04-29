@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class LiveFeedClient {
+class LiveFeedClient  {
     let addr = "172.16.25.116"
     let port = 8081
     var inp : NSInputStream?
@@ -25,7 +25,6 @@ class LiveFeedClient {
     init(storyboard :UIStoryboard) {
         liveFeedActive = true
         liveFeed = storyboard.instantiateViewControllerWithIdentifier("LiveFeedViewController") as! LiveFeedViewController
-        
         NSStream.getStreamsToHostWithName(addr, port: port, inputStream: &inp, outputStream: &out)
         
         self.inputStream = inp!
@@ -33,8 +32,12 @@ class LiveFeedClient {
         
         inputStream.open()
         outputStream.open()
-        outputStream.write(getSignalToSend(), maxLength: 4)
+        //outputStream.write([asciiValue(getSignalToSend())], maxLength: 4)
         startTimer()
+    }
+    
+    private func setupConnection() {
+        var error: NSError?
     }
     
     
@@ -42,15 +45,14 @@ class LiveFeedClient {
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(handleTimer(_:)), userInfo: nil, repeats: true)
     }
     
-    
     @objc private func handleTimer(timer: NSTimer) {
         var readBytes = [UInt8](count: 2000, repeatedValue: 0)
         var dataString = String()
         var ascii = String()
-        
+        print("sending: " + getSignalToSend())
+        outputStream.write([asciiValue(getSignalToSend())], maxLength: 4)
         while inputStream.hasBytesAvailable {
             print(inputStream.read(&readBytes, maxLength: 2000))
-            outputStream.write(getSignalToSend(), maxLength: 4)
             ascii = convertFromAscii(readBytes)
             dataString.appendContentsOf(ascii)
         }
@@ -63,6 +65,11 @@ class LiveFeedClient {
         }
     }
     
+    private func asciiValue(str: String) -> UInt8 {
+        let s = str.unicodeScalars
+        return UInt8(s[s.startIndex].value)
+        
+    }
     private func getSignalToSend() -> String {
         let leadNumber = LiveFeedViewController.displayedLead.characters.last!
         return String(leadNumber)
@@ -81,7 +88,6 @@ class LiveFeedClient {
     private func convertToIntArray(stringData: [String]) -> [Int] {
         var intData = [Int]()
         for i in 0..<stringData.count {
-            print(stringData[i] + " " )
             intData.append(Int(stringData[i])!)
         }
         return intData
