@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B8C8BCA7F7CC69EBA92FBFD /* Pods_EKGShirt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A689E60F38F4A2F1B3078EE /* Pods_EKGShirt.framework */; };
 		816916A81E97289A00D3B86C /* SocketClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816916A71E97289A00D3B86C /* SocketClient.swift */; };
 		81E7B9A61E91E5CF0027A92C /* Archive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E7B9A51E91E5CF0027A92C /* Archive.swift */; };
 		960040E31E8D946700EC63E9 /* ArchivesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960040E21E8D946700EC63E9 /* ArchivesViewController.swift */; };
@@ -85,6 +86,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2792B32F81C0D4773E48CA4D /* Pods-EKGShirt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EKGShirt.release.xcconfig"; path = "Pods/Target Support Files/Pods-EKGShirt/Pods-EKGShirt.release.xcconfig"; sourceTree = "<group>"; };
+		6A689E60F38F4A2F1B3078EE /* Pods_EKGShirt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EKGShirt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		816916A71E97289A00D3B86C /* SocketClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketClient.swift; sourceTree = "<group>"; };
 		81E7B9A51E91E5CF0027A92C /* Archive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Archive.swift; sourceTree = "<group>"; };
 		960040E21E8D946700EC63E9 /* ArchivesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchivesViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +110,7 @@
 		96F01CBD1E91D3AC002E5A32 /* SymptomsLegendController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SymptomsLegendController.swift; path = ../SymptomsLegendController.swift; sourceTree = "<group>"; };
 		96F01CBF1E91D4A2002E5A32 /* samples.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = samples.csv; sourceTree = SOURCE_ROOT; };
 		96F01CC31E91E991002E5A32 /* Archive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Archive.swift; sourceTree = "<group>"; };
+		C8E7005C6ACD024A13C28FD1 /* Pods-EKGShirt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EKGShirt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EKGShirt/Pods-EKGShirt.debug.xcconfig"; sourceTree = "<group>"; };
 		DB42D5501EB2F3F60049AE64 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		DB42D5571EB399290049AE64 /* LiveFeedClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LiveFeedClient.swift; path = ../LiveFeedClient.swift; sourceTree = "<group>"; };
 		DBBB78D91EB1D25600C8A81D /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -118,18 +122,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				96B674D01E9599EF00DF25D5 /* Charts.framework in Frameworks */,
+				3B8C8BCA7F7CC69EBA92FBFD /* Pods_EKGShirt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		474C339AEA2A407CD05F73F6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C8E7005C6ACD024A13C28FD1 /* Pods-EKGShirt.debug.xcconfig */,
+				2792B32F81C0D4773E48CA4D /* Pods-EKGShirt.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		96012EF51E8C1EA300973986 = {
 			isa = PBXGroup;
 			children = (
 				96012F001E8C1EA300973986 /* EKGShirt */,
 				96012EFF1E8C1EA300973986 /* Products */,
 				96701E551E940CF3003CF8CF /* Charts.xcodeproj */,
+				474C339AEA2A407CD05F73F6 /* Pods */,
+				DDB37E1827F3A82813FCA7C8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -182,6 +198,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		DDB37E1827F3A82813FCA7C8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6A689E60F38F4A2F1B3078EE /* Pods_EKGShirt.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -189,10 +213,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 96012F121E8C1EA300973986 /* Build configuration list for PBXNativeTarget "EKGShirt" */;
 			buildPhases = (
+				6E4919D551CD837127AAC8A8 /* [CP] Check Pods Manifest.lock */,
 				96012EFA1E8C1EA300973986 /* Sources */,
 				96012EFB1E8C1EA300973986 /* Frameworks */,
 				96012EFC1E8C1EA300973986 /* Resources */,
 				96B674D41E9599EF00DF25D5 /* Embed Frameworks */,
+				BB0AD1B9747BE89ACC66C4F2 /* [CP] Embed Pods Frameworks */,
+				A98B0F46911840897057D276 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -296,6 +323,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6E4919D551CD837127AAC8A8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A98B0F46911840897057D276 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EKGShirt/Pods-EKGShirt-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BB0AD1B9747BE89ACC66C4F2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EKGShirt/Pods-EKGShirt-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		96012EFA1E8C1EA300973986 /* Sources */ = {
@@ -433,12 +508,14 @@
 		};
 		96012F131E8C1EA300973986 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C8E7005C6ACD024A13C28FD1 /* Pods-EKGShirt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = EKGShirt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.companyname.EKGShirt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -448,12 +525,14 @@
 		};
 		96012F141E8C1EA300973986 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2792B32F81C0D4773E48CA4D /* Pods-EKGShirt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = EKGShirt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.companyname.EKGShirt;
 				PRODUCT_NAME = "$(TARGET_NAME)";

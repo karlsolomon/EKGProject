@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-class LiveFeedClient {
+class LiveFeedClient  {
     let addr = "172.16.25.116"
-    let port = 8080
+    let port = 8081
     var inp : NSInputStream?
     var out :NSOutputStream?
     var inputStream : NSInputStream
@@ -25,7 +25,6 @@ class LiveFeedClient {
     init(storyboard :UIStoryboard) {
         liveFeedActive = true
         liveFeed = storyboard.instantiateViewControllerWithIdentifier("LiveFeedViewController") as! LiveFeedViewController
-        
         NSStream.getStreamsToHostWithName(addr, port: port, inputStream: &inp, outputStream: &out)
         
         self.inputStream = inp!
@@ -33,8 +32,12 @@ class LiveFeedClient {
         
         inputStream.open()
         outputStream.open()
-        outputStream.write(getSignalToSend(), maxLength: 16)
+        //outputStream.write([asciiValue(getSignalToSend())], maxLength: 4)
         startTimer()
+    }
+    
+    private func setupConnection() {
+        var error: NSError?
     }
     
     
@@ -42,29 +45,34 @@ class LiveFeedClient {
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(handleTimer(_:)), userInfo: nil, repeats: true)
     }
     
-    
     @objc private func handleTimer(timer: NSTimer) {
         var readBytes = [UInt8](count: 2000, repeatedValue: 0)
         var dataString = String()
         var ascii = String()
-        
+        print("sending: " + getSignalToSend())
+        outputStream.write([asciiValue(getSignalToSend())], maxLength: 4)
         while inputStream.hasBytesAvailable {
             print(inputStream.read(&readBytes, maxLength: 2000))
-            outputStream.write(getSignalToSend(), maxLength: 16)
             ascii = convertFromAscii(readBytes)
             dataString.appendContentsOf(ascii)
         }
         
         print(dataString)
         let values = dataString.componentsSeparatedByString(",")
-        LiveFeedViewController.liveFeedData.enqueue(values.map{ Int($0)!})
-        liveFeed.updateChartWithData()
+        if (values.count > 1) {
+            LiveFeedViewController.liveFeedData.enqueue(convertToIntArray(values))
+            liveFeed.updateChartWithData()
+        }
     }
     
+    private func asciiValue(str: String) -> UInt8 {
+        let s = str.unicodeScalars
+        return UInt8(s[s.startIndex].value)
+        
+    }
     private func getSignalToSend() -> String {
-        var activeLead = Array(arrayLiteral: LiveFeedViewController.displayedLead)
-        let leadNumber = activeLead.removeLast()
-        return leadNumber
+        let leadNumber = LiveFeedViewController.displayedLead.characters.last!
+        return String(leadNumber)
     }
     
     private func convertFromAscii(buffer: [UInt8]) -> String{
@@ -77,9 +85,11 @@ class LiveFeedClient {
         return s
     }
     
-    private func convertToIntArray(ascii: String) -> [Int] {
-        let stringData = ascii.componentsSeparatedByString(",")
-        let intData = stringData.map{Int($0)!}
+    private func convertToIntArray(stringData: [String]) -> [Int] {
+        var intData = [Int]()
+        for i in 0..<stringData.count {
+            intData.append(Int(stringData[i])!)
+        }
         return intData
     }
     
