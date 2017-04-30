@@ -3,59 +3,48 @@ import time
 class DataBuffer():
 
     def __init__(self):
- 	self.start = 1 # Index of Oldest Value
-    	self.delay = 8.0 #miliseconds
-    	self.samplingRate = 1.0/self.delay * 1000 #Check if accessing samplingRate    
-    	self.bufferSize = 150 * self.samplingRate
-#   	print("buffer size" + str(bufferSize))   
-    	self.data = ["0"] * int(self.bufferSize)
- #  	print("size initial: " + str(len(data)))
-		
+ 	self.end = 0 # Index of Oldest Value
+	self.seconds = 150
+	self.frequency = 125
+	self.size = self.frequency*self.seconds
+	self.data = ["0"]*self.size
+	self.lastLiveEnd =1
 
     def getLiveData(self):
-	#FIXME: Doesn't handle wrapping (start is at the very beggining of the buffer), should probably make a class or method for copying from this that handles wrapping
-	liveEnd = int(self.start - 1)
-	liveStart = int(liveEnd - self.samplingRate)
-	print("start: " + str(liveStart) + " end: " + str(liveEnd))
-	liveFeedBuffer = self.data[liveStart: liveEnd]
-	return liveFeedBuffer
+	while self.end != self.toWrappedIndex(self.lastLiveEnd,1):
+	    pass # Wait until at least 1 second has passed before getting the next Live Data Set to avoid overlapping live data
+	return copyRange(1)
+
+    def toWrappedIndex(self, index, seconds):
+	return ((index + seconds*self.frequency) + self.size) % self.size
+
+    def copyRange(self, seconds):
+	start = self.toWrappedIndex(self.end,seconds)
+	self.lastLiveStart = start
+	print("start: " + str(start) + "end: " + str(self.end))
+	if(start < self.end):
+	    return list(self.data[start:self.end-1])
+	else:
+	    copy = list(self.data[start:self.size-1])
+	    copy.extend(list(self.data[0:self.end-1]))
+	    return copy	
 
     def getArchiveData(self):
-	print("old data storing")
-	oldStart = self.start
-        #Get Past 2.5 minutes of data
-	#oldDataCopy = copy.deepcopy(DataBuffer.data)
-        oldDataCopy = self.copyArray(self.data)
-	archiveBuffer = oldDataCopy[oldStart:len(self.data)-1]
-        archiveBuffer.extend(oldDataCopy[0:oldStart-1])
-       
-        #2.5 minutes later (exactly)
-#        targetTime = time.clock() + 1.0
- #       while time.clock() < targetTime:
- #           pass
-        print("next data")
-	newStart = self.start
-        #Get Next 2.5 minutes of data
-	#dataCopy = copy.deepcopy(DataBuffer.data)
-        dataCopy = self.copyArray(self.data)
-	archiveBuffer.extend(dataCopy[newStart:len(self.data)-1])
-        archiveBuffer.extend(dataCopy[0:newStart-1])
-        return archiveBuffer
+	print("getting Archived Data")
+	endOfFirstBufferRange = self.end
+	archive = copyRange(self.seconds)
+	time.sleep(1.0/float(frequency)*2.0) # wait until end has at least incremented once
+	while self.end != endOfFirstBufferRange:
+	    pass #wait for full buffer (1/2 of an archive) to be overwritten w/ new data
+	archive.extend(copyRange(self.seconds))
+	return archive
 
     def increment(self):
-        self.start += 1
-        self.start %= len(self.data)
+        self.end += 1
+        self.end %= self.size
         return
-        
 
     def addData(self, value):
-#	print("start index: " +str(self.start) + " buffer lenth: " +str( len(self.data)))
-        self.data[self.start] = value # update oldest value w/ newest value
+        self.data[self.end] = value # update oldest value w/ newest value
         self.increment() #start now points to oldest value
-#        print("Added: " + str(value) + "\n")
         return
-    
-
-    def copyArray(self,oldArray):
-	newArray = list(oldArray)
-	return newArray
