@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class LiveFeedClient {
+class LiveFeedClient  {
     let addr = "172.16.25.116"
     let port = 8081
     var inp : NSInputStream?
@@ -28,7 +28,6 @@ class LiveFeedClient {
     init(storyboard :UIStoryboard) {
         liveFeedActive = true
         liveFeed = storyboard.instantiateViewControllerWithIdentifier("LiveFeedViewController") as! LiveFeedViewController
-        
         NSStream.getStreamsToHostWithName(addr, port: port, inputStream: &inp, outputStream: &out)
         
         self.inputStream = inp!
@@ -69,6 +68,11 @@ class LiveFeedClient {
 
     }
     
+    private func asciiValue(str: String) -> UInt8 {
+        let s = str.unicodeScalars
+        return UInt8(s[s.startIndex].value)
+        
+    }
     private func getSignalToSend() -> String {
         let activeLead = LiveFeedViewController.displayedLead.characters.last!
         print("Writing: " + String(activeLead))

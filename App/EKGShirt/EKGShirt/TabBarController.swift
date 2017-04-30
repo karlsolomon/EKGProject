@@ -23,6 +23,7 @@ class TabBarController : UITabBarController {
             self.liveFeedRunning = true
             print("Live Feed Selected")
             self.liveFeed = LiveFeedClient(storyboard: self.storyboard!)
+            liveFeedRunning = true
             //TODO: BEGIN LIVE FEED PROCESS
         } else {
             print("Other Selected")

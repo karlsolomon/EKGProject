@@ -50,6 +50,11 @@ class Server(Thread):
 				buffer1 = ECGRead.DataBuffer1.getArchiveData()
 				buffer2 = ECGRead.DataBuffer2.getArchiveData()
 				buffer3 = ECGRead.DataBuffer3.getArchiveData()
+				time.sleep(150) #delay 2.5 minutes
+				buffer1.extend(ECGRead.DataBuffer1.getArchiveData())
+				buffer2.extend(ECGRead.DataBuffer2.getArchiveData())
+				buffer3.extend(ECGRead.DataBuffer3.getArchiveData())
+
 				print("time to get databuffer:" + str(time.time()))
 				bufferStr1 = ",".join(buffer1)
 				bufferStr2 = ",".join(buffer2)
@@ -67,17 +72,10 @@ class Server(Thread):
 					file.write("Lead 3," + bufferStr3)
 				with open("ecg.txt", "r") as readFile:
 					data = readFile.read()
-				conn.send(data) #send the archived data from .csv 
+				conn.send(data) 
 				conn.recv(1024)
 				print(data)	
-			#list1 = list(xrange(1000))
-			#list1.append(list(xrange(100)))
-			#list1.append(list(xrange(50)))
-			#print(",".join(str(elem) for elem in list1))
-			#conn.send("end")
 				print("time after sending data:" + str(time.time()))
 				print(conn.recv(1024))
-#			conn.flush()
 				conn.close()
-#		    	s.shutdown(2)
 		s.close()
