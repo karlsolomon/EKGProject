@@ -49,16 +49,15 @@ class LiveFeed(Thread):
                         			key = conn.recv(4)
                         			print("key size is: " + str(len(key)))
 						print("key is " + str(key))
-                        	 		if "1" in key:
+						buff = ["0"]
+						if "1" in key:
                             				buff = ECGRead.DataBuffer1.getLiveData()
-                            				bufferStr = ",".join(buff)
                         			elif "2" in key:
                             				buff = ECGRead.DataBuffer2.getLiveData()
-                            				bufferStr = ",".join(buff)
                         			elif "3" in key:
                             				buff = ECGRead.DataBuffer3.getLiveData()
-                            				bufferStr = ",".join(buff)
-                        			print("sending: " + bufferStr)
+						bufferStr = ",".join(buff)
+						print(len(bufferStr))
 						conn.send(bufferStr +  ",")
                     			except socket.error as msg:
                         			print "connection closed " + str(msg[0]) + " " + str(msg[1])
