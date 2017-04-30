@@ -11,6 +11,7 @@ import UIKit
 
 class TabBarController : UITabBarController {
     var liveFeed : LiveFeedClient?
+    var liveFeedRunning = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,13 +20,16 @@ class TabBarController : UITabBarController {
     override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
         if(item.title == "Live Feed") {
             LiveFeedViewController.isLiveFeed = true
+            self.liveFeedRunning = true
             print("Live Feed Selected")
             self.liveFeed = LiveFeedClient(storyboard: self.storyboard!)
             //TODO: BEGIN LIVE FEED PROCESS
         } else {
             print("Other Selected")
-            self.liveFeed!.stopLiveFeed()
-            //TODO: END LIVE FEED PROCESS
+            if liveFeedRunning {
+                self.liveFeed!.stopLiveFeed()
+                liveFeedRunning = false
+            }
         }
     } 
 }

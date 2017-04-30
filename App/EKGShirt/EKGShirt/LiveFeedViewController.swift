@@ -74,8 +74,8 @@ class LiveFeedViewController: UIViewController {
         
         min -= 10   // 10 dip margin in Y
         max += 10
-        //linePlotView.data = LineChartData(xVals: xValues, dataSet: dataSet)
-        //formatPlot(linePlotView, linePlotView.data)
+        linePlotView.data = LineChartData(xVals: xValues, dataSet: dataSet)
+        formatPlot(linePlotView, data: dataSet)
     }
     
     func formatLiveFeedPlot(plot: LineChartView, data: LineChartDataSet) {

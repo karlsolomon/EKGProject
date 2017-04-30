@@ -42,17 +42,17 @@ class LiveFeedClient {
     }
     
     private func startTimer() {
-        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(handleTimer(_:)), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.25, target: self, selector: #selector(handleTimer(_:)), userInfo: nil, repeats: true)
     }
     
     @objc private func handleTimer(timer: NSTimer) {
-        var readBytes = [UInt8](count: 249, repeatedValue: 0)
+        var readBytes = [UInt8](count: 190, repeatedValue: 0)
         var dataString = String()
         var ascii = String()
         outputStream.write(getSignalToSend(), maxLength: 4)
         sent += 1.0
         if inputStream.hasBytesAvailable {
-            print("byte input size: " + String(inputStream.read(&readBytes, maxLength: 249)))
+            print("byte input size: " + String(inputStream.read(&readBytes, maxLength: 190)))
             ascii = convertFromAscii(readBytes)
             dataString.appendContentsOf(ascii)
             print("read size: " + String(dataString.characters.count))
