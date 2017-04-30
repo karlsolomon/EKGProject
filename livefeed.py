@@ -59,10 +59,9 @@ class LiveFeed(Thread):
                             				buff = ECGRead.DataBuffer3.getLiveData()
                             				bufferStr = ",".join(buff)
                         			print("sending: " + bufferStr)
-						conn.send(bufferStr)
+						conn.send(bufferStr +  ",")
                     			except socket.error as msg:
                         			print "connection closed " + str(msg[0]) + " " + str(msg[1])
-                        			isConnected = False 
-                		print("time to get databuffer:" + str(time.time()))
+                        			isConnected = False
 				conn.close()
 	    	s.close()

@@ -1,6 +1,6 @@
  
 import socket
-
+import time
 import csv
 #import servertest
 import wiringpi as wpi
@@ -47,4 +47,5 @@ class ECGRead(Thread):
 			ECGRead.DataBuffer2.addData(str(lead2))
 			ECGRead.DataBuffer3.addData(str(lead3))
 		#	DataBuffer.getLiveData()
-			wpi.delay(8)                
+			wpi.delay(8)
+			time.sleep(.0001)

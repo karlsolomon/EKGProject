@@ -50,6 +50,11 @@ class Server(Thread):
 				buffer1 = ECGRead.DataBuffer1.getArchiveData()
 				buffer2 = ECGRead.DataBuffer2.getArchiveData()
 				buffer3 = ECGRead.DataBuffer3.getArchiveData()
+				time.sleep(150) #delay 2.5 minutes
+				buffer1.extend(ECGRead.DataBuffer1.getArchiveData())
+				buffer2.extend(ECGRead.DataBuffer2.getArchiveData())
+				buffer3.extend(ECGRead.DataBuffer3.getArchiveData())
+
 				print("time to get databuffer:" + str(time.time()))
 				bufferStr1 = ",".join(buffer1)
 				bufferStr2 = ",".join(buffer2)

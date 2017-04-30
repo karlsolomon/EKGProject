@@ -8,15 +8,17 @@ class DataBuffer():
 	self.frequency = 125
 	self.size = self.frequency*self.seconds
 	self.data = ["0"]*self.size
-	self.lastLiveEnd =1
+	self.lastLiveSent = time.clock()
 
     def getLiveData(self):
-	while self.end != self.toWrappedIndex(self.lastLiveEnd,1):
-	    pass # Wait until at least 1 second has passed before getting the next Live Data Set to avoid overlapping live data
-	return copyRange(1)
+	##while (time.clock() - 1.0) < self.lastLiveSent:
+	#    pass #keep live thread as active thread until it sends the data
+	time.sleep(1)
+	self.lastLiveSent = time.clock()
+	return self.copyRange(1)
 
     def toWrappedIndex(self, index, seconds):
-	return ((index + seconds*self.frequency) + self.size) % self.size
+	return ((index - seconds*self.frequency) + self.size) % self.size
 
     def copyRange(self, seconds):
 	start = self.toWrappedIndex(self.end,seconds)
@@ -31,12 +33,11 @@ class DataBuffer():
 
     def getArchiveData(self):
 	print("getting Archived Data")
-	endOfFirstBufferRange = self.end
-	archive = copyRange(self.seconds)
-	time.sleep(1.0/float(frequency)*2.0) # wait until end has at least incremented once
-	while self.end != endOfFirstBufferRange:
-	    pass #wait for full buffer (1/2 of an archive) to be overwritten w/ new data
-	archive.extend(copyRange(self.seconds))
+	print("first half Archive saved: " + str(time.clock))
+	archive = self.copyRange(self.seconds)
+	time.sleep(150) #sleep 2.5 minutes, can't occupy active thread
+	print("second half Archive saved: " + str(time.clock))
+	archive.extend(self.copyRange(self.seconds))
 	return archive
 
     def increment(self):

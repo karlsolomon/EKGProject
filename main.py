@@ -3,6 +3,7 @@ import sys
 import csv
 import wiringpi as wpi
 import thread
+import time
 
 from servertest import Server
 from ecgreader import ECGRead
@@ -23,7 +24,8 @@ try:
 
 
 except:
-   print "Error: unable to start thread"
+    print "Error: unable to start thread"
 
 while True:
-   pass
+    time.sleep(5)  
+    pass
