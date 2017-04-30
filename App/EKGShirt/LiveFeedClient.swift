@@ -11,7 +11,7 @@ import UIKit
 
 class LiveFeedClient {
     let addr = "172.16.25.116"
-    let port = 8080
+    let port = 8081
     var inp : NSInputStream?
     var out :NSOutputStream?
     var inputStream : NSInputStream
@@ -21,6 +21,9 @@ class LiveFeedClient {
     var liveFeed = LiveFeedViewController()
     var liveFeedActive = false
     weak var timer: NSTimer?
+    var sent = 0.0
+    var received = 0.0
+    
     
     init(storyboard :UIStoryboard) {
         liveFeedActive = true
@@ -33,53 +36,63 @@ class LiveFeedClient {
         
         inputStream.open()
         outputStream.open()
-        outputStream.write(getSignalToSend(), maxLength: 16)
+        print("writing to stream")
+        outputStream.write(getSignalToSend(), maxLength: 4)
         startTimer()
     }
-    
     
     private func startTimer() {
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(handleTimer(_:)), userInfo: nil, repeats: true)
     }
     
-    
     @objc private func handleTimer(timer: NSTimer) {
-        var readBytes = [UInt8](count: 2000, repeatedValue: 0)
+        var readBytes = [UInt8](count: 249, repeatedValue: 0)
         var dataString = String()
         var ascii = String()
-        
-        while inputStream.hasBytesAvailable {
-            print(inputStream.read(&readBytes, maxLength: 2000))
-            outputStream.write(getSignalToSend(), maxLength: 16)
+        outputStream.write(getSignalToSend(), maxLength: 4)
+        sent += 1.0
+        if inputStream.hasBytesAvailable {
+            print("byte input size: " + String(inputStream.read(&readBytes, maxLength: 249)))
             ascii = convertFromAscii(readBytes)
             dataString.appendContentsOf(ascii)
+            print("read size: " + String(dataString.characters.count))
+            
+            let values = dataString.componentsSeparatedByString(",")
+            if(values.count > 1) {
+                LiveFeedViewController.liveFeedData.enqueue(convertToIntArray(values))
+                liveFeed.updateChartWithData()
+                received += 1.0
+            }
+            print("% received = " + String(received*100.0/sent))
         }
         
-        print(dataString)
-        let values = dataString.componentsSeparatedByString(",")
-        LiveFeedViewController.liveFeedData.enqueue(values.map{ Int($0)!})
-        liveFeed.updateChartWithData()
+
     }
     
     private func getSignalToSend() -> String {
-        var activeLead = Array(arrayLiteral: LiveFeedViewController.displayedLead)
-        let leadNumber = activeLead.removeLast()
-        return leadNumber
+        let activeLead = LiveFeedViewController.displayedLead.characters.last!
+        print("Writing: " + String(activeLead))
+        return String(activeLead) + "\n"
     }
     
     private func convertFromAscii(buffer: [UInt8]) -> String{
         var s = String()
         for value in buffer{
-            if value != 0{  //null terminated
+            if value != 0 {  //null terminated
                 s += String(UnicodeScalar(value))
             }
         }
-        return s
+        return s  //add extra comma in case two packets get read consecutively
     }
     
-    private func convertToIntArray(ascii: String) -> [Int] {
-        let stringData = ascii.componentsSeparatedByString(",")
-        let intData = stringData.map{Int($0)!}
+    
+    private func convertToIntArray(stringData: [String]) -> [Int] {
+        var intData = [Int]()
+        for i in stringData {
+            if(i != "") {
+                intData.append(Int(i)!)
+            }
+        }
         return intData
     }
     
