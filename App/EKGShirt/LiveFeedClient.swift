@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 class LiveFeedClient  {
-    let addr = "172.16.25.116"
-    let port = 8081
+    let addr = "10.146.24.104"
+    let port = 8083
     var inp : NSInputStream?
     var out :NSOutputStream?
     var inputStream : NSInputStream
@@ -94,7 +94,8 @@ class LiveFeedClient  {
         var intData = [Int]()
         for i in stringData {
             if(i != "") {
-                intData.append(Int(i)!)
+                var convert: Int? = Int(i)
+                intData.append(convert!)
             }
         }
         return intData

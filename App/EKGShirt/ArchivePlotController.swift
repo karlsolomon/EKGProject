@@ -1,69 +1,62 @@
 //
-//  SecondViewController.swift
+//  ArchivePlotController.swift
 //  EKGShirt
 //
-//  Created by Solomon, Karl on 3/29/17.
+//  Created by Yu, Peter M on 4/30/17.
 //  Copyright © 2017 Solomon, Karl. All rights reserved.
 //
 
 import UIKit
-import Charts   //External Chart Library
+import Charts
 
-class LiveFeedViewController: UIViewController {
-    
-    @IBOutlet weak var viewTitle: UINavigationItem!
-    @IBOutlet weak var changeLeadButton: UIBarButtonItem! // Open PickerView Popup w/ Lead Options
-   // @IBOutlet weak var linePlotView1: LineChartView!
-    
-    
-   // @IBOutlet var linePlotView: LineChartView!
-   // @IBOutlet weak var pickerView: UIPickerView!
+class ArchivePlotController: UIViewController{
     var min: Int = 0
     var max: Int = 0
     let gain = 1023.0/3.3  // = DAC Precision / Max Voltage
-    
-    @IBOutlet weak var linePlotView: LineChartView!
+    //MARK: Properties
+   // @IBOutlet weak var archivePlotView: LineChartView!
     var dataSet: LineChartDataSet!
     static var displayedArchive: Archive?
-    static var liveFeedData = Queue()
+//    static var liveFeedData = Queue()
     static var displayedLead = "Lead 1" //default for first view
     static var isLiveFeed = false
     static var maxDataPoints = 400
     
+    @IBOutlet weak var archivePlotView: LineChartView!
     override func viewDidLoad() {
         super.viewDidLoad()
         updateChartWithData()
     }
     
     override func viewDidAppear(animated: Bool) {
-       
+        
         updateChartWithData()
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         updateChartWithData() // reinitializes scaling
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
     func updateChartWithData() {
-        viewTitle.title = LiveFeedViewController.displayedLead
+   //     viewTitle.title = ArchivePlotController.displayedLead
         var entries: [ChartDataEntry] = Array()
         var xValues: [String] = Array()
         min = 0
         max = 0
         var values = [Int]()
-        if !LiveFeedViewController.isLiveFeed {
-            guard let vals = LiveFeedViewController.displayedArchive?.getData(LiveFeedViewController.displayedLead) else {
-                changeLeadButton.enabled = false
+        if !ArchivePlotController.isLiveFeed {
+            guard let vals = ArchivePlotController.displayedArchive?.getData(ArchivePlotController.displayedLead) else {
+    //            changeLeadButton.enabled = false
                 return
             }
             values = vals
         }
         else {
-            values = LiveFeedViewController.liveFeedData.getDataSource()
+    //        values = ArchivePlotController.liveFeedData.getDataSource()
         }
         for (i, value) in values.enumerate()
         {
@@ -79,8 +72,8 @@ class LiveFeedViewController: UIViewController {
         
         min -= 10   // 10 dip margin in Y
         max += 10
-        linePlotView.data = LineChartData(xVals: xValues, dataSet: dataSet)
-        formatPlot(linePlotView, data: dataSet)
+        archivePlotView.data = LineChartData(xVals: xValues, dataSet: dataSet)
+        formatPlot(archivePlotView, data: dataSet)
     }
     
     func formatLiveFeedPlot(plot: LineChartView, data: LineChartDataSet) {
@@ -96,26 +89,26 @@ class LiveFeedViewController: UIViewController {
     }
     
     func formatPlot(plot: LineChartView, data: LineChartDataSet) {
-        if LiveFeedViewController.isLiveFeed {
+        if ArchivePlotController.isLiveFeed {
             formatLiveFeedPlot(plot, data: data)
         } else {
             formatArchivePlot(plot, data: data)
         }
         //Shift to mV Scale
-        linePlotView.leftAxis.axisMinValue = Double(min)/gain
-        linePlotView.rightAxis.axisMinValue = Double(min)/gain
-        linePlotView.rightAxis.axisMaxValue = Double(max)/gain
-        linePlotView.leftAxis.axisMaxValue = Double(max)/gain
+        archivePlotView.leftAxis.axisMinValue = Double(min)/gain
+        archivePlotView.rightAxis.axisMinValue = Double(min)/gain
+        archivePlotView.rightAxis.axisMaxValue = Double(max)/gain
+        archivePlotView.leftAxis.axisMaxValue = Double(max)/gain
         
         //Interactivity
-        linePlotView.doubleTapToZoomEnabled = false
+        archivePlotView.doubleTapToZoomEnabled = false
         plot.doubleTapToZoomEnabled = false
         plot.highlightPerTapEnabled = false
         plot.highlightPerDragEnabled = true
         plot.highlightFullBarEnabled = false
         
         //Marking
-        plot.setVisibleXRangeMaximum(CGFloat(LiveFeedViewController.maxDataPoints))   // Max for Data Visualization Rendering to be seamless
+        plot.setVisibleXRangeMaximum(CGFloat(ArchivePlotController.maxDataPoints))   // Max for Data Visualization Rendering to be seamless
         plot.legend.enabled = false
         plot.descriptionText = ""   //silences description
         plot.autoScaleMinMaxEnabled = false
@@ -133,5 +126,6 @@ class LiveFeedViewController: UIViewController {
         //xAxis.valueFormatter = AxisValueFormatter() // Shift to Time Scale
         data.setColor(NSUIColor(red: 0, green: 0, blue: 0, alpha: 0.8))
     }
-}
 
+
+}

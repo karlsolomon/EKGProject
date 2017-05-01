@@ -23,7 +23,13 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
     }
     
     override func viewDidAppear(animated: Bool) {
-        ArchivesViewController.ArchiveList = loadArchives()!
+        var load: [Archive]? = loadArchives()!
+        if load == nil{
+            ArchivesViewController.ArchiveList = Array<Archive>()
+        }
+        else{
+            ArchivesViewController.ArchiveList = load!
+        }
         self.archivesTableView.reloadData()
     }
 
