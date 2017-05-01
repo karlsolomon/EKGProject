@@ -27,12 +27,13 @@ class LiveFeedViewController: UIViewController {
     static var maxDataPoints = 400
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        updateChartWithData()
+ //       updateChartWithData()
     }
     
     override func viewDidAppear(animated: Bool) {
-        updateChartWithData()
+
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {

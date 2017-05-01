@@ -9,9 +9,10 @@
 import Foundation
 import UIKit
 
-class TabBarController : UITabBarController {
+class TabBarController : UITabBarController, UITabBarControllerDelegate{
     var liveFeed : LiveFeedClient?
     var liveFeedRunning = false
+    var liveFeedVC : LiveFeedViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,10 +21,14 @@ class TabBarController : UITabBarController {
     override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
         if(item.title == "Live Feed") {
             LiveFeedViewController.isLiveFeed = true
-            self.liveFeedRunning = true
+           
             print("Live Feed Selected")
             self.liveFeed = LiveFeedClient(storyboard: self.storyboard!)
+            if !liveFeedRunning{
+                self.showViewController((self.liveFeed?.getLiveFeedVC())!, sender: self)
+            }
             liveFeedRunning = true
+            
             //TODO: BEGIN LIVE FEED PROCESS
         } else {
             print("Other Selected")
@@ -32,5 +37,14 @@ class TabBarController : UITabBarController {
                 liveFeedRunning = false
             }
         }
-    } 
+    }
+    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+        if tabBarController.selectedIndex == 1{
+            return false
+        }
+        else{
+            return true
+        }
+    }
+
 }

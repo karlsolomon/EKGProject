@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 class LiveFeedClient  {
-    let addr = "172.16.25.116"
-    let port = 8081
+    let addr = "10.146.24.104"
+    let port = 8083
     var inp : NSInputStream?
     var out :NSOutputStream?
     var inputStream : NSInputStream
@@ -67,7 +67,9 @@ class LiveFeedClient  {
         
 
     }
-    
+    func getLiveFeedVC() -> LiveFeedViewController{
+        return self.liveFeed
+    }
     private func asciiValue(str: String) -> UInt8 {
         let s = str.unicodeScalars
         return UInt8(s[s.startIndex].value)
