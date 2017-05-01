@@ -29,13 +29,16 @@ class LiveFeedViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
- //       updateChartWithData()
+
     }
-    
+    private func goBack(){
+        dismissViewControllerAnimated(true, completion: nil)
+        self.tabBarController?.selectedIndex = 0
+    }
     override func viewDidAppear(animated: Bool) {
 
     }
-    
+
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         updateChartWithData() // reinitializes scaling
     }

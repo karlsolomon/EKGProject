@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Ib9-ep-uaN">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="4SR-lw-Qwo">
+            <objects>
+                <navigationController id="Ib9-ep-uaN" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="b5A-a6-6v4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="49e-Tb-3d3" kind="relationship" relationship="rootViewController" id="u7e-Fj-UBo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JoH-nX-rSD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-942" y="665"/>
+        </scene>
         <!--TabBarController-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
                 <tabBarController title="TabBarController" id="49e-Tb-3d3" customClass="TabBarController" customModule="EKGShirt" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="odU-fN-5HC"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
@@ -28,6 +45,7 @@
         <!--Symptoms-->
         <scene sceneID="lg7-SM-oiu">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="41I-Yx-a2t" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="6zQ-Nf-9cZ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Symptoms" image="symptoms.png" id="1MM-kp-RnR"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qph-zu-T5M">
@@ -38,7 +56,6 @@
                         <segue destination="bhp-NT-gtO" kind="relationship" relationship="rootViewController" id="nWg-Iu-e2K"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="41I-Yx-a2t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="670.5" y="-5"/>
         </scene>
@@ -329,6 +346,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Live Feed" image="livefeed.png" selectedImage="livefeed.png" id="Flv-BW-ZsE"/>
                     <navigationItem key="navigationItem" title="Live Feed" id="vDA-lh-GGD">
                         <barButtonItem key="rightBarButtonItem" title="Change Lead" id="PbW-qq-DjA">
                             <connections>
@@ -397,6 +415,24 @@
             </objects>
             <point key="canvasLocation" x="2340" y="665"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="NFe-tq-wIg">
+            <objects>
+                <viewController id="AS4-8H-9ks" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PfK-1B-YHm"/>
+                        <viewControllerLayoutGuide type="bottom" id="XIu-ez-gty"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ks1-nc-vZm">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Y6-wl-erX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3018" y="879"/>
+        </scene>
     </scenes>
     <resources>
         <image name="archives.png" width="30" height="30"/>
@@ -404,6 +440,6 @@
         <image name="symptoms.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gi3-dG-fNM"/>
+        <segue reference="5PI-Eo-J3d"/>
     </inferredMetricsTieBreakers>
 </document>

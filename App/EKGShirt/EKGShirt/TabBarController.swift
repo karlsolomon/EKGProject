@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TabBarController : UITabBarController, UITabBarControllerDelegate{
+class TabBarController : UITabBarController{
     var liveFeed : LiveFeedClient?
     var liveFeedRunning = false
     var liveFeedVC : LiveFeedViewController?
@@ -19,14 +19,18 @@ class TabBarController : UITabBarController, UITabBarControllerDelegate{
     }
     
     override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
+        
         if(item.title == "Live Feed") {
             LiveFeedViewController.isLiveFeed = true
            
             print("Live Feed Selected")
             self.liveFeed = LiveFeedClient(storyboard: self.storyboard!)
-            if !liveFeedRunning{
+          
+                self.tabBarController?.tabBar.hidden = false
+                let backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: "goBack")
+                (self.liveFeed?.getLiveFeedVC())!.navigationItem.backBarButtonItem = backButton
                 self.showViewController((self.liveFeed?.getLiveFeedVC())!, sender: self)
-            }
+            
             liveFeedRunning = true
             
             //TODO: BEGIN LIVE FEED PROCESS
@@ -36,14 +40,6 @@ class TabBarController : UITabBarController, UITabBarControllerDelegate{
                 self.liveFeed!.stopLiveFeed()
                 liveFeedRunning = false
             }
-        }
-    }
-    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
-        if tabBarController.selectedIndex == 1{
-            return false
-        }
-        else{
-            return true
         }
     }
 
