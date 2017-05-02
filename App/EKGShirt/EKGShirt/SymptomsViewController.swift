@@ -17,11 +17,13 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
     static let ArchiveURL = DocumentsDirectory.URLByAppendingPathComponent("archives")  //Backend directory that stores input TXT files
+    static var recordDate = NSDate()
     
     let contents = Symptoms.instance.getAllSymptoms()   // Symtpoms Table Data Source
 	var selectedSymptoms = [String]()
     let cellIdentifier = "symptomsCell"
 	var symptomsSelected = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,11 +80,10 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
             }))
             presentViewController(alert, animated: true, completion: nil)
             }
-            NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: #selector(self.enableButton), userInfo: nil, repeats: false)  //TODO: IN FINAL RELEASE CHANGE TIME INTERVAL TO 150 (2.5 MINUTES)
+            createArchive()
             recordButton.setTitle("Record EKG", forState: UIControlState.Normal)
             recordButton.enabled = false
             allowSelection(false)
-            sendSymptoms()
             resetTable()
         } else {
             recordButton.setTitle("Submit Symptoms", forState: UIControlState.Normal)//titleLabel = "Submit Symptoms"
@@ -102,8 +103,21 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    func enableButton() {
+    
+    func createArchive() {
+        SymptomsViewController.recordDate = NSDate()
+        NSTimer.scheduledTimerWithTimeInterval(150, target: self, selector: #selector(self.getArchive), userInfo: nil, repeats: false)
+    }
+    
+    func getArchive() {
         self.recordButton.enabled = true
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "MM_dd_yy_hh_mm"
+        let dateString = formatter.stringFromDate(SymptomsViewController.recordDate)
+        let client = SocketClient(fileName: dateString)
+        let filePath = client.getFilePath()
+        let archive = Archive(date: SymptomsViewController.recordDate, path: filePath, symptoms: selectedSymptoms)
+        ArchivesViewController().addArchive(archive)
     }
     
     //Refreshes Symptoms Table between events to deselect all symptoms
@@ -140,19 +154,5 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         selectedSymptoms.removeAtIndex(selectedSymptoms.indexOf(contents[indexPath.row])!)
     }
-    
-    
-//MARK: SEND SYMPTOMS
-    func sendSymptoms() {
-        let date = NSDate()
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "MM_dd_yy_hh_mm"
-        let dateString = formatter.stringFromDate(date)
-        let client = SocketClient(fileName: dateString)
-        let filePath = client.getFilePath()
-            let archive = Archive(date: date, path: filePath, symptoms: selectedSymptoms)
-            ArchivesViewController().addArchive(archive)
-    }
-
 
 }

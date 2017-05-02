@@ -77,13 +77,14 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         LiveFeedViewController.displayedArchive = ArchivesViewController.ArchiveList[indexPath.row]
         let destinationVC = self.storyboard?.instantiateViewControllerWithIdentifier("LiveFeedViewController") as! LiveFeedViewController
-        self.showViewController(destinationVC, sender: self)       
+        self.showViewController(destinationVC, sender: self)
+        destinationVC.updateChartWithData()
     }
     
     //Delete Archive From memory
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            archivesTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)  //TODO: CHECK FOR MEMORY LEAK
+            archivesTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
     }
     
@@ -91,11 +92,10 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
     func configuredMailComposeViewController(archive: Archive) -> MFMailComposeViewController {
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self
-        mailComposerVC.setToRecipients(["ksolomon@utexas.edu"])
         mailComposerVC.setSubject("Patient EKG Record: " + archive.getDate() + " " + archive.getTime() )
         mailComposerVC.setMessageBody("Symptoms: \n" + archive.getSymptoms(), isHTML: false)
         if let fileData = NSData(contentsOfURL: archive.getPath()){
-            mailComposerVC.addAttachmentData(fileData, mimeType: "text/csv", fileName: "Sample CSV")
+            mailComposerVC.addAttachmentData(fileData, mimeType: "text/plain", fileName: archive.getDate())
         } else {
             let alert = UIAlertController(title: "File Not Found", message: "The file for this archive could not be found", preferredStyle: .Alert)
             let cancel = UIAlertAction(title: "Cancel", style: .Default, handler: { action in

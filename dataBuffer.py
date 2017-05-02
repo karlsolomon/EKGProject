@@ -7,7 +7,7 @@ class DataBuffer():
     end = 0 #index of oldest value
     lastLiveSent = time.clock()
     start = 0
-    seconds = 150
+    seconds = 300
     frequency = 125
     size = frequency*seconds
 
@@ -37,11 +37,7 @@ class DataBuffer():
 
     def getArchiveData(self):
 	print("getting Archived Data")
-	print("first half Archive saved: " + str(time.clock))
 	archive = self.copyFrom(DataBuffer.end +1)
-	time.sleep(150) #sleep 2.5 minutes, can't occupy active thread
-	print("second half Archive saved: " + str(time.clock))
-	archive.extend(self.copyFrom(DataBuffer.end +1))
 	return archive
 
     def increment(self):

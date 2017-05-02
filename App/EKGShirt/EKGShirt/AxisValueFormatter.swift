@@ -12,7 +12,8 @@ import Charts
 class AxisValueFormatter : ChartXAxisValueFormatter{
     private let sampleTiming = 8 //mS
     @objc func stringForXValue(index: Int, original: String, viewPortHandler: ChartViewPortHandler) -> String {
-        let xAxisValue = "\(sampleTiming*index/1000 ).\(sampleTiming*index%1000)s"
+        var xAxisValue = "\(sampleTiming*index/1000 ).\(sampleTiming*index%1000)"
+        xAxisValue = xAxisValue.substringToIndex(xAxisValue.startIndex.advancedBy(4)) + "s"
         return xAxisValue
     }
 }
