@@ -8,8 +8,8 @@
 import Foundation
 
 class SocketClient{
-    let addr = "192.168.0.33"
-    let port = 8080
+    let addr = "172.20.10.2"
+    let port = 8082
     var inp : NSInputStream?
     var out :NSOutputStream?
     var fileName = String()

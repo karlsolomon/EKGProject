@@ -24,7 +24,7 @@ class CSVParse {
             for k in 0..<rows.count {
                 var values = rows[k].componentsSeparatedByString(",")
                 let leadName = values.removeAtIndex(0)
-                self.leads[leadName] = values.map{Int($0)!}
+                self.leads[leadName] = convertToIntArray(values)
             }
         } catch {
             print("Could Not Find File")
@@ -39,6 +39,17 @@ class CSVParse {
     //Returns Lead Names
     func getHeader() -> [String] {
         return Array(self.leads.keys)
+    }
+    
+    
+    private func convertToIntArray(stringData: [String]) -> [Int] {
+        var intData = [Int]()
+        for i in stringData {
+            if(i != "") {
+                intData.append(Int(i)!)
+            }
+        }
+        return intData
     }
     
 }

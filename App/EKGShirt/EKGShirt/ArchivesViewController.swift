@@ -18,6 +18,9 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
 // MARK: Properties
     @IBOutlet var archivesTableView: UITableView!
     
+    @IBOutlet var titleBar: UINavigationItem!
+    @IBOutlet var definitions: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -25,6 +28,7 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
     override func viewDidAppear(animated: Bool) {
         ArchivesViewController.ArchiveList = loadArchives()!
         self.archivesTableView.reloadData()
+        self.navigationController?.navigationBarHidden = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,7 +87,6 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
         LiveFeedViewController.displayedArchive = ArchivesViewController.ArchiveList[indexPath.row]
         let destinationVC = self.storyboard?.instantiateViewControllerWithIdentifier("LiveFeedViewController") as! LiveFeedViewController
         self.showViewController(destinationVC, sender: self)
-        destinationVC.updateChartWithData()
     }
     
     //Delete Archive From memory

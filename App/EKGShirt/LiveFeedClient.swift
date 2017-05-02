@@ -18,7 +18,7 @@ class LiveFeedClient  {
     var outputStream : NSOutputStream
     var fileName = String()
     var filePath = NSURL()
-    var liveFeed = LiveFeedViewController()
+    static var liveFeed: LiveFeedViewController?
     var liveFeedActive = false
     weak var timer: NSTimer?
     var sent = 0.0
@@ -26,7 +26,9 @@ class LiveFeedClient  {
     
     init(storyboard :UIStoryboard) {
         liveFeedActive = true
-        liveFeed = storyboard.instantiateViewControllerWithIdentifier("LiveFeedViewController") as! LiveFeedViewController
+        LiveFeedClient.liveFeed = storyboard.instantiateViewControllerWithIdentifier("LiveFeedViewController") as?LiveFeedViewController
+        LiveFeedClient.liveFeed!.showViewController(LiveFeedClient.liveFeed!, sender: storyboard.instantiateViewControllerWithIdentifier("TabBarController") as! TabBarController)
+        
         NSStream.getStreamsToHostWithName(addr, port: port, inputStream: &inp, outputStream: &out)
         
         self.inputStream = inp!
@@ -58,13 +60,10 @@ class LiveFeedClient  {
                 values.removeFirst()
                 values.removeLast()
                 LiveFeedViewController.liveFeedData.enqueue(convertToIntArray(values))
-                liveFeed.updateChartWithData()
+                LiveFeedClient.liveFeed!.updateChartWithData()
                 received += 1.0
             }
         }
-    }
-    func getLiveFeedVC() -> LiveFeedViewController{
-        return self.liveFeed
     }
     private func asciiValue(str: String) -> UInt8 {
         let s = str.unicodeScalars

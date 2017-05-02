@@ -8,6 +8,7 @@
 import UIKit
 
 class SymptomsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    @IBOutlet weak var titleBar: UINavigationItem!
     
 // MARK: Properties
     @IBOutlet weak var definitions: UIBarButtonItem!
@@ -106,7 +107,7 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func createArchive() {
         SymptomsViewController.recordDate = NSDate()
-        NSTimer.scheduledTimerWithTimeInterval(150, target: self, selector: #selector(self.getArchive), userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(self.getArchive), userInfo: nil, repeats: false)
     }
     
     func getArchive() {

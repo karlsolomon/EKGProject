@@ -28,8 +28,8 @@ class TabBarController : UITabBarController{
           
                 self.tabBarController?.tabBar.hidden = false
                 let backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: "goBack")
-                (self.liveFeed?.getLiveFeedVC())!.navigationItem.backBarButtonItem = backButton
-                self.showViewController((self.liveFeed?.getLiveFeedVC())!, sender: self)
+                (LiveFeedClient.liveFeed)!.navigationItem.backBarButtonItem = backButton
+                self.showViewController((LiveFeedClient.liveFeed)!, sender: self)
             
             liveFeedRunning = true
             

@@ -27,18 +27,21 @@ class LiveFeedViewController: UIViewController {
     static var displayedLead = "Lead 1" //default for first view
     static var isLiveFeed = false
     static var maxDataPoints = 400
+    let back = UIButton(frame: CGRect(x: 20.0, y: 20.0, width: 100.0, height: 60.0))
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-
+        updateChartWithData()
+        back.addTarget(self, action: #selector(goBack), forControlEvents: .TouchUpInside)
     }
-    private func goBack(){
-        dismissViewControllerAnimated(true, completion: nil)
+    
+    @objc private func goBack(){
+        self.showViewController((self.storyboard?.instantiateViewControllerWithIdentifier("TabBarController")) as! TabBarController, sender: self)
         self.tabBarController?.selectedIndex = 0
     }
     override func viewDidAppear(animated: Bool) {
-
+        updateChartWithData()
+        self.view.addSubview(back)
     }
 
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {

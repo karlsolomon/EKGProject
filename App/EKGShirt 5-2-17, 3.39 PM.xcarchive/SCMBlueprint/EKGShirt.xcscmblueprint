@@ -1,0 +1,25 @@
+{
+  "DVTSourceControlWorkspaceBlueprintLocationsKey" : {
+    "A250B41C7FDE2405142F19CD6DE51542EA9D7B4C" : {
+      "DVTSourceControlBranchIdentifierKey" : "socketbranch",
+      "DVTSourceControlLocationRevisionKey" : "b0dd43594fd0c624f60f793685166e39c5acb4a1",
+      "DVTSourceControlBranchOptionsKey" : 4,
+      "DVTSourceControlWorkspaceBlueprintLocationTypeKey" : "DVTSourceControlBranch"
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "A250B41C7FDE2405142F19CD6DE51542EA9D7B4C",
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "7D01945D-87CB-4CFD-B92D-D8258C682FB6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "A250B41C7FDE2405142F19CD6DE51542EA9D7B4C" : "EKGProject\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "EKGShirt",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "App\/EKGShirt\/EKGShirt.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/petermyu\/EKGProject.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A250B41C7FDE2405142F19CD6DE51542EA9D7B4C"
+    }
+  ]
+}
