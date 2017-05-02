@@ -12,10 +12,10 @@ This software was developed to be used in conjunction with a portable ECG device
 
 This software allows the user to input symptoms and toggle an ECG recording whenever the user believes he/she is undergoing cardiac discomfort. The RaspberryPi ECG is controlled via iOS application, where the user can also view and send ECG data on the app. The software requires an internet connection provided by the phone's hotspot as well as the EKG Shirt attached and powered.
 
-### Software 
+## Software 
 
 
-#### Front End
+### Front End
 
 **SymptomsViewController.swift**
     
@@ -37,7 +37,7 @@ This software allows the user to input symptoms and toggle an ECG recording when
 
    The Picker View allows the user to view multiple leads in a selected Archived ECG reading. Once selected, the specific lead is then portrayed in graphical format. 
 
-#### Back End - iOS Application
+### Back End - iOS Application
 
 **SocketServer**
  
@@ -81,7 +81,7 @@ This software allows the user to input symptoms and toggle an ECG recording when
 **ECGRead**
   ECGRead employs the WiringPi library, in which the script can manipulate the MCP3008 to output analog data through the function analogRead(). Each DataBuffer corresponding to the lead is updated with the captured ECG data. ECGRead runs continuously as long as the RasberryPi is powered. ECG readings are taken at a sampling rate of at least 125 Hz.
   
-### Hardware
+## Hardware
 1. Analog Logic (For each of 3 leads)
     1. Amplification
     	AD8226 Instrumentation Amplifier
