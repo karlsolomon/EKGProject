@@ -26,7 +26,6 @@ class DataBuffer():
 	return ((index - seconds*DataBuffer.frequency) + DataBuffer.size) % DataBuffer.size
 
     def copyFrom(self, start):
-	#DataBuffer.start = self.toWrappedIndex(DataBuffer.end,seconds)
 	print("start: " + str(start) + "end: " + str(DataBuffer.end))
 	if(start < DataBuffer.end):
 	    return list(self.data[start:DataBuffer.end-1])

@@ -233,7 +233,7 @@
 				TargetAttributes = {
 					96012EFD1E8C1EA300973986 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 5BU4Q6J5R9;
+						DevelopmentTeam = 4NN4B9N546;
 					};
 				};
 			};
@@ -455,7 +455,7 @@
 				INFOPLIST_FILE = EKGShirt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.companyname.EKGShirt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bme261L.EKGShirt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -471,7 +471,7 @@
 				INFOPLIST_FILE = EKGShirt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.companyname.EKGShirt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bme261L.EKGShirt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

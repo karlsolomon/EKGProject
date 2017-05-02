@@ -19,7 +19,7 @@ class Server(Thread):
 	def run(self):
 		flag = True
 		while True:
-			HOST = "192.168.0.33"   # iPhone app IP address
+			HOST = "172.20.10.2"   # iPhone app IP address
 			PORT = 8080 # Arbitrary non-privileged port
 			try:
 				s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

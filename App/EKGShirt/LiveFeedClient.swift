@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class LiveFeedClient  {
-    let addr = "192.168.0.33"
+    let addr = "172.20.10.2"
     let port = 8081 
     var inp : NSInputStream?
     var out :NSOutputStream?

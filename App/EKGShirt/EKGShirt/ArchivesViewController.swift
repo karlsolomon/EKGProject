@@ -37,7 +37,12 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
     }
     
     private func loadArchives() -> [Archive]? {
-        return NSKeyedUnarchiver.unarchiveObjectWithFile(SymptomsViewController.ArchiveURL.path!) as? [Archive] // loads all saved archives from memory
+        let archives =  NSKeyedUnarchiver.unarchiveObjectWithFile(SymptomsViewController.ArchiveURL.path!) as? [Archive] // loads all saved archives from memory
+        if(archives == nil) {
+            return [Archive]()
+        } else {
+            return archives
+        }
     }
 
 // MARK: Table view data source
