@@ -88,4 +88,4 @@ This software allows the user to input symptoms and toggle an ECG recording when
     2. Voltage Follower
     	TLV2774CN
 2. ADC
-	MCP3008 10 bit
+	MCP3008 8 bit
