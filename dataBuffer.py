@@ -16,7 +16,7 @@ class DataBuffer():
 
     def getLiveData(self):
 	print("getLiveData: " + str(time.gmtime()))
-	time.sleep(0.25)
+	time.sleep(0.125)
 	DataBuffer.lastLiveSent = time.clock()
 	liveData = self.copyFrom(DataBuffer.lastLiveEnd)
 	DataBuffer.lastLiveEnd = DataBuffer.end
@@ -40,12 +40,12 @@ class DataBuffer():
 	archive = self.copyFrom(DataBuffer.end +1)
 	return archive
 
-    def increment(self):
+    @staticmethod
+    def increment():
         DataBuffer.end += 1
         DataBuffer.end %= DataBuffer.size
         return
 
     def addData(self, value):
         self.data[DataBuffer.end] = value # update oldest value w/ newest value
-        self.increment() #start now points to oldest value
         return

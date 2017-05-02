@@ -18,7 +18,7 @@ samplingRate = 1/delay * 1000
 
 try:
 	print("trheads starting")
-	#Server()
+	Server()
 	ECGRead()
 	LiveFeed()
 
