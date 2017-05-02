@@ -33,7 +33,7 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
     
     func addArchive(archive: Archive) {
         ArchivesViewController.ArchiveList.append(archive)
-        let success = NSKeyedArchiver.archiveRootObject(ArchivesViewController.ArchiveList, toFile: SymptomsViewController.ArchiveURL.path!)   // saves archive to documents directory (semi-permanent) memory
+        let _ = NSKeyedArchiver.archiveRootObject(ArchivesViewController.ArchiveList, toFile: SymptomsViewController.ArchiveURL.path!)   // saves archive to documents directory (semi-permanent) memory
     }
     
     private func loadArchives() -> [Archive]? {
@@ -98,6 +98,9 @@ class ArchivesViewController: UITableViewController, MFMailComposeViewController
             mailComposerVC.addAttachmentData(fileData, mimeType: "text/csv", fileName: "Sample CSV")
         } else {
             let alert = UIAlertController(title: "File Not Found", message: "The file for this archive could not be found", preferredStyle: .Alert)
+            let cancel = UIAlertAction(title: "Cancel", style: .Default, handler: { action in
+            })
+            alert.addAction(cancel)
             presentViewController(alert, animated: true, completion: nil)
         }
         return mailComposerVC

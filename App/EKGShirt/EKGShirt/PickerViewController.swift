@@ -29,6 +29,7 @@ class PickerViewController : UIViewController, UIPickerViewDelegate, UIPickerVie
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         LiveFeedViewController.displayedLead = leadArray[row]
+        LiveFeedViewController.liveFeedData.clear()
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {

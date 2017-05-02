@@ -8,7 +8,7 @@
 import Foundation
 
 class SocketClient{
-    let addr = "172.16.25.116"
+    let addr = "192.168.0.33"
     let port = 8080
     var inp : NSInputStream?
     var out :NSOutputStream?
