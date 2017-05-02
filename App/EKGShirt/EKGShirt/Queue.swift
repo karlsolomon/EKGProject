@@ -11,23 +11,13 @@ import Foundation
 class Queue {
     var dataSource = [Int]()
     
-    func enqueue(_item: Int) {
-        dataSource.append(_item)
-    }
-    
     func enqueue(_items: [Int]) {
         dataSource.appendContentsOf(_items)
         if(dataSource.count > LiveFeedViewController.maxDataPoints) {
-            dequeue(dataSource.count - LiveFeedViewController.maxDataPoints)
+            let overflow = dataSource.count - LiveFeedViewController.maxDataPoints
+            print(overflow)
+            dataSource.removeRange(0...overflow)
         }
-    }
-    
-    func dequeue() -> Int {
-        return dataSource.removeFirst()
-    }
-    
-    func dequeue(numberToDequeue: Int) {
-        return dataSource.removeFirst(numberToDequeue)
     }
     
     func getDataSource() -> [Int]
@@ -37,5 +27,9 @@ class Queue {
     
     func getDataSource() -> [Double] {
         return dataSource.map{Double($0)}
+    }
+    
+    func clear() {
+        dataSource = [Int]()
     }
 }

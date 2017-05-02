@@ -18,8 +18,6 @@ class SymptomsViewController: UIViewController, UITableViewDataSource, UITableVi
     static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
     static let ArchiveURL = DocumentsDirectory.URLByAppendingPathComponent("archives")  //Backend directory that stores input TXT files
     
-    
-    
     let contents = Symptoms.instance.getAllSymptoms()   // Symtpoms Table Data Source
 	var selectedSymptoms = [String]()
     let cellIdentifier = "symptomsCell"

@@ -17,7 +17,9 @@ class LiveFeedViewController: UIViewController {
     @IBOutlet weak var pickerView: UIPickerView!
     var min: Int = 0
     var max: Int = 0
-    let gain = 1023.0/3.3  // = DAC Precision / Max Voltage
+    let lead1Gain = 1023.0/3.3  // = DAC Precision / Empirical Voltage Range
+    let lead2Gain = 1023.0/3.3
+    let lead3Gain = 1023.0/3.3
     
     var dataSet: LineChartDataSet!
     static var displayedArchive: Archive?
@@ -66,7 +68,7 @@ class LiveFeedViewController: UIViewController {
         }
         for (i, value) in values.enumerate()
         {
-            entries.append(ChartDataEntry.init(value: Double(value)/gain, xIndex: i))
+            entries.append(ChartDataEntry.init(value: Double(value)/getActiveGain(), xIndex: i))
             xValues.append("\(i)")
             if(value > max) { max = value }
             if(value < min) { min = value }
@@ -92,6 +94,19 @@ class LiveFeedViewController: UIViewController {
         plot.dragDecelerationEnabled = true
         plot.dragDecelerationFrictionCoef = 0.95
         plot.keepPositionOnRotation = true
+        plot.noDataText = "Archive Not Found"
+    }
+    
+    private func getActiveGain() -> Double {
+        if(LiveFeedViewController.displayedLead == "Lead 1") {
+            return self.lead1Gain
+        } else if (LiveFeedViewController.displayedLead == "Lead 2"){
+            return self.lead2Gain
+        } else if (LiveFeedViewController.displayedLead == "Lead 3") {
+            return self.lead3Gain
+        } else {
+            return 0.0
+        }
     }
     
     func formatPlot(plot: LineChartView, data: LineChartDataSet) {
@@ -100,36 +115,28 @@ class LiveFeedViewController: UIViewController {
         } else {
             formatArchivePlot(plot, data: data)
         }
-        //Shift to mV Scale
-        linePlotView.leftAxis.axisMinValue = Double(min)/gain
-        linePlotView.rightAxis.axisMinValue = Double(min)/gain
-        linePlotView.rightAxis.axisMaxValue = Double(max)/gain
-        linePlotView.leftAxis.axisMaxValue = Double(max)/gain
-        
+
         //Interactivity
-        linePlotView.doubleTapToZoomEnabled = false
         plot.doubleTapToZoomEnabled = false
         plot.highlightPerTapEnabled = false
         plot.highlightPerDragEnabled = true
         plot.highlightFullBarEnabled = false
+        plot.rightAxis.enabled = false
         
         //Marking
         plot.setVisibleXRangeMaximum(CGFloat(LiveFeedViewController.maxDataPoints))   // Max for Data Visualization Rendering to be seamless
         plot.legend.enabled = false
         plot.descriptionText = ""   //silences description
-        plot.autoScaleMinMaxEnabled = false
+        plot.autoScaleMinMaxEnabled = true
         plot.drawMarkers = true
-        plot.maxVisibleValueCount = 3 // most XLabels Visible w/o cluttering screen
         
         let xAxis = plot.xAxis
         let gridColor = UIColor(red: 1, green: 0, blue: 0, alpha: 1)
         let yAxisL = plot.leftAxis
-        let yAxisR = plot.rightAxis
         
         yAxisL.gridColor = gridColor
-        yAxisR.gridColor = gridColor
         xAxis.gridColor = gridColor
-        //xAxis.valueFormatter = AxisValueFormatter() // Shift to Time Scale
+        xAxis.valueFormatter = AxisValueFormatter() // Shift to Time Scale
         data.setColor(NSUIColor(red: 0, green: 0, blue: 0, alpha: 0.8))
     }
 }

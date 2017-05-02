@@ -29,6 +29,7 @@
 		96F01CC01E91D4A2002E5A32 /* samples.csv in Resources */ = {isa = PBXBuildFile; fileRef = 96F01CBF1E91D4A2002E5A32 /* samples.csv */; };
 		DB42D5511EB2F3F60049AE64 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB42D5501EB2F3F60049AE64 /* Queue.swift */; };
 		DB42D5581EB399290049AE64 /* LiveFeedClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB42D5571EB399290049AE64 /* LiveFeedClient.swift */; };
+		DB48C34E1EB87FFC00C9CF16 /* AxisValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB48C34D1EB87FFC00C9CF16 /* AxisValueFormatter.swift */; };
 		DBBB78DA1EB1D25600C8A81D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBB78D91EB1D25600C8A81D /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
@@ -110,6 +111,7 @@
 		96F01CC31E91E991002E5A32 /* Archive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Archive.swift; sourceTree = "<group>"; };
 		DB42D5501EB2F3F60049AE64 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		DB42D5571EB399290049AE64 /* LiveFeedClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LiveFeedClient.swift; path = ../LiveFeedClient.swift; sourceTree = "<group>"; };
+		DB48C34D1EB87FFC00C9CF16 /* AxisValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AxisValueFormatter.swift; path = ../../../../../Documents/EKGProject/App/EKGShirt/EKGShirt/AxisValueFormatter.swift; sourceTree = "<group>"; };
 		DBBB78D91EB1D25600C8A81D /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -161,6 +163,7 @@
 				96012F051E8C1EA300973986 /* LiveFeedViewController.swift */,
 				96F01CC31E91E991002E5A32 /* Archive.swift */,
 				960040E21E8D946700EC63E9 /* ArchivesViewController.swift */,
+				DB48C34D1EB87FFC00C9CF16 /* AxisValueFormatter.swift */,
 				DB42D5501EB2F3F60049AE64 /* Queue.swift */,
 				96F01CBF1E91D4A2002E5A32 /* samples.csv */,
 				96CB31AD1E8EB6040038762F /* Symptoms.swift */,
@@ -325,6 +328,7 @@
 				DBBB78DA1EB1D25600C8A81D /* TabBarController.swift in Sources */,
 				960040E31E8D946700EC63E9 /* ArchivesViewController.swift in Sources */,
 				96F01CBE1E91D3AC002E5A32 /* SymptomsLegendController.swift in Sources */,
+				DB48C34E1EB87FFC00C9CF16 /* AxisValueFormatter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
