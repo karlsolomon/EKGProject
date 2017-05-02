@@ -19,7 +19,7 @@ class Server(Thread):
 	def run(self):
 		flag = True
 		while True:
-			HOST = "172.16.25.116"   # iPhone app IP address
+			HOST = "192.168.0.33"   # iPhone app IP address
 			PORT = 8080 # Arbitrary non-privileged port
 			try:
 				s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -50,10 +50,10 @@ class Server(Thread):
 				buffer1 = ECGRead.DataBuffer1.getArchiveData()
 				buffer2 = ECGRead.DataBuffer2.getArchiveData()
 				buffer3 = ECGRead.DataBuffer3.getArchiveData()
-				time.sleep(150) #delay 2.5 minutes
-				buffer1.extend(ECGRead.DataBuffer1.getArchiveData())
-				buffer2.extend(ECGRead.DataBuffer2.getArchiveData())
-				buffer3.extend(ECGRead.DataBuffer3.getArchiveData())
+				#time.sleep(150) #delay 2.5 minutes
+				#buffer1.extend(ECGRead.DataBuffer1.getArchiveData())
+				#buffer2.extend(ECGRead.DataBuffer2.getArchiveData())
+				#buffer3.extend(ECGRead.DataBuffer3.getArchiveData())
 
 				print("time to get databuffer:" + str(time.time()))
 				bufferStr1 = ",".join(buffer1)

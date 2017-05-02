@@ -21,7 +21,7 @@ class LiveFeed(Thread):
 		isConnected = True
 		flag = True
 		while True:
-			HOST = "172.16.25.116"   # raspberryPi IP address
+			HOST = "172.20.10.2"   # raspberryPi IP address
 			PORT = 8081 # Arbitrary non-privileged port
             		try:
 				s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -30,14 +30,13 @@ class LiveFeed(Thread):
 			except socket.error as msg:
                 		print 'Bind failed. Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
                 		flag = False
-            		print 'LiveFeed Socket bind complete'
-         
-			#Start listening on socket
+         	   		print 'LiveFeed Socket bind complete'
+         			#Start listening on socket
             		while flag:
                 		s.listen(1)
                 		print 'LiveFeed Socket now listening'
                 		print("LiveFeed time waiting for client: "+ str(time.time))
-        			
+        			isConnected = True
 				#now keep talking with the client
                 		conn, addr = s.accept()
                 		print 'LiveFeed Connected with ' + addr[0] + ':' + str(addr[1])
@@ -57,7 +56,7 @@ class LiveFeed(Thread):
                         			elif "3" in key:
                             				buff = ECGRead.DataBuffer3.getLiveData()
 						bufferStr = ",".join(buff)
-						print(len(bufferStr))
+						print(bufferStr)
 						conn.send(bufferStr +  ",")
                     			except socket.error as msg:
                         			print "connection closed " + str(msg[0]) + " " + str(msg[1])
