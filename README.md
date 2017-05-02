@@ -14,6 +14,7 @@ This software allows the user to input symptoms and toggle an ECG recording when
 
 ### Software 
 
+
 #### Front End
 
 **SymptomsViewController.swift**
@@ -36,7 +37,7 @@ This software allows the user to input symptoms and toggle an ECG recording when
 
    The Picker View allows the user to view multiple leads in a selected Archived ECG reading. Once selected, the specific lead is then portrayed in graphical format. 
 
-#### Back End
+#### Back End - iOS Application
 
 **SocketServer**
  
@@ -61,7 +62,9 @@ This software allows the user to input symptoms and toggle an ECG recording when
 **Symptoms.swift**
    
    The Symptoms class holds static lists of common symptoms that occur during cardiac anomalies. These symptoms are tabulated and abbreviated, and they can be viewed and selected via the Symptoms Tab. 
-  
+
+### Back End - RaspberryPi
+
 **Main**
   Initiates all classes which are established as runnable threads as well as global variables and external libraries. These threads are run continuously as long as the RaspberryPi is active and powered.
   
